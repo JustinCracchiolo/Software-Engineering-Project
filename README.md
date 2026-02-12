@@ -1,6 +1,5 @@
  
-Software Requirements Specification
-for
+Software Requirements Specification for
 Vehicular Cloud Real Time System (VCRTS)
 Prepared by Justin Cracchiolo, Lauren Rodriguez, David Choi, Tristan Huertas, Ivan Lin, Anthony Vallejo, and Sebastian Villavicencio
 Software Engineering – CUS 1166
