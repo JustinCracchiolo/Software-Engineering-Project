@@ -19,13 +19,15 @@ JCheckBox checkBox = new JCheckBox("Check"); JRadioButton radioButton = new JRad
 
 */
 
-public class BasicUI {
+public class UI {
     public static void main(String[] args) {
         // create UI when invoked 
         SwingUtilities.invokeLater(() -> createAndShowGUI());
     }
+    //------------------------------------
 
     private static void createAndShowGUI() {
+        
         // Simple in-memory user store for demo login/register.
         Map<String, User> users = new HashMap<>();
         
@@ -34,8 +36,9 @@ public class BasicUI {
         frame.setSize(1000, 800); 
 
         // CardLayout drives screen switching between Login/Home/Register.
-        JPanel cards = new JPanel(new CardLayout()); //allows us to switch to different screens
+        JPanel cards = new JPanel(new CardLayout());
         
+        // Creation of different screens
         JPanel loginPage = new JPanel(new BorderLayout());
         JPanel homePage = new JPanel(new BorderLayout());
         JPanel registerPage = new JPanel(new BorderLayout());
@@ -44,6 +47,7 @@ public class BasicUI {
         cards.add(homePage, "home");
         cards.add(registerPage, "register");
 
+        //--------------------------------------------
 
         // Login page
 
@@ -60,7 +64,6 @@ public class BasicUI {
         loginPanel.setPreferredSize(new Dimension(600, 800));
 
 
-
         //Enter a username
         JLabel username_label = new JLabel("Username"); 
         username_label.setAlignmentX(Component.CENTER_ALIGNMENT); 
@@ -71,8 +74,7 @@ public class BasicUI {
         JTextField usernameTextField = new JTextField(20);
         usernameTextField.setMaximumSize(usernameTextField.getPreferredSize()); 
         usernameTextField.setAlignmentX(Component.CENTER_ALIGNMENT); 
-        
-
+    
 
         //Enter a password
         JLabel password_label = new JLabel("Password");
@@ -83,9 +85,7 @@ public class BasicUI {
         JTextField passwordTextField = new JTextField(20); 
         passwordTextField.setMaximumSize(passwordTextField.getPreferredSize()); 
         passwordTextField.setAlignmentX(Component.CENTER_ALIGNMENT); 
-        
-
-        
+                
         //Login button
         JButton loginButton = new JButton("Login"); 
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -95,6 +95,19 @@ public class BasicUI {
         JButton registerButton = new JButton("Register");
         registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         registerButton.setFont(new Font("Arial", Font.PLAIN, 30));
+
+        //--------------------------------------------
+        //Temp button to skip login process
+        JButton skipButton = new JButton("Skip Login");
+        skipButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        skipButton.setFont(new Font("Arial", Font.PLAIN, 30));
+
+        skipButton.addActionListener(e -> { 
+            CardLayout cl = (CardLayout) cards.getLayout(); 
+            cl.show(cards, "home");
+        });
+
+        //--------------------------------------------
        
         // Validate credentials before switching to Home.
         loginButton.addActionListener(e -> { 
@@ -114,15 +127,12 @@ public class BasicUI {
             CardLayout cl = (CardLayout) cards.getLayout();
             cl.show(cards, "register");
         });
-
-
         
         //Title on sidebar
         JLabel title_label = new JLabel("VCRTS");
         title_label.setAlignmentX(Component.CENTER_ALIGNMENT); 
         title_label.setForeground(Color.white);  
         title_label.setFont(new Font("Arial", Font.PLAIN, 50));
-
 
 
         //Add all of the elements
@@ -141,6 +151,12 @@ public class BasicUI {
         loginPanel.add(registerButton);
         loginPanel.add(Box.createVerticalGlue()); 
 
+        //--------------------------
+        // to delete
+        loginPanel.add(skipButton);
+
+        //--------------------------
+
         sidePanel.add(Box.createVerticalStrut(400)); 
         sidePanel.add(title_label);
 
@@ -150,6 +166,7 @@ public class BasicUI {
         loginPanel.setOpaque(true); //allows changing color
         sidePanel.setOpaque(true);
 
+        //--------------------------------------------
 
         // Home screen
         JPanel navbar = new JPanel(); 
@@ -164,16 +181,22 @@ public class BasicUI {
         
         JButton homeBtn = new JButton("Home"); 
         JButton settingsBtn = new JButton("Settings"); 
+        JButton scheduleBtn = new JButton("Schedule");
        
         navbar.add(Box.createHorizontalStrut(20)); 
         navbar.add(title); 
         navbar.add(Box.createHorizontalGlue()); 
         navbar.add(homeBtn); 
         navbar.add(Box.createHorizontalStrut(10)); 
+        navbar.add(scheduleBtn); 
+        navbar.add(Box.createHorizontalStrut(10)); 
         navbar.add(settingsBtn); 
         navbar.add(Box.createHorizontalStrut(20));
 
+
         homePage.add(navbar, BorderLayout.NORTH);
+        
+        //--------------------------------------------
 
         // Register screen
         JPanel registerSidePanel = new JPanel();
