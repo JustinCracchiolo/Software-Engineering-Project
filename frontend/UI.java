@@ -22,6 +22,8 @@ JCheckBox checkBox = new JCheckBox("Check"); JRadioButton radioButton = new JRad
 */
 
 public class UI {
+    public static User currentUser; //once a person logs in, this holds all information for that user
+    
     public static void main(String[] args) {
         // create UI when invoked 
         SwingUtilities.invokeLater(() -> createAndShowGUI());
@@ -31,7 +33,7 @@ public class UI {
     private static void createAndShowGUI() {
 
         UserManager userManager = new UserManager();
-        
+
         JFrame frame = new JFrame("VCRTS App"); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         frame.setSize(1000, 800); 
@@ -116,6 +118,7 @@ public class UI {
             String password = passwordTextField.getText();
            
             if (userManager.login(username, password)) {
+                currentUser = userManager.getUser(username); //this tells the program the person who is logged in    
                 CardLayout cl = (CardLayout) cards.getLayout(); 
                 cl.show(cards, "home");
             } else {
@@ -183,13 +186,14 @@ public class UI {
         JButton homeBtn = new JButton("Home"); 
         JButton settingsBtn = new JButton("Settings"); 
         JButton logOutBtn = new JButton("Log Out"); //logout button
+
         logOutBtn.addActionListener(e -> {
             CardLayout cl = (CardLayout) cards.getLayout();
             cl.show(cards, "login");
         });
         
         JButton scheduleBtn = new JButton("Schedule");
-       
+    
         navbar.add(Box.createHorizontalStrut(20)); 
         navbar.add(title); 
         navbar.add(Box.createHorizontalGlue()); 
@@ -319,20 +323,5 @@ public class UI {
         frame.add(cards);
         frame.setVisible(true);
 
-    }
-
-    /* 
-
-    // Simple user record for demo purposes.
-    private static class User {
-        private final String password;
-
-        private User(String password) {
-            this.password = password;
-
-        }
-    }
-
-    */
-    
+    }  
 }
