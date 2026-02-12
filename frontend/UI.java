@@ -1,6 +1,8 @@
 /* 
 Front end for the project
 */
+import classes.User;
+import classes.UserManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,9 +29,8 @@ public class UI {
     //------------------------------------
 
     private static void createAndShowGUI() {
-        
-        // Simple in-memory user store for demo login/register.
-        Map<String, User> users = new HashMap<>();
+
+        UserManager userManager = new UserManager();
         
         JFrame frame = new JFrame("VCRTS App"); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -113,8 +114,8 @@ public class UI {
         loginButton.addActionListener(e -> { 
             String username = usernameTextField.getText().trim();
             String password = passwordTextField.getText();
-            User user = users.get(username);
-            if (user != null && user.password.equals(password)) {
+           
+            if (userManager.login(username, password)) {
                 CardLayout cl = (CardLayout) cards.getLayout(); 
                 cl.show(cards, "home");
             } else {
@@ -269,20 +270,23 @@ public class UI {
                 JOptionPane.showMessageDialog(frame, "Username and password are required.");
                 return;
             }
-
-            if (users.containsKey(username)) {
-                JOptionPane.showMessageDialog(frame, "Username already exists.");
+            
+            if(userManager.register(username, password)) { //creates a User with username and passwords and puts them into system
+                JOptionPane.showMessageDialog(frame, "User " + username + " created!");
+                regUsernameField.setText("");
+                regPasswordField.setText("");
+                CardLayout cl = (CardLayout) cards.getLayout();
+                cl.show(cards, "login");
                 return;
             }
-
-            users.put(username, new User(password));
-
-            regUsernameField.setText("");
-            regPasswordField.setText("");
-
-
-            CardLayout cl = (CardLayout) cards.getLayout();
-            cl.show(cards, "login");
+            else { //checks if someone with repeat username
+                JOptionPane.showMessageDialog(frame, "Username already exists. Try again");
+                regUsernameField.setText("");
+                regPasswordField.setText("");
+                CardLayout cl = (CardLayout) cards.getLayout();
+                cl.show(cards, "register");
+                return;
+            }
         });
 
         // Return without changes.
@@ -317,6 +321,8 @@ public class UI {
 
     }
 
+    /* 
+
     // Simple user record for demo purposes.
     private static class User {
         private final String password;
@@ -326,4 +332,7 @@ public class UI {
 
         }
     }
+
+    */
+    
 }
