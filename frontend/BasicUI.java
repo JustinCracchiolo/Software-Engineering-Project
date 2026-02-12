@@ -164,7 +164,12 @@ public class BasicUI {
         
         JButton homeBtn = new JButton("Home"); 
         JButton settingsBtn = new JButton("Settings"); 
-       
+        JButton logOutBtn = new JButton("Log Out"); //logout button
+        logOutBtn.addActionListener(e -> {
+            CardLayout cl = (CardLayout) cards.getLayout();
+            cl.show(cards, "login");
+        });
+        
         navbar.add(Box.createHorizontalStrut(20)); 
         navbar.add(title); 
         navbar.add(Box.createHorizontalGlue()); 
@@ -172,6 +177,8 @@ public class BasicUI {
         navbar.add(Box.createHorizontalStrut(10)); 
         navbar.add(settingsBtn); 
         navbar.add(Box.createHorizontalStrut(20));
+        navbar.add(logOutBtn); 
+        navbar.add(Box.createHorizontalStrut(30));
 
         homePage.add(navbar, BorderLayout.NORTH);
 
