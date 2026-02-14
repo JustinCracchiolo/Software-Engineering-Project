@@ -9,6 +9,7 @@ import java.awt.event.FocusEvent;
 public class PlaceHolderTextField extends JTextField {
     private String placeHolder;
 
+    //can be extended to holds emails, etc. Will be different for login page so will need null values
     public PlaceHolderTextField(String text, int cols) {
         super(cols);
         placeHolder = text;

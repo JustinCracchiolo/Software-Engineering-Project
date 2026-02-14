@@ -83,14 +83,14 @@ public class UI {
         //Login button
         JButton loginButton = new JButton("Login"); 
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        loginButton.setFont(new Font("Arial", Font.PLAIN, 30));
         loginButton.setBackground(new Color(65, 105, 255 )); 
         loginButton.setForeground(Color.white);
         loginButton.setOpaque(true); 
         loginButton.setBorderPainted(false);
         
         //Register button
-        JButton registerButton = new JButton("Register");
+        JButton registerButton = new JButton("Create an Acount");
         registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         registerButton.setFont(new Font("Arial", Font.PLAIN, 30));
 
@@ -124,11 +124,6 @@ public class UI {
         // Go to register screen.
         registerButton.addActionListener(e -> {
             meetAndSwitch(cards, loginPage, loginSidePanel, loginPanel, "register");
-           
-            /*  
-             CardLayout cl = (CardLayout) cards.getLayout();
-            cl.show(cards, "register");
-            */
         });
         
         //Title on sidebar
@@ -150,7 +145,6 @@ public class UI {
         loginPanel.add(Box.createVerticalStrut(30)); 
         loginPanel.add(loginButton); 
         loginPanel.add(Box.createVerticalStrut(10));
-        loginPanel.add(registerButton);
         loginPanel.add(Box.createVerticalGlue()); 
 
         //--------------------------
@@ -159,8 +153,11 @@ public class UI {
 
         //--------------------------
 
-        loginSidePanel.add(Box.createVerticalStrut(400)); 
+        loginSidePanel.add(Box.createVerticalGlue()); 
         loginSidePanel.add(title_label);
+        loginSidePanel.add(Box.createVerticalStrut(30));
+        loginSidePanel.add(registerButton);
+        loginSidePanel.add(Box.createVerticalGlue());
 
         loginPage.add(loginPanel, BorderLayout.CENTER); 
         loginPage.add(loginSidePanel, BorderLayout.WEST);
@@ -211,7 +208,7 @@ public class UI {
 
         // Register screen
         JPanel registerSidePanel = new JPanel();
-        registerSidePanel.setBackground(Color.darkGray);
+        registerSidePanel.setBackground(new Color(65, 105, 255 ));
         registerSidePanel.setLayout(new BoxLayout(registerSidePanel, BoxLayout.Y_AXIS));
         registerSidePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         registerSidePanel.setPreferredSize(new Dimension(500, 800));
@@ -221,35 +218,23 @@ public class UI {
         registerTitleLabel.setForeground(Color.white);
         registerTitleLabel.setFont(new Font("Arial", Font.PLAIN, 50));
 
-        registerSidePanel.add(Box.createVerticalStrut(400));
-        registerSidePanel.add(registerTitleLabel);
-
         JPanel registerPanel = new JPanel();
-        registerPanel.setBackground(new Color(65, 105, 255));
+        registerPanel.setBackground(Color.WHITE);
         registerPanel.setLayout(new BoxLayout(registerPanel, BoxLayout.Y_AXIS));
         registerPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         registerPanel.setPreferredSize(new Dimension(600, 800));
 
         JLabel registerHeader = new JLabel("Register");
         registerHeader.setAlignmentX(Component.CENTER_ALIGNMENT);
-        registerHeader.setForeground(Color.white);
+        registerHeader.setForeground(new Color(65, 105, 255 ));
         registerHeader.setFont(new Font("Arial", Font.PLAIN, 40));
 
-        JLabel regUsernameLabel = new JLabel("Username");
-        regUsernameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        regUsernameLabel.setForeground(Color.white);
-        regUsernameLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 
-        JTextField regUsernameField = new JTextField(20);
+        JTextField regUsernameField = new PlaceHolderTextField("Username", 20);
         regUsernameField.setMaximumSize(regUsernameField.getPreferredSize());
         regUsernameField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel regPasswordLabel = new JLabel("Password");
-        regPasswordLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        regPasswordLabel.setForeground(Color.white);
-        regPasswordLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-
-        JTextField regPasswordField = new JTextField(20);
+        JTextField regPasswordField = new PlaceHolderTextField("Password", 20);
         regPasswordField.setMaximumSize(regPasswordField.getPreferredSize());
         regPasswordField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -257,6 +242,10 @@ public class UI {
         JButton submitRegisterButton = new JButton("Create Account");
         submitRegisterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         submitRegisterButton.setFont(new Font("Arial", Font.PLAIN, 30));
+        submitRegisterButton.setBackground(new Color(65, 105, 255 )); 
+        submitRegisterButton.setForeground(Color.white);
+        submitRegisterButton.setOpaque(true); 
+        submitRegisterButton.setBorderPainted(false);
 
         JButton backToLoginButton = new JButton("Back to Login");
         backToLoginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -277,8 +266,6 @@ public class UI {
                 JOptionPane.showMessageDialog(frame, "User " + username + " created!");
                 regUsernameField.setText("");
                 regPasswordField.setText("");
-                CardLayout cl = (CardLayout) cards.getLayout();
-                cl.show(cards, "login");
                 return;
             }
             else { //checks if someone with repeat username
@@ -294,32 +281,34 @@ public class UI {
         // Return without changes.
         backToLoginButton.addActionListener(e -> {
             meetAndSwitch(cards, registerPage, registerPanel, registerSidePanel, "login");
-            /* 
-            CardLayout cl = (CardLayout) cards.getLayout();
-            cl.show(cards, "login");
-            */
         });
 
         registerPanel.add(Box.createVerticalGlue());
         registerPanel.add(registerHeader);
         registerPanel.add(Box.createVerticalStrut(20));
-        registerPanel.add(regUsernameLabel);
         registerPanel.add(Box.createVerticalStrut(10));
         registerPanel.add(regUsernameField);
         registerPanel.add(Box.createVerticalStrut(20));
-        registerPanel.add(regPasswordLabel);
         registerPanel.add(Box.createVerticalStrut(10));
         registerPanel.add(regPasswordField);
         registerPanel.add(Box.createVerticalStrut(20));
         registerPanel.add(submitRegisterButton);
         registerPanel.add(Box.createVerticalStrut(10));
-        registerPanel.add(backToLoginButton);
         registerPanel.add(Box.createVerticalGlue());
+
+        registerSidePanel.setOpaque(true);
+
+      registerSidePanel.add(Box.createVerticalGlue());      // pushes content down
+      registerSidePanel.add(registerTitleLabel);
+      registerSidePanel.add(Box.createVerticalStrut(30));
+      registerSidePanel.add(backToLoginButton);
+      registerSidePanel.add(Box.createVerticalGlue());      // pushes content up
+
 
         registerPage.add(registerPanel, BorderLayout.CENTER);
         registerPage.add(registerSidePanel, BorderLayout.EAST);
         registerPanel.setOpaque(true);
-        registerSidePanel.setOpaque(true);
+
 
         frame.add(cards);
         frame.setVisible(true);
