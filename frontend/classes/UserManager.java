@@ -37,10 +37,10 @@ public class UserManager {
         if(users.containsKey(normalizedUsername)) {
             return false;
         }
-        users.put(normalizedUsername, new User(username, password));
+        users.put(normalizedUsername, new User(username, password,""));
         addUserToFile(username, password);
         return true;
-    }
+    }   
 
     // Validates credentials against the in-memory store. 
     public boolean login(String username, String password) {
@@ -79,7 +79,7 @@ public class UserManager {
                 String password = trimmed.substring(sepIndex + 1);
                 String normalizedUsername = normalizeUsername(username);
                 if (!username.isEmpty() && !users.containsKey(normalizedUsername)) {
-                    users.put(normalizedUsername, new User(username, password));
+                    users.put(normalizedUsername, new User(username, password, ""));
                 }
             }
         } catch (IOException e) {
