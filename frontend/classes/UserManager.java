@@ -49,10 +49,14 @@ public class UserManager {
         if(users.containsKey(normalizedUsername)) {
             return false;
         }
-        users.put(normalizedUsername, new User(username, password)); //added to UserManager hashmap of all users
+        users.put(normalizedUsername, new User(username, password,""));
+        addUserToFile(username, password);
+        users.put(normalizedUsername, new User(username, password, "")); //added to UserManager hashmap of all users
         addUserToFile(username, password); //added to the txt file
         return true;
-    }
+    }   
+
+    // Validates credentials against the in-memory store. 
     //------------------------------
 
     /** 
@@ -109,7 +113,7 @@ public class UserManager {
                 String password = trimmed.substring(sepIndex + 1);
                 String normalizedUsername = normalizeUsername(username);
                 if (!username.isEmpty() && !users.containsKey(normalizedUsername)) {
-                    users.put(normalizedUsername, new User(username, password));
+                    users.put(normalizedUsername, new User(username, password, ""));
                 }
             }
         } catch (IOException e) {
