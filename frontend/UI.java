@@ -7,6 +7,9 @@ This class controls the UI for the project.
 
 import classes.User;
 import classes.UserManager;
+import classes.PlaceHolderTextField;
+import classes.PlaceHolderTextField;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -52,44 +55,39 @@ public class UI {
         // Login page
 
         JPanel sidePanel = new JPanel();
-        sidePanel.setBackground(Color. darkGray);
+        sidePanel.setBackground(new Color(65, 105, 255 ));
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS)); // center everything vertically
         sidePanel.setAlignmentX(Component.CENTER_ALIGNMENT); //center horizontally
         sidePanel.setPreferredSize(new Dimension(500, 800));
         
         JPanel loginPanel = new JPanel(); 
-        loginPanel.setBackground(new Color(65, 105, 255 ));
+        loginPanel.setBackground(Color.WHITE);
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
         loginPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginPanel.setPreferredSize(new Dimension(600, 800));
 
+        JLabel loginLabel = new JLabel("Sign In");
+        loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT); 
+        loginLabel.setForeground(new Color(65, 105, 255 ));  
+        loginLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 
-        //Enter a username
-        JLabel username_label = new JLabel("Username"); 
-        username_label.setAlignmentX(Component.CENTER_ALIGNMENT); 
-        username_label.setForeground(Color.white);  
-        username_label.setFont(new Font("Arial", Font.PLAIN, 40));
-
-
-        JTextField usernameTextField = new JTextField(20);
+        JTextField usernameTextField = new PlaceHolderTextField("Username", 20); //adds more graphics to regular textfield
         usernameTextField.setMaximumSize(usernameTextField.getPreferredSize()); 
         usernameTextField.setAlignmentX(Component.CENTER_ALIGNMENT); 
     
 
-        //Enter a password
-        JLabel password_label = new JLabel("Password");
-        password_label.setAlignmentX(Component.CENTER_ALIGNMENT); 
-        password_label.setForeground(Color.white);  
-        password_label.setFont(new Font("Arial", Font.PLAIN, 40));
-
-        JTextField passwordTextField = new JTextField(20); 
+        JTextField passwordTextField = new PlaceHolderTextField("Password", 20); 
         passwordTextField.setMaximumSize(passwordTextField.getPreferredSize()); 
         passwordTextField.setAlignmentX(Component.CENTER_ALIGNMENT); 
                 
         //Login button
         JButton loginButton = new JButton("Login"); 
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginButton.setFont(new Font("Arial", Font.PLAIN, 30));
+        loginButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        loginButton.setBackground(new Color(65, 105, 255 )); 
+        loginButton.setForeground(Color.white);
+        loginButton.setOpaque(true); 
+        loginButton.setBorderPainted(false);
         
         //Register button
         JButton registerButton = new JButton("Register");
@@ -139,14 +137,13 @@ public class UI {
         //Add all of the elements
 
         loginPanel.add(Box.createVerticalGlue()); 
-        loginPanel.add(username_label); 
-        loginPanel.add(Box.createVerticalStrut(10)); //creates padding between elements
+        loginPanel.add(loginLabel); 
+        loginPanel.add(Box.createVerticalStrut(30)); //creates padding between elements
         loginPanel.add(usernameTextField); 
-        loginPanel.add(Box.createVerticalStrut(20)); 
-        loginPanel.add(password_label); 
+        loginPanel.add(Box.createVerticalStrut(20));
         loginPanel.add(Box.createVerticalStrut(10)); 
         loginPanel.add(passwordTextField); 
-        loginPanel.add(Box.createVerticalStrut(10)); 
+        loginPanel.add(Box.createVerticalStrut(30)); 
         loginPanel.add(loginButton); 
         loginPanel.add(Box.createVerticalStrut(10));
         loginPanel.add(registerButton);
