@@ -54,11 +54,11 @@ public class UI {
 
         // Login page
 
-        JPanel sidePanel = new JPanel();
-        sidePanel.setBackground(new Color(65, 105, 255 ));
-        sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS)); // center everything vertically
-        sidePanel.setAlignmentX(Component.CENTER_ALIGNMENT); //center horizontally
-        sidePanel.setPreferredSize(new Dimension(500, 800));
+        JPanel loginSidePanel = new JPanel();
+        loginSidePanel.setBackground(new Color(65, 105, 255 ));
+        loginSidePanel.setLayout(new BoxLayout(loginSidePanel, BoxLayout.Y_AXIS)); // center everything vertically
+        loginSidePanel.setAlignmentX(Component.CENTER_ALIGNMENT); //center horizontally
+        loginSidePanel.setPreferredSize(new Dimension(500, 800));
         
         JPanel loginPanel = new JPanel(); 
         loginPanel.setBackground(Color.WHITE);
@@ -123,8 +123,12 @@ public class UI {
 
         // Go to register screen.
         registerButton.addActionListener(e -> {
-            CardLayout cl = (CardLayout) cards.getLayout();
+            meetAndSwitch(cards, loginPage, loginSidePanel, loginPanel, "register");
+           
+            /*  
+             CardLayout cl = (CardLayout) cards.getLayout();
             cl.show(cards, "register");
+            */
         });
         
         //Title on sidebar
@@ -155,14 +159,14 @@ public class UI {
 
         //--------------------------
 
-        sidePanel.add(Box.createVerticalStrut(400)); 
-        sidePanel.add(title_label);
+        loginSidePanel.add(Box.createVerticalStrut(400)); 
+        loginSidePanel.add(title_label);
 
         loginPage.add(loginPanel, BorderLayout.CENTER); 
-        loginPage.add(sidePanel, BorderLayout.WEST);
+        loginPage.add(loginSidePanel, BorderLayout.WEST);
 
         loginPanel.setOpaque(true); //allows changing color
-        sidePanel.setOpaque(true);
+        loginSidePanel.setOpaque(true);
 
         //--------------------------------------------
 
@@ -289,8 +293,11 @@ public class UI {
 
         // Return without changes.
         backToLoginButton.addActionListener(e -> {
+            meetAndSwitch(cards, registerPage, registerPanel, registerSidePanel, "login");
+            /* 
             CardLayout cl = (CardLayout) cards.getLayout();
             cl.show(cards, "login");
+            */
         });
 
         registerPanel.add(Box.createVerticalGlue());
@@ -310,12 +317,64 @@ public class UI {
         registerPanel.add(Box.createVerticalGlue());
 
         registerPage.add(registerPanel, BorderLayout.CENTER);
-        registerPage.add(registerSidePanel, BorderLayout.WEST);
+        registerPage.add(registerSidePanel, BorderLayout.EAST);
         registerPanel.setOpaque(true);
         registerSidePanel.setOpaque(true);
 
         frame.add(cards);
         frame.setVisible(true);
 
-    }  
+    }
+    
+    //animations from login => register and register => login
+    public static void meetAndSwitch(JPanel cards, JPanel currentCard, JPanel leftPanel, JPanel rightPanel, String nextCardName) {
+        int halfWidth = currentCard.getWidth() / 2;
+        
+        // Temporarily disable layout on the CURRENT card
+        currentCard.setLayout(null);
+        
+        // Starting positions
+        leftPanel.setLocation(0, 0);
+        rightPanel.setLocation(halfWidth, 0);
+        
+        Timer timer = new Timer(5, null);
+        timer.addActionListener(e -> {
+            // Move left panel right
+            leftPanel.setLocation(leftPanel.getX() + 10, 0);
+            
+            // Move right panel left
+            rightPanel.setLocation(rightPanel.getX() - 10, 0);
+            
+            currentCard.repaint();
+            
+            // Stop when they meet in the middle
+            if (rightPanel.getX() <= halfWidth / 2) {
+                timer.stop();
+
+                currentCard.removeAll(); 
+                currentCard.setLayout(new BorderLayout()); 
+                
+                // Put the panels back where they originally belonged 
+                // Login page uses WEST + CENTER 
+                // Register page uses CENTER + EAST 
+                if (nextCardName.equals("register")) { 
+                    currentCard.add(leftPanel, BorderLayout.WEST); 
+                    currentCard.add(rightPanel, BorderLayout.CENTER); 
+                } 
+                else {
+                    currentCard.add(leftPanel, BorderLayout.CENTER); 
+                    currentCard.add(rightPanel, BorderLayout.EAST); 
+                } 
+                currentCard.revalidate(); 
+                currentCard.repaint();
+                
+                // Switch to the next card
+                CardLayout cl = (CardLayout) cards.getLayout();
+                cl.show(cards, nextCardName);
+            }
+        });
+        timer.start();
+    }
+
+
 }
