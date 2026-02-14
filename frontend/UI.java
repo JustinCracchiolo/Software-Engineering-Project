@@ -1,6 +1,10 @@
-/* 
-Front end for the project
+/* Project: VCRTS
+Class: UI.java
+Author: Justin, Athony, Sebastian, Lauren, Ivan, Tristan, David
+Date: Spring 2026 Semester
+This class controls the UI for the project.
 */
+
 import classes.User;
 import classes.UserManager;
 import javax.swing.*;
@@ -10,16 +14,6 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
-/* 
-JFrame references
-
-JButton button = new JButton("Button"); 
-JLabel label = new JLabel("Label"); 
-JTextField textField = new JTextField(12); 
-JTextArea textArea = new JTextArea(4, 12);
-JCheckBox checkBox = new JCheckBox("Check"); JRadioButton radioButton = new JRadioButton("Option"); 
-
-*/
 
 public class UI {
     public static User currentUser; //once a person logs in, this holds all information for that user
@@ -32,6 +26,9 @@ public class UI {
 
     private static void createAndShowGUI() {
 
+        //Possible place for loadUsersFromFile
+
+        //management tool for keeping track of who creates accounts. 
         UserManager userManager = new UserManager();
 
         JFrame frame = new JFrame("VCRTS App"); 
@@ -149,7 +146,7 @@ public class UI {
         loginPanel.add(password_label); 
         loginPanel.add(Box.createVerticalStrut(10)); 
         loginPanel.add(passwordTextField); 
-        loginPanel.add(Box.createVerticalStrut(30)); 
+        loginPanel.add(Box.createVerticalStrut(10)); 
         loginPanel.add(loginButton); 
         loginPanel.add(Box.createVerticalStrut(10));
         loginPanel.add(registerButton);
