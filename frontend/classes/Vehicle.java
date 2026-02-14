@@ -6,28 +6,30 @@ package classes;
 //The system shall receive and verify the vehicle's number, license plate, make, and model.
 
 public class Vehicle { 
-    private int number;
+    private final String vinNumber;
     private String make;
     private String model;
     private String licensePlate;
 
 
-    public Vehicle(int number, String make, String model , String licensePlate) {
-        this.number = number;
+    //constructor 
+    public Vehicle(String vinNumber, String make, String model , String licensePlate) {
+        this.vinNumber = vinNumber;
         this.make = make;
         this.model = model;
         this.licensePlate = licensePlate;
 
-        //make sure vehicle has all the necessary information
-    if(number == 0 || make == null || model == null || licensePlate == null){
+    
+    //make sure vehicle has all the necessary information
+    if(vinNumber.equals("") || make == null || model == null || licensePlate == null){
         throw new IllegalArgumentException("Vehicle information is incomplete");
     }
     }
 
     //implementing the getters in order to access the private variables
 
-    public int getNumber() {
-        return number;
+    public String getNumber() {
+        return vinNumber;
     }
     public String getMake() {
         return make;
