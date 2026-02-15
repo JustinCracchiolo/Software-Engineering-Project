@@ -46,10 +46,16 @@ public class UI {
         JPanel loginPage = new JPanel(new BorderLayout());
         JPanel homePage = new JPanel(new BorderLayout());
         JPanel registerPage = new JPanel(new BorderLayout());
+        JPanel offerVehiclePage = new JPanel(new BorderLayout());
+        JPanel schedulePage = new JPanel(new BorderLayout());
+        JPanel submitJobPage = new JPanel(new BorderLayout());
 
         cards.add(loginPage, "login"); 
         cards.add(homePage, "home");
         cards.add(registerPage, "register");
+        cards.add(offerVehiclePage, "offerVehicle");
+        cards.add(schedulePage, "schedule");
+        cards.add(submitJobPage, "submitJob");
 
         //--------------------------------------------
 
@@ -189,6 +195,8 @@ public class UI {
         });
         
         JButton scheduleBtn = new JButton("Schedule");
+        JButton offerVehicleBtn = new JButton("Offer Vehicle");
+        JButton submitJobBtn = new JButton("Submit Job");
     
         navbar.add(Box.createHorizontalStrut(20)); 
         navbar.add(title); 
@@ -197,13 +205,21 @@ public class UI {
         navbar.add(Box.createHorizontalStrut(10)); 
         navbar.add(scheduleBtn); 
         navbar.add(Box.createHorizontalStrut(10)); 
+        navbar.add(offerVehicleBtn); 
+        navbar.add(Box.createHorizontalStrut(10));
+        navbar.add(submitJobBtn); 
+        navbar.add(Box.createHorizontalStrut(10));
         navbar.add(settingsBtn); 
         navbar.add(Box.createHorizontalStrut(20));
         navbar.add(logOutBtn); 
         navbar.add(Box.createHorizontalStrut(30));
 
-
         homePage.add(navbar, BorderLayout.NORTH);
+        // placeholder to test functionality of each page
+        homePage.add(new JLabel("Home Page TEST", SwingConstants.CENTER), BorderLayout.CENTER);
+        offerVehiclePage.add(new JLabel("Offer Vehicle Form (Owner)", SwingConstants.CENTER), BorderLayout.CENTER);
+        submitJobPage.add(new JLabel("Submit Job Form (Client)", SwingConstants.CENTER), BorderLayout.CENTER);
+        schedulePage.add(new JLabel("Schedule Form (Client)", SwingConstants.CENTER), BorderLayout.CENTER);
         
         //--------------------------------------------
 
@@ -282,6 +298,26 @@ public class UI {
         // Return without changes.
         backToLoginButton.addActionListener(e -> {
             meetAndSwitch(cards, registerPage, registerPanel, registerSidePanel, "login");
+        });
+
+        offerVehicleBtn.addActionListener(e -> {
+            CardLayout cl = (CardLayout) cards.getLayout();
+            cl.show(cards, "offerVehicle");
+        });
+        
+        submitJobBtn.addActionListener(e -> {
+            CardLayout cl = (CardLayout) cards.getLayout();
+            cl.show(cards, "submitJob");
+        });
+
+        scheduleBtn.addActionListener(e -> {
+            CardLayout cl = (CardLayout) cards.getLayout();
+            cl.show(cards, "schedule");
+        });
+
+        homeBtn.addActionListener(e -> {
+            CardLayout cl = (CardLayout) cards.getLayout();
+            cl.show(cards, "home");
         });
 
         registerPanel.add(Box.createVerticalGlue());
