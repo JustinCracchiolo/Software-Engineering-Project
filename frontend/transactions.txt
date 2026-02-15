@@ -10,3 +10,306 @@ VIN: sdada
 License Plate: dadasda
 Residency Time: dsad
 
+--------------------------------
+[2026-02-15 14:52:22]
+Action: ADD_VEHICLE
+User Type: OWNER
+Owner ID: 103013
+Make: Honda
+Model: Civic
+Year: 2020
+Color: Black
+VIN: 13132131
+License Plate: 313kek
+Approx Residency Time: 30 min
+
+--------------------------------
+[2026-02-15 14:52:28]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 14:52:36]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 14:54:46]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 14:54:52]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 15:02:03]
+Action: ADD_VEHICLE
+User Type: OWNER
+Owner ID: asdasd
+Make: adsda
+Model: dasda
+Year: 2222
+Color: dasdas
+VIN: dasda
+License Plate: sdsad
+Approx Residency Time: asda
+
+--------------------------------
+[2026-02-15 15:02:35]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 15:02:51]
+Action: ADD_VEHICLE
+User Type: OWNER
+Owner ID: 1
+Make: Honda
+Model: Civic
+Year: 2020
+Color: Black
+VIN: 1
+License Plate: 1
+Approx Residency Time: 1
+
+--------------------------------
+[2026-02-15 15:05:36]
+Action: REMOVE_VEHICLE
+User Type: OWNER
+Owner ID: 1
+Make: Honda
+Model: Civic
+Year: 2020
+Color: Black
+VIN: 1
+License Plate: 1
+Approx Residency Time: 1
+
+--------------------------------
+[2026-02-15 15:05:42]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 15:05:48]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 15:05:49]
+Action: REMOVE_VEHICLE
+User Type: OWNER
+Owner ID: asdasd
+Make: adsda
+Model: dasda
+Year: 2222
+Color: dasdas
+VIN: dasda
+License Plate: sdsad
+Approx Residency Time: asda
+
+--------------------------------
+[2026-02-15 15:06:04]
+Action: ADD_VEHICLE
+User Type: OWNER
+Owner ID: 1
+Make: 1
+Model: 1
+Year: 1111
+Color: 1
+VIN: 1
+License Plate: 1
+Approx Residency Time: 1
+
+--------------------------------
+[2026-02-15 15:06:07]
+Action: EDIT_VEHICLE
+User Type: OWNER
+Owner ID: 1
+Make: 1
+Model: 1
+Year: 1111
+Color: 1
+VIN: 1
+License Plate: 1
+Approx Residency Time: 1
+
+--------------------------------
+[2026-02-15 15:07:50]
+Action: ADD_VEHICLE
+User Type: OWNER
+Owner ID: 1
+Make: 1
+Model: 1
+Year: 1111
+Color: 1
+VIN: 1
+License Plate: 1
+Approx Residency Time: 1
+
+--------------------------------
+[2026-02-15 15:08:08]
+Action: EDIT_VEHICLE
+User Type: OWNER
+Owner ID: 2
+Make: 2
+Model: 2
+Year: 2222
+Color: 2
+VIN: 1
+License Plate: 2
+Approx Residency Time: 2
+
+--------------------------------
+[2026-02-15 15:08:10]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 15:08:36]
+Action: ADD_VEHICLE
+User Type: OWNER
+Owner ID: 1
+Make: 1
+Model: 1
+Year: 1111
+Color: 1
+VIN: 1
+License Plate: 1
+Approx Residency Time: 1
+
+--------------------------------
+[2026-02-15 15:11:09]
+Action: EDIT_VEHICLE
+User Type: OWNER
+Owner ID: 2
+Make: 2
+Model: 2
+Year: 2222
+Color: 2
+VIN: 1
+License Plate: 2
+Approx Residency Time: 2
+
+--------------------------------
+[2026-02-15 15:11:11]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 15:55:25]
+Action: ADD_VEHICLE
+User Type: OWNER
+Owner ID: 2
+Make: 2
+Model: 2
+Year: 2222
+Color: 2
+VIN: 2
+License Plate: 2
+Approx Residency Time: 2
+
+--------------------------------
+[2026-02-15 15:55:29]
+Action: ADD_VEHICLE
+User Type: OWNER
+Owner ID: 3
+Make: 3
+Model: 3
+Year: 3333
+Color: 3
+VIN: 3
+License Plate: 3
+Approx Residency Time: 3
+
+--------------------------------
+[2026-02-15 15:55:35]
+Action: ADD_VEHICLE
+User Type: OWNER
+Owner ID: 4
+Make: 4
+Model: 4
+Year: 4444
+Color: 4
+VIN: 4
+License Plate: 4
+Approx Residency Time: 4
+
+--------------------------------
+[2026-02-15 15:55:47]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 4
+
+--------------------------------
+[2026-02-15 15:59:10]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 4
+
+--------------------------------
+[2026-02-15 15:59:28]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 4
+
+--------------------------------
+[2026-02-15 16:09:19]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 4
+
+--------------------------------
+[2026-02-15 16:09:36]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 4
+
+--------------------------------
+[2026-02-15 16:10:33]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 4
+
+--------------------------------
+[2026-02-15 16:13:46]
+Action: ADD_VEHICLE
+User Type: OWNER
+Owner ID: 1
+Make: 1
+Model: 1
+Year: 1111
+Color: 1
+VIN: 1
+License Plate: 1
+Approx Residency Time: 1
+
+--------------------------------
+[2026-02-15 16:13:48]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 16:14:01]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
+--------------------------------
+[2026-02-15 16:14:04]
+Action: VIEW_VEHICLES
+User Type: OWNER
+Vehicle Count: 1
+
