@@ -9,7 +9,12 @@
 import classes.User;
 import classes.UserManager;
 import classes.PlaceHolderTextField;
-import classes.PlaceHolderTextField;
+
+import pages.HomePage;
+import pages.OfferVehiclePage;
+import pages.SubmitJobPage;
+import pages.SchedulePage;
+import pages.Settings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,11 +49,13 @@ public class UI {
         
         // Creation of different screens
         JPanel loginPage = new JPanel(new BorderLayout());
-        JPanel homePage = new JPanel(new BorderLayout());
+        
+        HomePage homePage = new HomePage(cards);
+        OfferVehiclePage offerVehiclePage = new OfferVehiclePage(cards);
+        SchedulePage schedulePage = new SchedulePage(cards);
+        SubmitJobPage submitJobPage = new SubmitJobPage(cards);
+        Settings settingsPage = new Settings(cards);
         JPanel registerPage = new JPanel(new BorderLayout());
-        JPanel offerVehiclePage = new JPanel(new BorderLayout());
-        JPanel schedulePage = new JPanel(new BorderLayout());
-        JPanel submitJobPage = new JPanel(new BorderLayout());
 
         cards.add(loginPage, "login"); 
         cards.add(homePage, "home");
@@ -56,6 +63,7 @@ public class UI {
         cards.add(offerVehiclePage, "offerVehicle");
         cards.add(schedulePage, "schedule");
         cards.add(submitJobPage, "submitJob");
+        cards.add(settingsPage, "settings");
 
         //--------------------------------------------
 
@@ -174,55 +182,6 @@ public class UI {
 
         //--------------------------------------------
 
-        // Home screen
-        JPanel navbar = new JPanel(); 
-        
-        navbar.setBackground(new Color(30, 30, 30)); 
-        navbar.setLayout(new BoxLayout(navbar, BoxLayout.X_AXIS)); 
-        navbar.setPreferredSize(new Dimension(1000, 60));
-        
-        JLabel title = new JLabel("VCRTS"); 
-        title.setForeground(Color.WHITE); 
-        title.setFont(new Font("Arial", Font.BOLD, 28)); 
-        
-        JButton homeBtn = new JButton("Home"); 
-        JButton settingsBtn = new JButton("Settings"); 
-        JButton logOutBtn = new JButton("Log Out"); //logout button
-
-        logOutBtn.addActionListener(e -> {
-            CardLayout cl = (CardLayout) cards.getLayout();
-            cl.show(cards, "login");
-        });
-        
-        JButton scheduleBtn = new JButton("Schedule");
-        JButton offerVehicleBtn = new JButton("Offer Vehicle");
-        JButton submitJobBtn = new JButton("Submit Job");
-    
-        navbar.add(Box.createHorizontalStrut(20)); 
-        navbar.add(title); 
-        navbar.add(Box.createHorizontalGlue()); 
-        navbar.add(homeBtn); 
-        navbar.add(Box.createHorizontalStrut(10)); 
-        navbar.add(scheduleBtn); 
-        navbar.add(Box.createHorizontalStrut(10)); 
-        navbar.add(offerVehicleBtn); 
-        navbar.add(Box.createHorizontalStrut(10));
-        navbar.add(submitJobBtn); 
-        navbar.add(Box.createHorizontalStrut(10));
-        navbar.add(settingsBtn); 
-        navbar.add(Box.createHorizontalStrut(20));
-        navbar.add(logOutBtn); 
-        navbar.add(Box.createHorizontalStrut(30));
-
-        homePage.add(navbar, BorderLayout.NORTH);
-        // placeholder to test functionality of each page
-        homePage.add(new JLabel("Home Page TEST", SwingConstants.CENTER), BorderLayout.CENTER);
-        offerVehiclePage.add(new JLabel("Offer Vehicle Form (Owner)", SwingConstants.CENTER), BorderLayout.CENTER);
-        submitJobPage.add(new JLabel("Submit Job Form (Client)", SwingConstants.CENTER), BorderLayout.CENTER);
-        schedulePage.add(new JLabel("Schedule Form (Client)", SwingConstants.CENTER), BorderLayout.CENTER);
-        
-        //--------------------------------------------
-
         // Register screen
         JPanel registerSidePanel = new JPanel();
         registerSidePanel.setBackground(new Color(65, 105, 255 ));
@@ -300,6 +259,7 @@ public class UI {
             meetAndSwitch(cards, registerPage, registerPanel, registerSidePanel, "login");
         });
 
+        /*  
         offerVehicleBtn.addActionListener(e -> {
             CardLayout cl = (CardLayout) cards.getLayout();
             cl.show(cards, "offerVehicle");
@@ -319,6 +279,7 @@ public class UI {
             CardLayout cl = (CardLayout) cards.getLayout();
             cl.show(cards, "home");
         });
+        */
 
         registerPanel.add(Box.createVerticalGlue());
         registerPanel.add(registerHeader);
