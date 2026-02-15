@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class OfferVehiclePage extends JPanel {
 
     //Saving/Loading information from transactions.txt.
-    private static final String OUTPUT_FILE = "transactions.txt";
+    private static final String OUTPUT_FILE = "frontend/transactions.txt";
     private static final DateTimeFormatter TS_FORMAT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
