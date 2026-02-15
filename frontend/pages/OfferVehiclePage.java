@@ -29,7 +29,7 @@ public class OfferVehiclePage extends JPanel {
     //Look up vehicles by VIN.
     private final Map<String, Vehicle> VEHICLES_BY_VIN = new LinkedHashMap<>();
 
-    private final JTextArea statusArea = new JTextArea(6, 50);
+    private final JTextArea STATUS_AREA = new JTextArea(6, 50);
 
     public OfferVehiclePage(JPanel cards) {
         setLayout(new BorderLayout());
@@ -70,10 +70,10 @@ public class OfferVehiclePage extends JPanel {
         
 
         //Status
-        statusArea.setEditable(false);
-        statusArea.setLineWrap(true);
-        statusArea.setWrapStyleWord(true);
-        JScrollPane statusScroll = new JScrollPane(statusArea);
+        STATUS_AREA.setEditable(false);
+        STATUS_AREA.setLineWrap(true);
+        STATUS_AREA.setWrapStyleWord(true);
+        JScrollPane statusScroll = new JScrollPane(STATUS_AREA);
         statusScroll.setBorder(BorderFactory.createTitledBorder("Status"));
 
   
@@ -254,7 +254,7 @@ public class OfferVehiclePage extends JPanel {
 
     //log + space
     private void logStatus(String msg) {
-        statusArea.append(msg + "\n");
+        STATUS_AREA.append(msg + "\n");
     }
 
     //write
