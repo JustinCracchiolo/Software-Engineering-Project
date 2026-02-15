@@ -9,6 +9,7 @@
 import classes.User;
 import classes.UserManager;
 import classes.PlaceHolderTextField;
+import classes.PlaceHolderPasswordField;
 
 import pages.HomePage;
 import pages.OfferVehiclePage;
@@ -91,10 +92,30 @@ public class UI {
         usernameTextField.setMaximumSize(usernameTextField.getPreferredSize()); 
         usernameTextField.setAlignmentX(Component.CENTER_ALIGNMENT); 
     
-
-        JTextField passwordTextField = new PlaceHolderTextField("Password", 20); 
+        // Hides password on login page and add a button to show password when pressed
+        JPasswordField passwordTextField = new PlaceHolderPasswordField("Password", 20); 
         passwordTextField.setMaximumSize(passwordTextField.getPreferredSize()); 
         passwordTextField.setAlignmentX(Component.CENTER_ALIGNMENT); 
+        char loginEchoChar = passwordTextField.getEchoChar();
+        JButton showLoginPasswordButton = new JButton("Show Password");
+        showLoginPasswordButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        showLoginPasswordButton.setMargin(new Insets(2, 8, 2, 8));
+        showLoginPasswordButton.addMouseListener(new java.awt.event.MouseAdapter() {
+
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                passwordTextField.setEchoChar((char) 0);
+            }
+
+            public void mouseReleased(java.awt.event.MouseEvent e) {
+                passwordTextField.setEchoChar(loginEchoChar);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                passwordTextField.setEchoChar(loginEchoChar);
+            }
+            
+        });
+
                 
         //Login button
         JButton loginButton = new JButton("Login"); 
@@ -106,7 +127,7 @@ public class UI {
         loginButton.setBorderPainted(false);
         
         //Register button
-        JButton registerButton = new JButton("Create an Acount");
+        JButton registerButton = new JButton("Create an Account");
         registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         registerButton.setFont(new Font("Arial", Font.PLAIN, 30));
 
@@ -126,7 +147,7 @@ public class UI {
         // Validate credentials before switching to Home.
         loginButton.addActionListener(e -> { 
             String username = usernameTextField.getText().trim();
-            String password = passwordTextField.getText();
+            String password = new String(passwordTextField.getPassword());
            
             if (userManager.login(username, password)) {
                 currentUser = userManager.getUser(username); //this tells the program the person who is logged in    
@@ -158,6 +179,8 @@ public class UI {
         loginPanel.add(Box.createVerticalStrut(20));
         loginPanel.add(Box.createVerticalStrut(10)); 
         loginPanel.add(passwordTextField); 
+        loginPanel.add(Box.createVerticalStrut(10));
+        loginPanel.add(showLoginPasswordButton);
         loginPanel.add(Box.createVerticalStrut(30)); 
         loginPanel.add(loginButton); 
         loginPanel.add(Box.createVerticalStrut(10));
