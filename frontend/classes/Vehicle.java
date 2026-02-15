@@ -1,4 +1,10 @@
-
+/* Project: Vehicular Cloud Real Time System (VCRTS)
+ * Class: Vehicle.java
+ * Authors: Group 2 (Justin Cracchiolo, Lauren Rodriguez, David Choi, Tristan Huertas, Ivan Lin, Anthony Vallejo, Sebastian Villavicencio)
+ * Date: February 2026
+ * The Vehicle class represents a registered vehicle in the VCRTS system. It stores vehicle identification information including VIN number,
+ * make, model, and license plate. The class validates that all required vehicle information is provided during object creation.
+ */
 package classes;
 //Focus on the backend and make necessary classes to store information for the user and their vehicles (Sebastian)
 

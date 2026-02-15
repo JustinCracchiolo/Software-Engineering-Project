@@ -1,3 +1,10 @@
+/* Project: Vehicular Cloud Real Time System (VCRTS)
+ * Class: User.java
+ * Authors: Group 2 (Justin Cracchiolo, Lauren Rodriguez, David Choi, Tristan Huertas, Ivan Lin, Anthony Vallejo, Sebastian Villavicencio)
+ * Date: February 2026
+ * The User class represents a general system user in the VCRTS system. It stores authentication-related information including username,
+ * password, and email. This class acts as a base class for more specific user types such as Owner and Client.
+ */
 package classes;
 
 //this class represents a user of the system, with a username and password. It is used by UserManager to store user data in memory and persist it to a file. The Owner class extends User to add additional fields for car owners.

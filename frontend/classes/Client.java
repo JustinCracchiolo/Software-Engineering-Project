@@ -1,3 +1,11 @@
+/* Project: Vehicular Cloud Real Time System (VCRTS)
+ * Class: Client.java
+ * Authors: Group 2 (Justin Cracchiolo, Lauren Rodriguez, David Choi, Tristan Huertas, Ivan Lin, Anthony Vallejo, and Sebastian Villavicencio)
+ * Date: February 2026
+ * The Client class represents a consumer in the VCRTS system who submits computational jobs. It stores the client's ID, approximate job duration,
+ * and job deadline, and extends the User class to inherit authentication properties such as username and password.
+ */
+
 package classes;
 
 import java.time.LocalDateTime; // allows to see the job deadline and approximate job duration of the client

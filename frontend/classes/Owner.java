@@ -1,3 +1,11 @@
+/* Project: Vehicular Cloud Real Time System (VCRTS)
+ * Class: Owner.java
+ * Authors: Group 2 (Justin Cracchiolo, Lauren Rodriguez, David Choi, Tristan Huertas, Ivan Lin, Anthony Vallejo, and Sebastian Villavicencio)
+ * Date: February 2026
+ * The Owner class represents a vehicle provider in the VCRTS system. It extends the User class and stores information specific to vehicle
+ * owners, including their registered vehicles and approximate residency time. Owners can add vehicles to the system and manage their availability.
+ */
+
 package classes;
 //this class represents a user of the system(specifically owner)
 

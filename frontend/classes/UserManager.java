@@ -1,3 +1,10 @@
+/*  Project: Vehicular Cloud Real Time System (VCRTS)
+ * Class: UserManager.java
+ * Authors: Group 2 (Justin Cracchiolo, Lauren Rodriguez, David Choi, Tristan Huertas, Ivan Lin, Anthony Vallejo, Sebastian Villavicencio)
+ * Date: February 2026
+ * This program manages user registration and login for the VCRTS system by storing user accounts in memory and persisting them to a tab-separated
+ * text file (UserInfo/users.txt). Usernames are normalized (trimmed and lowercased) to support consistent lookups.
+ */
 package classes;
 
 import java.io.BufferedReader;

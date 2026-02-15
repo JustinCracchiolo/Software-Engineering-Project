@@ -1,0 +1,12 @@
+# Java compiled output
+*.class
+**/*.class
+
+# OS / editor junk
+.DS_Store
+
+# build folders
+bin/
+out/
+target/
+EOF
