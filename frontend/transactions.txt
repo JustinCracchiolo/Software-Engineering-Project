@@ -1,0 +1,12 @@
+--------------------------------
+[2026-02-15 14:21:48]
+User Type: OWNER
+Owner ID: dasd
+Make: adasd
+Model: adasdad
+Year: asdasd
+Color: adadada
+VIN: sdada
+License Plate: dadasda
+Residency Time: dsad
+
