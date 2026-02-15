@@ -55,6 +55,7 @@ public class UI {
         SchedulePage schedulePage = new SchedulePage(cards);
         SubmitJobPage submitJobPage = new SubmitJobPage(cards);
         Settings settingsPage = new Settings(cards);
+        
         JPanel registerPage = new JPanel(new BorderLayout());
 
         cards.add(loginPage, "login"); 
