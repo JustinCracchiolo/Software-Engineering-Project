@@ -56,10 +56,11 @@ public class UserManager {
         if(users.containsKey(normalizedUsername)) {
             return false;
         }
-        users.put(normalizedUsername, new User(username, password,""));
+        // Create and store the user once
+        User newUser = new User (username, password, "");
+        users.put(normalizedUsername, newUser);
+        // Save to file once
         addUserToFile(username, password);
-        users.put(normalizedUsername, new User(username, password, "")); //added to UserManager hashmap of all users
-        addUserToFile(username, password); //added to the txt file
         return true;
     }   
 
