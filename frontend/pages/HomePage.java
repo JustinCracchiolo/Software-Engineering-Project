@@ -17,7 +17,7 @@ import java.awt.*;
 
 public class HomePage extends JPanel {
 
-    public HomePage(JPanel cards, User user) {
+    public HomePage(JPanel cards, User user, UserManager users) {
 
         OfferVehiclePage offerVehiclePage = new OfferVehiclePage(cards, user);
         SchedulePage schedulePage = new SchedulePage(cards, user);

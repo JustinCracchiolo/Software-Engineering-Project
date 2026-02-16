@@ -165,5 +165,9 @@ public class UserManager {
         return username.trim().toLowerCase();
     }
     //------------------------------
+
+    public Map<String, User> getAllUsers() {
+        return users;
+    }
     
 }

@@ -145,7 +145,7 @@ public class UI {
                 currentUser = userManager.getUser(user); //this tells the program the person who is logged in    
                 CardLayout cl = (CardLayout) cards.getLayout(); 
                 
-                HomePage homePage = new HomePage(cards, currentUser);
+                HomePage homePage = new HomePage(cards, currentUser, userManager);
                 cards.add(homePage, "home");
                 
                 cl.show(cards, "home");
@@ -274,6 +274,8 @@ public class UI {
                 JOptionPane.showMessageDialog(frame, "User " + username + " created!");
                 regUsernameField.setText("");
                 regPasswordField.setText("");
+                CardLayout cl = (CardLayout) cards.getLayout();
+                cl.show(cards, "login");
                 return;
             }
             else { //checks if someone with repeat username
