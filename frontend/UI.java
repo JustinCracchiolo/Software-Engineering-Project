@@ -270,8 +270,8 @@ public class UI {
         // Create a new account in memory and return to Login.
         submitRegisterButton.addActionListener(e -> {
             String username = regUsernameField.getText().trim();
-            String password = regPasswordField.getText();
-
+            String password = new String(regPasswordField.getPassword());
+            String confirmPassword = new String(regConfirmPasswordField.getPassword());
 
             if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "All fields are required.");
@@ -289,6 +289,9 @@ public class UI {
                 JOptionPane.showMessageDialog(frame, "User " + username + " created!");
                 regUsernameField.setText("");
                 regPasswordField.setText("");
+                regConfirmPasswordField.setText("");
+                CardLayout cl = (CardLayout) cards.getLayout();
+                cl.show(cards, "login");
                 return;
             }
             else { //checks if someone with repeat username
