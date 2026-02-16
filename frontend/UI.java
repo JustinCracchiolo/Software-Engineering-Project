@@ -238,6 +238,10 @@ public class UI {
         regPasswordField.setMaximumSize(regPasswordField.getPreferredSize());
         regPasswordField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        JPasswordField regConfirmPasswordField = new PlaceHolderPasswordField("Confirm Password", 20);
+        regConfirmPasswordField.setMaximumSize(regConfirmPasswordField.getPreferredSize());
+        regConfirmPasswordField.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         JButton showRegistrationPasswordButton = new JButton("Show Password");
         showRegistrationPasswordButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         showRegistrationPasswordButton.setMargin(new Insets(2, 8, 2, 8));
@@ -245,14 +249,17 @@ public class UI {
 
             public void mousePressed(java.awt.event.MouseEvent e) {
                 regPasswordField.setEchoChar((char) 0);
+                regConfirmPasswordField.setEchoChar((char) 0);
             }
 
             public void mouseReleased(java.awt.event.MouseEvent e) {
                 regPasswordField.setEchoChar(loginEchoChar);
+                regConfirmPasswordField.setEchoChar(loginEchoChar);
             }
 
             public void mouseExited(java.awt.event.MouseEvent e) {
                 regPasswordField.setEchoChar(loginEchoChar);
+                regConfirmPasswordField.setEchoChar(loginEchoChar);
             }
             
         });
@@ -273,11 +280,18 @@ public class UI {
         // Create a new account in memory and return to Login.
         submitRegisterButton.addActionListener(e -> {
             String username = regUsernameField.getText().trim();
-            String password = regPasswordField.getText();
+            String password = new String(regPasswordField.getPassword());
+            String confirmPassword = new String(regConfirmPasswordField.getPassword());
 
-
-            if (username.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(frame, "Username and password are required.");
+            if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "All fields are required.");
+                return;
+            }
+            
+            if (!password.equals(confirmPassword)) {
+                JOptionPane.showMessageDialog(frame, "Passwords do not match. Please try again.");
+                regPasswordField.setText("");
+                regConfirmPasswordField.setText("");
                 return;
             }
             
@@ -285,12 +299,14 @@ public class UI {
                 JOptionPane.showMessageDialog(frame, "User " + username + " created!");
                 regUsernameField.setText("");
                 regPasswordField.setText("");
+                regConfirmPasswordField.setText("");
                 return;
             }
             else { //checks if someone with repeat username
                 JOptionPane.showMessageDialog(frame, "Username already exists. Try again");
                 regUsernameField.setText("");
                 regPasswordField.setText("");
+                regConfirmPasswordField.setText("");
                 CardLayout cl = (CardLayout) cards.getLayout();
                 cl.show(cards, "register");
                 return;
@@ -332,6 +348,9 @@ public class UI {
         registerPanel.add(Box.createVerticalStrut(20));
         registerPanel.add(Box.createVerticalStrut(10));
         registerPanel.add(regPasswordField);
+        registerPanel.add(Box.createVerticalStrut(20));
+        registerPanel.add(Box.createVerticalStrut(10));
+        registerPanel.add(regConfirmPasswordField);
         registerPanel.add(Box.createVerticalStrut(20));
         registerPanel.add(showRegistrationPasswordButton);
         registerPanel.add(Box.createVerticalStrut(20));
