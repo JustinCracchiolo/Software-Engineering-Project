@@ -18,7 +18,7 @@ public class Job {
     private int approximateJobDuration; // in minutes or hours
     private LocalDateTime jobDeadline; 
 
-    //constructor 
+    //constructor   
     public Job(String JOB_ID, int approximateJobDuration, LocalDateTime jobDeadline) {
         this.JOB_ID = JOB_ID;
         this.approximateJobDuration = approximateJobDuration;
