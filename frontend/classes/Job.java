@@ -1,5 +1,5 @@
 /* Project: Vehicular Cloud Real Time System (VCRTS)
- * Class: Vehicle.java
+ * Class: Job.java
  * Authors: Group 2 (Justin Cracchiolo, Lauren Rodriguez, David Choi, Tristan Huertas, Ivan Lin, Anthony Vallejo, Sebastian Villavicencio)
  * Date: February 2026
  * The Job class represents a Job submitted into the VCRTS system. It stores job information including job ID,
@@ -52,9 +52,6 @@ public class Job {
         this.jobDeadline = jobDeadline;
     }
 
-    // Tjhis is somethigns
-
-    //this is a comment
 }
 
 
