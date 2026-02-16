@@ -64,12 +64,7 @@ public class UI {
         JPanel registerPage = new JPanel(new BorderLayout());
 
         cards.add(loginPage, "login"); 
-        //cards.add(homePage, "home");
         cards.add(registerPage, "register");
-        //cards.add(offerVehiclePage, "offerVehicle");
-        //cards.add(schedulePage, "schedule");
-        //cards.add(submitJobPage, "submitJob");
-        //cards.add(settingsPage, "settings");
 
         //--------------------------------------------
 
