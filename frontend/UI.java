@@ -50,22 +50,26 @@ public class UI {
         
         // Creation of different screens
         JPanel loginPage = new JPanel(new BorderLayout());
+
+        /* 
         
         HomePage homePage = new HomePage(cards);
         OfferVehiclePage offerVehiclePage = new OfferVehiclePage(cards);
         SchedulePage schedulePage = new SchedulePage(cards);
         SubmitJobPage submitJobPage = new SubmitJobPage(cards);
         Settings settingsPage = new Settings(cards);
+
+        */
         
         JPanel registerPage = new JPanel(new BorderLayout());
 
         cards.add(loginPage, "login"); 
-        cards.add(homePage, "home");
+        //cards.add(homePage, "home");
         cards.add(registerPage, "register");
-        cards.add(offerVehiclePage, "offerVehicle");
-        cards.add(schedulePage, "schedule");
-        cards.add(submitJobPage, "submitJob");
-        cards.add(settingsPage, "settings");
+        //cards.add(offerVehiclePage, "offerVehicle");
+        //cards.add(schedulePage, "schedule");
+        //cards.add(submitJobPage, "submitJob");
+        //cards.add(settingsPage, "settings");
 
         //--------------------------------------------
 
@@ -131,27 +135,19 @@ public class UI {
         registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         registerButton.setFont(new Font("Arial", Font.PLAIN, 30));
 
-        //--------------------------------------------
-        //Temp button to skip login process
-        JButton skipButton = new JButton("Skip Login");
-        skipButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        skipButton.setFont(new Font("Arial", Font.PLAIN, 30));
-
-        skipButton.addActionListener(e -> { 
-            CardLayout cl = (CardLayout) cards.getLayout(); 
-            cl.show(cards, "home");
-        });
-
-        //--------------------------------------------
        
         // Validate credentials before switching to Home.
         loginButton.addActionListener(e -> { 
-            String username = usernameTextField.getText().trim();
-            String password = new String(passwordTextField.getPassword());
+            String user = usernameTextField.getText().trim();
+            String user_password = new String(passwordTextField.getPassword());
            
-            if (userManager.login(username, password)) {
-                currentUser = userManager.getUser(username); //this tells the program the person who is logged in    
+            if (userManager.login(user, user_password)) {
+                currentUser = userManager.getUser(user); //this tells the program the person who is logged in    
                 CardLayout cl = (CardLayout) cards.getLayout(); 
+                
+                HomePage homePage = new HomePage(cards, currentUser, userManager);
+                cards.add(homePage, "home");
+                
                 cl.show(cards, "home");
             } else {
                 JOptionPane.showMessageDialog(frame, "Invalid username or password.");
@@ -185,12 +181,6 @@ public class UI {
         loginPanel.add(loginButton); 
         loginPanel.add(Box.createVerticalStrut(10));
         loginPanel.add(Box.createVerticalGlue()); 
-
-        //--------------------------
-        // to delete
-        loginPanel.add(skipButton);
-
-        //--------------------------
 
         loginSidePanel.add(Box.createVerticalGlue()); 
         loginSidePanel.add(title_label);
@@ -280,8 +270,8 @@ public class UI {
         // Create a new account in memory and return to Login.
         submitRegisterButton.addActionListener(e -> {
             String username = regUsernameField.getText().trim();
-            String password = new String(regPasswordField.getPassword());
-            String confirmPassword = new String(regConfirmPasswordField.getPassword());
+            String password = regPasswordField.getText();
+
 
             if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "All fields are required.");
@@ -299,7 +289,6 @@ public class UI {
                 JOptionPane.showMessageDialog(frame, "User " + username + " created!");
                 regUsernameField.setText("");
                 regPasswordField.setText("");
-                regConfirmPasswordField.setText("");
                 return;
             }
             else { //checks if someone with repeat username

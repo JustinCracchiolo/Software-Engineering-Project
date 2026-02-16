@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import classes.User;
 
 public class OfferVehiclePage extends JPanel {
 
@@ -31,11 +32,11 @@ public class OfferVehiclePage extends JPanel {
 
     private final JTextArea STATUS_AREA = new JTextArea(6, 50);
 
-    public OfferVehiclePage(JPanel cards) {
+    public OfferVehiclePage(JPanel cards, User user) {
         setLayout(new BorderLayout());
 
         //NavBar
-        add(new NavBar(cards), BorderLayout.NORTH);
+        add(new NavBar(cards, user), BorderLayout.NORTH);
 
         JPanel center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
