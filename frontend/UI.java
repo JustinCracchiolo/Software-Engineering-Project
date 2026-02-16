@@ -234,9 +234,28 @@ public class UI {
         regUsernameField.setMaximumSize(regUsernameField.getPreferredSize());
         regUsernameField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextField regPasswordField = new PlaceHolderTextField("Password", 20);
+        JPasswordField regPasswordField = new PlaceHolderPasswordField("Password", 20);
         regPasswordField.setMaximumSize(regPasswordField.getPreferredSize());
         regPasswordField.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton showRegistrationPasswordButton = new JButton("Show Password");
+        showRegistrationPasswordButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        showRegistrationPasswordButton.setMargin(new Insets(2, 8, 2, 8));
+        showRegistrationPasswordButton.addMouseListener(new java.awt.event.MouseAdapter() {
+
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                regPasswordField.setEchoChar((char) 0);
+            }
+
+            public void mouseReleased(java.awt.event.MouseEvent e) {
+                regPasswordField.setEchoChar(loginEchoChar);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                regPasswordField.setEchoChar(loginEchoChar);
+            }
+            
+        });
 
 
         JButton submitRegisterButton = new JButton("Create Account");
@@ -313,6 +332,8 @@ public class UI {
         registerPanel.add(Box.createVerticalStrut(20));
         registerPanel.add(Box.createVerticalStrut(10));
         registerPanel.add(regPasswordField);
+        registerPanel.add(Box.createVerticalStrut(20));
+        registerPanel.add(showRegistrationPasswordButton);
         registerPanel.add(Box.createVerticalStrut(20));
         registerPanel.add(submitRegisterButton);
         registerPanel.add(Box.createVerticalStrut(10));
