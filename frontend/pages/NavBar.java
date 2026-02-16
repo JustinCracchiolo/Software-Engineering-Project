@@ -8,9 +8,10 @@ package pages;
 
 import javax.swing.*;
 import java.awt.*;
+import classes.User;
 
 public class NavBar extends JPanel{
-    public NavBar(JPanel cards) {
+    public NavBar(JPanel cards, User user) {
         setBackground(new Color(30, 30, 30));
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setPreferredSize(new Dimension(1000, 60));

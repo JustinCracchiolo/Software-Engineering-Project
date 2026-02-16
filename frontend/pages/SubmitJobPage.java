@@ -10,9 +10,10 @@ package pages;
 
 import javax.swing.*;
 import java.awt.*;
+import classes.User;
 
 public class SubmitJobPage extends JPanel {
-    public SubmitJobPage(JPanel cards) {
+    public SubmitJobPage(JPanel cards, User user) {
         setLayout(new BorderLayout());
         JLabel label = new JLabel("Submit Job Page", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 24));
@@ -20,7 +21,7 @@ public class SubmitJobPage extends JPanel {
         add(label, BorderLayout.CENTER);
 
         setLayout(new BorderLayout());
-        add(new NavBar(cards), BorderLayout.NORTH);
+        add(new NavBar(cards, user), BorderLayout.NORTH);
         add(label, BorderLayout.CENTER);
     }
     

@@ -10,10 +10,11 @@ package pages;
 
 import javax.swing.*;
 import java.awt.*;
+import classes.User;
 
 public class SchedulePage extends JPanel {
     
-    public SchedulePage(JPanel cards) {
+    public SchedulePage(JPanel cards, User user) {
         setLayout(new BorderLayout());
         JLabel label = new JLabel("Schedule Page", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 24));
@@ -21,7 +22,7 @@ public class SchedulePage extends JPanel {
         add(label, BorderLayout.CENTER);
 
         setLayout(new BorderLayout());
-        add(new NavBar(cards), BorderLayout.NORTH);
+        add(new NavBar(cards, user), BorderLayout.NORTH);
         add(label, BorderLayout.CENTER);
     }
 }
