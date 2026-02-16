@@ -22,14 +22,14 @@ import javax.swing.table.DefaultTableModel;
 public class OfferVehiclePage extends JPanel {
 
     //Saving/Loading information from transactions.txt.
-    private static final String OUTPUT_FILE = "transactions.txt";
+    private static final String OUTPUT_FILE = "frontend/transactions.txt";
     private static final DateTimeFormatter TS_FORMAT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     //Look up vehicles by VIN.
-    private final Map<String, Vehicle> vehiclesByVin = new LinkedHashMap<>();
+    private final Map<String, Vehicle> VEHICLES_BY_VIN = new LinkedHashMap<>();
 
-    private final JTextArea statusArea = new JTextArea(6, 50);
+    private final JTextArea STATUS_AREA = new JTextArea(6, 50);
 
     public OfferVehiclePage(JPanel cards) {
         setLayout(new BorderLayout());
@@ -70,10 +70,10 @@ public class OfferVehiclePage extends JPanel {
         
 
         //Status
-        statusArea.setEditable(false);
-        statusArea.setLineWrap(true);
-        statusArea.setWrapStyleWord(true);
-        JScrollPane statusScroll = new JScrollPane(statusArea);
+        STATUS_AREA.setEditable(false);
+        STATUS_AREA.setLineWrap(true);
+        STATUS_AREA.setWrapStyleWord(true);
+        JScrollPane statusScroll = new JScrollPane(STATUS_AREA);
         statusScroll.setBorder(BorderFactory.createTitledBorder("Status"));
 
   
@@ -110,7 +110,7 @@ public class OfferVehiclePage extends JPanel {
         Vehicle v = form.toVehicle();
         if (v == null) return; // validation already handled with message
 
-        if (vehiclesByVin.containsKey(v.vin)) {
+        if (VEHICLES_BY_VIN.containsKey(v.vin)) {
             JOptionPane.showMessageDialog(this,
                     "A vehicle with this VIN already exists.\nUse Edit Vehicle Info instead.",
                     "Duplicate VIN",
@@ -119,7 +119,7 @@ public class OfferVehiclePage extends JPanel {
             return;
         }
 
-        vehiclesByVin.put(v.vin, v);
+        VEHICLES_BY_VIN.put(v.vin, v);
         logStatus("Vehicle added: " + v.make + " " + v.model + " (" + v.year + "), VIN " + v.vin);
 
         appendToFile(buildRecord("ADD_VEHICLE", v));
@@ -127,7 +127,7 @@ public class OfferVehiclePage extends JPanel {
 
     private void onRemoveVehicle() {
         //no vehicle on table
-        if (vehiclesByVin.isEmpty()) {
+        if (VEHICLES_BY_VIN.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No vehicles to remove.", "Empty", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -146,7 +146,7 @@ public class OfferVehiclePage extends JPanel {
             return;
         }
 
-        Vehicle removed = vehiclesByVin.remove(vin);
+        Vehicle removed = VEHICLES_BY_VIN.remove(vin);
         //incorrect info
         if (removed == null) {
             JOptionPane.showMessageDialog(this, "No vehicle found for VIN: " + vin, "Not Found", JOptionPane.WARNING_MESSAGE);
@@ -160,7 +160,7 @@ public class OfferVehiclePage extends JPanel {
 
     private void onEditVehicle() {
         //no data in table
-        if (vehiclesByVin.isEmpty()) {
+        if (VEHICLES_BY_VIN.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No vehicles to edit.", "Empty", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -179,7 +179,7 @@ public class OfferVehiclePage extends JPanel {
             return;
         }
 
-        Vehicle existing = vehiclesByVin.get(vin);
+        Vehicle existing = VEHICLES_BY_VIN.get(vin);
         //incorrect request
         if (existing == null) {
             JOptionPane.showMessageDialog(this, "No vehicle found for VIN: " + vin, "Not Found", JOptionPane.WARNING_MESSAGE);
@@ -210,7 +210,7 @@ public class OfferVehiclePage extends JPanel {
 
         //Updating while maintaining the VIN
         updated.vin = vin;
-        vehiclesByVin.put(vin, updated);
+        VEHICLES_BY_VIN.put(vin, updated);
 
         logStatus("Vehicle updated: VIN " + vin);
         appendToFile(buildRecord("EDIT_VEHICLE", updated));
@@ -218,7 +218,7 @@ public class OfferVehiclePage extends JPanel {
 
     private void onViewVehicles() {
         //no data on the table
-        if (vehiclesByVin.isEmpty()) {
+        if (VEHICLES_BY_VIN.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No vehicles available.", "Empty", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -227,7 +227,7 @@ public class OfferVehiclePage extends JPanel {
         String[] cols = {"Owner ID", "Make", "Model", "Year", "Color", "VIN", "License Plate", "Residency Time"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
 
-        for (Vehicle v : vehiclesByVin.values()) {
+        for (Vehicle v : VEHICLES_BY_VIN.values()) {
             model.addRow(new Object[]{
                     v.ownerId,
                     v.make,
@@ -248,13 +248,13 @@ public class OfferVehiclePage extends JPanel {
         JOptionPane.showMessageDialog(this, pane, "Current Vehicles", JOptionPane.INFORMATION_MESSAGE);
 
         //log message
-        logStatus("Viewed vehicles (" + vehiclesByVin.size() + " total).");
+        logStatus("Viewed vehicles (" + VEHICLES_BY_VIN.size() + " total).");
         appendToFile(buildViewRecord());
     }
 
     //log + space
     private void logStatus(String msg) {
-        statusArea.append(msg + "\n");
+        STATUS_AREA.append(msg + "\n");
     }
 
     //write
@@ -292,7 +292,7 @@ public class OfferVehiclePage extends JPanel {
                 "[" + nowTs() + "]\n" +
                 "Action: VIEW_VEHICLES\n" +
                 "User Type: OWNER\n" +
-                "Vehicle Count: " + vehiclesByVin.size() + "\n";
+                "Vehicle Count: " + VEHICLES_BY_VIN.size() + "\n";
     }
 
     //constructors

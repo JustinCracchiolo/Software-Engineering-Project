@@ -26,7 +26,7 @@ import java.util.Map;
 public class UserManager {
 
     private Map<String, User> users = new HashMap<>(); //username => User
-    private final Path usersFilePath;
+    private final Path USERS_FILE_PATH;
     //------------------------------
 
     // Uses the default users file path under UserInfo/users.txt. 
@@ -37,8 +37,8 @@ public class UserManager {
     //------------------------------
 
     // Loads users from the provided file path. 
-    public UserManager(Path usersFilePath) {
-        this.usersFilePath = usersFilePath;
+    public UserManager(Path USERS_FILE_PATH) {
+        this.USERS_FILE_PATH = USERS_FILE_PATH;
         loadUsersFromFile();
     }
     //------------------------------
@@ -101,12 +101,12 @@ public class UserManager {
      * Put all their information in the hashmap. Keeps registrations after application closed
      */
     private void loadUsersFromFile() {
-        if (!Files.exists(usersFilePath)) {
+        if (!Files.exists(USERS_FILE_PATH)) {
             return;
         }
 
         //try reading it by line and using next()
-        try (BufferedReader reader = Files.newBufferedReader(usersFilePath, StandardCharsets.UTF_8)) {
+        try (BufferedReader reader = Files.newBufferedReader(USERS_FILE_PATH, StandardCharsets.UTF_8)) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String trimmed = line.trim();
@@ -138,12 +138,12 @@ public class UserManager {
      */
     private void addUserToFile(String username, String password) {
         try {
-            Path parent = usersFilePath.getParent();
+            Path parent = USERS_FILE_PATH.getParent();
             if (parent != null) {
                 Files.createDirectories(parent);
             }
             try (BufferedWriter writer = Files.newBufferedWriter(
-                    usersFilePath,
+                    USERS_FILE_PATH,
                     StandardCharsets.UTF_8,
                     StandardOpenOption.CREATE,
                     StandardOpenOption.APPEND
