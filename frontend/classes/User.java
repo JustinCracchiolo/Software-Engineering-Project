@@ -7,17 +7,28 @@
  */
 package classes;
 
+import java.util.ArrayList;
+
 //this class represents a user of the system, with a username and password. It is used by UserManager to store user data in memory and persist it to a file. The Owner class extends User to add additional fields for car owners.
 
 public class User {
+    private static int increment = 1000;
+    private String userId;
     private String username;
     private String password;
     private String email;
+
+    private ArrayList<Vehicle> user_vehciles = new ArrayList<>();
 
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
+        increment++;
+        this.userId = Integer.toString(increment);
+
+        //read vehicle file for when user is loaded into the system
+        // readUserVehicles()
     }
 
     public String getUsername() {
@@ -30,5 +41,17 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void addUserVehicles(Vehicle v) {
+        user_vehciles.add(v);
+    }
+
+    public ArrayList<Vehicle> getUserVehicles() {
+        return user_vehciles;
     }
 }

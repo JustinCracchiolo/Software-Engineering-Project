@@ -19,6 +19,9 @@ public class Vehicle {
 
 
     //constructor 
+
+    //add user as parameter in constructor 
+    
     public Vehicle(String VIN_NUMBER, String make, String model , String licensePlate) {
         this.VIN_NUMBER = VIN_NUMBER;
         this.make = make;

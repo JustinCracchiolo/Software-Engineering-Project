@@ -10,10 +10,14 @@ package pages;
 
 import javax.swing.*;
 import java.awt.*;
-import classes.User;
+import java.util.ArrayList;
+import java.util.Map;
 
-public class SubmitJobPage extends JPanel {
-    public SubmitJobPage(JPanel cards, User user) {
+import classes.User;
+import classes.Vehicle;
+
+public class SubmitJobPage extends JPanel implements Refreshable {
+    public SubmitJobPage(JPanel cards, User user, Map<String, Refreshable> registry) {
         setLayout(new BorderLayout());
         JLabel label = new JLabel("Submit Job Page", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 24));
@@ -21,8 +25,12 @@ public class SubmitJobPage extends JPanel {
         add(label, BorderLayout.CENTER);
 
         setLayout(new BorderLayout());
-        add(new NavBar(cards, user), BorderLayout.NORTH);
+        add(new NavBar(cards, user, registry), BorderLayout.NORTH);
         add(label, BorderLayout.CENTER);
+    }
+
+    @Override
+    public void refresh() {
     }
     
 }

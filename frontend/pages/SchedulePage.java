@@ -10,11 +10,15 @@ package pages;
 
 import javax.swing.*;
 import java.awt.*;
-import classes.User;
+import java.util.ArrayList;
+import java.util.Map;
 
-public class SchedulePage extends JPanel {
+import classes.User;
+import classes.Vehicle;
+
+public class SchedulePage extends JPanel  implements Refreshable {
     
-    public SchedulePage(JPanel cards, User user) {
+    public SchedulePage(JPanel cards, User user, Map<String, Refreshable> registry) {
         setLayout(new BorderLayout());
         JLabel label = new JLabel("Schedule Page", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 24));
@@ -22,7 +26,11 @@ public class SchedulePage extends JPanel {
         add(label, BorderLayout.CENTER);
 
         setLayout(new BorderLayout());
-        add(new NavBar(cards, user), BorderLayout.NORTH);
+        add(new NavBar(cards, user, registry), BorderLayout.NORTH);
         add(label, BorderLayout.CENTER);
+    }
+
+    @Override
+    public void refresh() {
     }
 }

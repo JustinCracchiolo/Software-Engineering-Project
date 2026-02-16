@@ -14,13 +14,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import classes.User;
 
-public class OfferVehiclePage extends JPanel {
+import classes.PlaceHolderTextField;
+import classes.User;
+import classes.Vehicle;
+
+public class OfferVehiclePage extends JPanel implements Refreshable {
 
     //Saving/Loading information from transactions.txt.
     private static final String OUTPUT_FILE = "frontend/transactions.txt";
@@ -32,11 +36,13 @@ public class OfferVehiclePage extends JPanel {
 
     private final JTextArea STATUS_AREA = new JTextArea(6, 50);
 
-    public OfferVehiclePage(JPanel cards, User user) {
+    public OfferVehiclePage(JPanel cards, User user, Map<String, Refreshable> registry) {
         setLayout(new BorderLayout());
 
         //NavBar
-        add(new NavBar(cards, user), BorderLayout.NORTH);
+        add(new NavBar(cards, user, registry), BorderLayout.NORTH);
+
+        /* 
 
         JPanel center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
@@ -58,6 +64,65 @@ public class OfferVehiclePage extends JPanel {
         removeBtn.setFont(new Font("Arial", Font.PLAIN, 16));
         editBtn.setFont(new Font("Arial", Font.PLAIN, 16));
         viewBtn.setFont(new Font("Arial", Font.PLAIN, 16));
+        */
+
+        JPanel vehicleForm = new JPanel();
+        vehicleForm.setBackground(new Color(65, 105, 255 ));
+        vehicleForm.setLayout(new BoxLayout(vehicleForm, BoxLayout.Y_AXIS)); // center everything vertically
+        vehicleForm.setAlignmentX(Component.CENTER_ALIGNMENT); //center horizontally
+        vehicleForm.setPreferredSize(new Dimension(500, 800));
+
+        JLabel vehicleLabel = new JLabel("Enter vehicle information");
+        vehicleLabel.setAlignmentX(Component.CENTER_ALIGNMENT); 
+        vehicleLabel.setForeground(Color.WHITE);  
+        vehicleLabel.setFont(new Font("Arial", Font.PLAIN, 40));
+
+        JTextField vehicleVin = new PlaceHolderTextField("Vin", 20); //adds more graphics to regular textfield
+        //vehicleVin.setMaximumSize(vehicleVin.getPreferredSize()); 
+        vehicleVin.setAlignmentX(Component.CENTER_ALIGNMENT); 
+
+        JTextField vehicleMake = new PlaceHolderTextField("Make", 20); //adds more graphics to regular textfield
+        //vehicleVin.setMaximumSize(vehicleVin.getPreferredSize()); 
+        vehicleVin.setAlignmentX(Component.CENTER_ALIGNMENT); 
+
+        JTextField vehicleModel = new PlaceHolderTextField("Model", 20); //adds more graphics to regular textfield
+        //vehicleVin.setMaximumSize(vehicleVin.getPreferredSize()); 
+        vehicleVin.setAlignmentX(Component.CENTER_ALIGNMENT); 
+
+        JTextField vehiclePlate = new PlaceHolderTextField("License Plate", 20); //adds more graphics to regular textfield
+        //vehicleVin.setMaximumSize(vehicleVin.getPreferredSize()); 
+        vehicleVin.setAlignmentX(Component.CENTER_ALIGNMENT); 
+
+        JButton submitBtn = new JButton("Submit");
+        submitBtn.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        vehicleForm.add(Box.createVerticalGlue()); 
+        vehicleForm.add(vehicleLabel); 
+        vehicleForm.add(Box.createVerticalStrut(30)); //creates padding between elements
+        vehicleForm.add(vehicleVin); 
+        vehicleForm.add(Box.createVerticalStrut(30)); //creates padding between elements
+        vehicleForm.add(vehicleMake); 
+        vehicleForm.add(Box.createVerticalStrut(30)); //creates padding between elements
+        vehicleForm.add(vehicleModel); 
+        vehicleForm.add(Box.createVerticalStrut(30)); //creates padding between elements
+        vehicleForm.add(vehiclePlate); 
+        vehicleForm.add(Box.createVerticalStrut(30)); //creates padding between elements
+        vehicleForm.add(submitBtn); 
+
+
+        add(vehicleForm, BorderLayout.SOUTH);
+
+        submitBtn.addActionListener(e -> {
+            String VIN_NUMBER = vehicleVin.getText();
+            String make = vehicleMake.getText();
+            String model = vehicleModel.getText();
+            String licensePlate = vehiclePlate.getText();
+
+            Vehicle v = new Vehicle(VIN_NUMBER, make, model, licensePlate);
+            user.addUserVehicles(v);
+        });
+
+        /* 
 
         //buttons and actions
         buttonRow.add(addBtn);
@@ -69,6 +134,9 @@ public class OfferVehiclePage extends JPanel {
         buttonRow.add(viewBtn);
         viewBtn.addActionListener(e -> onViewVehicles());
         
+        */
+
+        /* 
 
         //Status
         STATUS_AREA.setEditable(false);
@@ -407,5 +475,13 @@ public class OfferVehiclePage extends JPanel {
         gbc.gridx = 1;
         gbc.weightx = 0.7;
         panel.add(field, gbc);
+
+    */ 
+    
+    }
+
+    @Override
+    public void refresh() {
+        
     }
 }

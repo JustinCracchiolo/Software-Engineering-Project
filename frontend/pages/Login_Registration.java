@@ -6,16 +6,26 @@
 * It connects to UserManager to support user registration and login.
 */
 
+package pages;
+
 import classes.User;
 import classes.UserManager;
 import classes.PlaceHolderTextField;
 import classes.PlaceHolderPasswordField;
 
+
+import pages.OfferVehiclePage;
+import pages.SchedulePage;
+import pages.Settings;
+import pages.SubmitJobPage;
+
 import pages.HomePage;
+import pages.NavBar;
 import pages.OfferVehiclePage;
 import pages.SubmitJobPage;
 import pages.SchedulePage;
 import pages.Settings;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class UI {
+public class Login_Registration {
     public static User currentUser; //once a person logs in, this holds all information for that user
     
     public static void main(String[] args) {
@@ -50,21 +60,12 @@ public class UI {
         
         // Creation of different screens
         JPanel loginPage = new JPanel(new BorderLayout());
-
-        /* 
-        
-        HomePage homePage = new HomePage(cards);
-        OfferVehiclePage offerVehiclePage = new OfferVehiclePage(cards);
-        SchedulePage schedulePage = new SchedulePage(cards);
-        SubmitJobPage submitJobPage = new SubmitJobPage(cards);
-        Settings settingsPage = new Settings(cards);
-
-        */
         
         JPanel registerPage = new JPanel(new BorderLayout());
 
         cards.add(loginPage, "login"); 
         cards.add(registerPage, "register");
+
 
         //--------------------------------------------
 
@@ -140,10 +141,46 @@ public class UI {
                 currentUser = userManager.getUser(user); //this tells the program the person who is logged in    
                 CardLayout cl = (CardLayout) cards.getLayout(); 
                 
+                Map<String, Refreshable> registry = new HashMap<>();
+                HomePage home = new HomePage(cards, currentUser, userManager, registry);
+                SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
+                OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
+                SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
+                Settings settings = new Settings(cards, currentUser, registry);
+                
+                registry.put("home", home);
+                registry.put("schedule", schedule);
+                registry.put("offerVehicle", offer);
+                registry.put("submitJob", submit);
+                registry.put("settings", settings);
+                
+                cards.add(home, "home");
+                cards.add(schedule, "schedule");
+                cards.add(offer, "offerVehicle");
+                cards.add(submit, "submitJob");
+                cards.add(settings, "settings");
+
+
+                cl.show(cards, "home");
+
+
+                /* 
                 HomePage homePage = new HomePage(cards, currentUser, userManager);
                 cards.add(homePage, "home");
+
+                OfferVehiclePage offerVehiclePage = new OfferVehiclePage(cards, currentUser);
+                SchedulePage schedulePage = new SchedulePage(cards, currentUser);
+                SubmitJobPage submitJobPage = new SubmitJobPage(cards, currentUser);
+                Settings settingsPage = new Settings(cards, currentUser);
+                
+                cards.add(offerVehiclePage, "offerVehicle");
+                cards.add(schedulePage, "schedule");
+                cards.add(submitJobPage, "submitJob");
+                cards.add(settingsPage, "settings");
                 
                 cl.show(cards, "home");
+
+                */
             } else {
                 JOptionPane.showMessageDialog(frame, "Invalid username or password.");
             }
@@ -305,28 +342,6 @@ public class UI {
             meetAndSwitch(cards, registerPage, registerPanel, registerSidePanel, "login");
         });
 
-        /*  
-        offerVehicleBtn.addActionListener(e -> {
-            CardLayout cl = (CardLayout) cards.getLayout();
-            cl.show(cards, "offerVehicle");
-        });
-        
-        submitJobBtn.addActionListener(e -> {
-            CardLayout cl = (CardLayout) cards.getLayout();
-            cl.show(cards, "submitJob");
-        });
-
-        scheduleBtn.addActionListener(e -> {
-            CardLayout cl = (CardLayout) cards.getLayout();
-            cl.show(cards, "schedule");
-        });
-
-        homeBtn.addActionListener(e -> {
-            CardLayout cl = (CardLayout) cards.getLayout();
-            cl.show(cards, "home");
-        });
-        */
-
         registerPanel.add(Box.createVerticalGlue());
         registerPanel.add(registerHeader);
         registerPanel.add(Box.createVerticalStrut(20));
@@ -346,18 +361,16 @@ public class UI {
         registerPanel.add(Box.createVerticalGlue());
 
         registerSidePanel.setOpaque(true);
-
-      registerSidePanel.add(Box.createVerticalGlue());      // pushes content down
-      registerSidePanel.add(registerTitleLabel);
-      registerSidePanel.add(Box.createVerticalStrut(30));
-      registerSidePanel.add(backToLoginButton);
-      registerSidePanel.add(Box.createVerticalGlue());      // pushes content up
-
+        
+        registerSidePanel.add(Box.createVerticalGlue());      // pushes content down
+        registerSidePanel.add(registerTitleLabel);
+        registerSidePanel.add(Box.createVerticalStrut(30));
+        registerSidePanel.add(backToLoginButton);
+        registerSidePanel.add(Box.createVerticalGlue());      // pushes content up
 
         registerPage.add(registerPanel, BorderLayout.CENTER);
         registerPage.add(registerSidePanel, BorderLayout.EAST);
         registerPanel.setOpaque(true);
-
 
         frame.add(cards);
         frame.setVisible(true);
@@ -413,6 +426,6 @@ public class UI {
         });
         timer.start();
     }
-
+    //------------------------------
 
 }
