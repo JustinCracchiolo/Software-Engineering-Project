@@ -8,7 +8,7 @@
 
 package classes;
 
-import java.time.LocalDateTime;
+import java.time.LocalDateTime; // allows to see the job deadline and approximate job duration of the client
 
 // job class
 //The system shall receive and verify the vehicle's jobId, approximateJobDuration, and jobDeadline.
