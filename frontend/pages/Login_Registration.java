@@ -312,6 +312,11 @@ public class Login_Registration {
             String password = new String(regPasswordField.getPassword());
             String confirmPassword = new String(regConfirmPasswordField.getPassword());
 
+            //
+            String userType = (String) comboBox.getSelectedItem();
+            //
+            
+
             if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "All fields are required.");
                 return;
@@ -324,7 +329,7 @@ public class Login_Registration {
                 return;
             }
             
-            if(userManager.register(username, password)) { //creates a User with username and passwords and puts them into system
+            if(userManager.register(username, password, userType)) { //creates a User with username and passwords and puts them into system
                 JOptionPane.showMessageDialog(frame, "User " + username + " created!");
                 regUsernameField.setText("");
                 regPasswordField.setText("");

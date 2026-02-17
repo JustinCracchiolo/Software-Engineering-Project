@@ -18,14 +18,18 @@ public class User {
     private String password;
     private String email;
 
+    private String userType;
+
     private ArrayList<Vehicle> user_vehciles = new ArrayList<>();
 
-    public User(String username, String password, String email) {
+    public User(String username, String password, String email, String userType) {
         this.username = username;
         this.password = password;
         this.email = email;
         increment++;
         this.userId = Integer.toString(increment);
+
+        this.userType = userType;
 
         //read vehicle file for when user is loaded into the system
         // readUserVehicles()

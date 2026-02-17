@@ -1,4 +1,5 @@
-Justin	password  
-Lauren	lauren 
-admin	admin 
-test	test
+Justin|password|Owner
+Lauren|lauren|Client
+admin|admin|Client
+test|test|Owner
+test2|test2|Client

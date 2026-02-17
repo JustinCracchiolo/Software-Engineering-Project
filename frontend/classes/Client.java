@@ -13,9 +13,11 @@ public class Client extends User { // utilizes the User class to set client user
     private String clientId;
 
     //constructor for the client class; utilizes the constructor of the User class to set the username and password, and also sets the clientId.
-    public Client(String username, String password, String clientId) {
-        super(username, password, ""); //email is not needed for clients, so we can set it to an empty string
-        this.clientId = clientId;
+    public Client(String username, String password) {
+        super(username, password, "", "Client"); //email is not needed for clients, so we can set it to an empty string
+        
+        //fix clientId
+        //this.clientId = clientId;
     }
 
     public String getClientId() {

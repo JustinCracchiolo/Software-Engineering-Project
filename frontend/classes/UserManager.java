@@ -51,16 +51,32 @@ public class UserManager {
      * @return boolean: force person to register again or put them to login screen
      */
 
-    public boolean register(String username, String password) {
+    public boolean register(String username, String password, String userType) {
+        User newUser;
         String normalizedUsername = normalizeUsername(username);
+       
         if(users.containsKey(normalizedUsername)) {
             return false;
         }
+
+        //will need to add admin type as well
+        //will have problem with residency time
+
+        if(userType.equals("Owner")) {
+            newUser = new Owner(username, password, 0);
+        }
+        else {
+            newUser = new Client(username, password);
+        }
+
+
+
         // Create and store the user once
-        User newUser = new User (username, password, "");
+        //User newUser = new User (username, password, "", userType);
+        
         users.put(normalizedUsername, newUser);
         // Save to file once
-        addUserToFile(username, password);
+        addUserToFile(username, password, userType);
         return true;
     }   
 
@@ -104,6 +120,48 @@ public class UserManager {
         if (!Files.exists(USERS_FILE_PATH)) {
             return;
         }
+        try (BufferedReader reader = Files.newBufferedReader(USERS_FILE_PATH, StandardCharsets.UTF_8)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String trimmed = line.trim();
+                if (trimmed.isEmpty()) {
+                    continue;
+                }
+                // Split using "|" as the delimiter
+                String[] parts = trimmed.split("\\|");
+              
+                //will have to change this it we have more than one user type per person
+                //will also have to chnage to get expected residence time once implemented
+                String username = parts[0].trim();
+                String password = parts[1].trim();
+                String type = parts[2].trim();
+                
+                String normalizedUsername = normalizeUsername(username);
+
+                //will have to update this for admin type
+
+                if (!username.isEmpty() && !users.containsKey(normalizedUsername)) {
+                    if(type.equals("Owner")) {
+                        users.put(normalizedUsername, new Owner(username, password, 0));
+                    }
+                    else {
+                        users.put(normalizedUsername, new Client(username, password));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            // If the file is unreadable, continue with an empty in-memory list.
+        }
+    }
+    //-----------------
+
+
+
+    /* 
+    private void loadUsersFromFile() {
+        if (!Files.exists(USERS_FILE_PATH)) {
+            return;
+        }
 
         //try reading it by line and using next()
         try (BufferedReader reader = Files.newBufferedReader(USERS_FILE_PATH, StandardCharsets.UTF_8)) {
@@ -129,6 +187,7 @@ public class UserManager {
         }
         
     }
+    */
     //------------------------------
 
     /** 
@@ -136,7 +195,7 @@ public class UserManager {
      * @param password: from the user when they register
      * Put their information into the txt file
      */
-    private void addUserToFile(String username, String password) {
+    private void addUserToFile(String username, String password, String userType) {
         try {
             Path parent = USERS_FILE_PATH.getParent();
             if (parent != null) {
@@ -148,7 +207,7 @@ public class UserManager {
                     StandardOpenOption.CREATE,
                     StandardOpenOption.APPEND
             )) {
-                writer.write(username + "\t" + password);
+                writer.write(username + "|" + password + "|" + userType);
                 writer.newLine();
             }
         } catch (IOException e) {

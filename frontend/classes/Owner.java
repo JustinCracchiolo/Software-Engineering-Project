@@ -22,7 +22,7 @@ public class Owner extends User {
 
     //constructor for the owner class; utilizes the constructor of the User class to set the username and password.
     public Owner(String username, String password, int approximateResidencyTime) {
-        super(username, password, "");
+        super(username, password, "", "Owner");
         this.approximateResidencyTime = approximateResidencyTime;
     }
 
