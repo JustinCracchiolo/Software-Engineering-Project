@@ -15,6 +15,7 @@ import java.util.HashMap;
 public class NavBar extends JPanel {
 
     private final Map<String, Refreshable> refreshables;
+    private JButton submitJobBtn;
 
     public NavBar(JPanel cards, User user, Map<String, Refreshable> refreshables) {
         this.refreshables = refreshables;
@@ -30,8 +31,14 @@ public class NavBar extends JPanel {
 
         JButton homeBtn = new JButton("Home");
         JButton scheduleBtn = new JButton("Schedule");
+
+
         JButton offerVehicleBtn = new JButton("Offer Vehicle");
-        JButton submitJobBtn = new JButton("Submit Job");
+
+        if(user.getUserType().equals("Client")) {
+            submitJobBtn = new JButton("Submit Job");
+        }
+
         JButton settingsBtn = new JButton("Settings");
         JButton logoutBtn = new JButton("Log Out");
 
@@ -50,10 +57,19 @@ public class NavBar extends JPanel {
             ((CardLayout) cards.getLayout()).show(cards, "offerVehicle");
         });
 
+        if(user.getUserType().equals("Client")) {
+            submitJobBtn.addActionListener(e -> {
+                refreshables.get("submitJob").refresh();
+                ((CardLayout) cards.getLayout()).show(cards, "submitJob");
+            });
+        }
+
+        /*  
         submitJobBtn.addActionListener(e -> {
             refreshables.get("submitJob").refresh();
             ((CardLayout) cards.getLayout()).show(cards, "submitJob");
         });
+        */
 
         settingsBtn.addActionListener(e -> {
             refreshables.get("settings").refresh();
@@ -73,8 +89,13 @@ public class NavBar extends JPanel {
         add(Box.createHorizontalStrut(10));
         add(offerVehicleBtn);
         add(Box.createHorizontalStrut(10));
-        add(submitJobBtn);
-        add(Box.createHorizontalStrut(10));
+
+        if(user.getUserType().equals("Client")) {
+            add(submitJobBtn);
+            add(Box.createHorizontalStrut(10));
+        }
+        
+
         add(settingsBtn);
         add(Box.createHorizontalStrut(10));
         add(logoutBtn);

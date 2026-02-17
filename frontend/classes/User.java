@@ -58,4 +58,8 @@ public class User {
     public ArrayList<Vehicle> getUserVehicles() {
         return user_vehciles;
     }
+
+    public String getUserType() {
+        return userType;
+    }
 }
