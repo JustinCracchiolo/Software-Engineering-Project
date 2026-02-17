@@ -148,11 +148,13 @@ public class Login_Registration {
                 SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
                 Settings settings = new Settings(cards, currentUser, registry);
                 
+                //These cards can now be refreshed when looked up in the hashmap
                 registry.put("home", home);
                 registry.put("schedule", schedule);
                 registry.put("offerVehicle", offer);
                 registry.put("submitJob", submit);
                 registry.put("settings", settings);
+
                 
                 cards.add(home, "home");
                 cards.add(schedule, "schedule");
@@ -286,6 +288,11 @@ public class Login_Registration {
             
         });
 
+        String[] user_type = {"Client", "Owner"}; 
+        // Create the JComboBox (the dropdown) 
+        JComboBox<String> comboBox = new JComboBox<>(user_type); 
+        comboBox.setBounds(50, 50, 10, 10); 
+
 
         JButton submitRegisterButton = new JButton("Create Account");
         submitRegisterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -356,6 +363,11 @@ public class Login_Registration {
         registerPanel.add(Box.createVerticalStrut(20));
         registerPanel.add(showRegistrationPasswordButton);
         registerPanel.add(Box.createVerticalStrut(20));
+
+        registerPanel.add(comboBox);
+        registerPanel.add(Box.createVerticalStrut(10));
+        registerPanel.add(Box.createVerticalGlue());
+
         registerPanel.add(submitRegisterButton);
         registerPanel.add(Box.createVerticalStrut(10));
         registerPanel.add(Box.createVerticalGlue());
