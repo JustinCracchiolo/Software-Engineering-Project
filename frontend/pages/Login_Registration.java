@@ -13,7 +13,6 @@ import classes.UserManager;
 import classes.PlaceHolderTextField;
 import classes.PlaceHolderPasswordField;
 
-
 import pages.OfferVehiclePage;
 import pages.SchedulePage;
 import pages.Settings;
@@ -26,7 +25,6 @@ import pages.SubmitJobPage;
 import pages.SchedulePage;
 import pages.Settings;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -34,68 +32,73 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
-
+// ---------------------------------------------------------------
+// class that controls the login and registration page
 public class Login_Registration {
-    public static User currentUser; //once a person logs in, this holds all information for that user
-    
+    // once a person logs in, this holds all information for that user
+    public static User currentUser;
+
+    // ---------------------------------------------------------------
+    // main method that generates the GUI for the client + owners
     public static void main(String[] args) {
-        // create UI when invoked 
+        // create UI when invoked
         SwingUtilities.invokeLater(() -> createAndShowGUI());
     }
-    //------------------------------------
 
+    // ---------------------------------------------------------------
+    // method that creates the GUI for the client + owners
     private static void createAndShowGUI() {
 
-        //Possible place for loadUsersFromFile
+        // Possible place for loadUsersFromFile
 
-        //management tool for keeping track of who creates accounts. 
+        // management tool for keeping track of who creates accounts.
         UserManager userManager = new UserManager();
 
-        JFrame frame = new JFrame("VCRTS App"); 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        frame.setSize(1000, 800); 
+        JFrame frame = new JFrame("VCRTS App");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1000, 800);
 
         // CardLayout drives screen switching between Login/Home/Register.
         JPanel cards = new JPanel(new CardLayout());
-        
+
         // Creation of different screens
         JPanel loginPage = new JPanel(new BorderLayout());
-        
+
         JPanel registerPage = new JPanel(new BorderLayout());
 
-        cards.add(loginPage, "login"); 
+        cards.add(loginPage, "login");
         cards.add(registerPage, "register");
 
-
-        //--------------------------------------------
+        // --------------------------------------------
 
         // Login page
 
         JPanel loginSidePanel = new JPanel();
-        loginSidePanel.setBackground(new Color(65, 105, 255 ));
+        loginSidePanel.setBackground(new Color(65, 105, 255));
         loginSidePanel.setLayout(new BoxLayout(loginSidePanel, BoxLayout.Y_AXIS)); // center everything vertically
-        loginSidePanel.setAlignmentX(Component.CENTER_ALIGNMENT); //center horizontally
+        loginSidePanel.setAlignmentX(Component.CENTER_ALIGNMENT); // center horizontally
         loginSidePanel.setPreferredSize(new Dimension(500, 800));
-        
-        JPanel loginPanel = new JPanel(); 
+
+        JPanel loginPanel = new JPanel();
         loginPanel.setBackground(Color.WHITE);
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
         loginPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginPanel.setPreferredSize(new Dimension(600, 800));
 
         JLabel loginLabel = new JLabel("Sign In");
-        loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT); 
-        loginLabel.setForeground(new Color(65, 105, 255 ));  
+        loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginLabel.setForeground(new Color(65, 105, 255));
         loginLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 
-        JTextField usernameTextField = new PlaceHolderTextField("Username", 20); //adds more graphics to regular textfield
-        usernameTextField.setMaximumSize(usernameTextField.getPreferredSize()); 
-        usernameTextField.setAlignmentX(Component.CENTER_ALIGNMENT); 
-    
+        JTextField usernameTextField = new PlaceHolderTextField("Username", 20); // adds more graphics to regular
+                                                                                 // textfield
+        usernameTextField.setMaximumSize(usernameTextField.getPreferredSize());
+        usernameTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         // Hides password on login page and add a button to show password when pressed
-        JPasswordField passwordTextField = new PlaceHolderPasswordField("Password", 20); 
-        passwordTextField.setMaximumSize(passwordTextField.getPreferredSize()); 
-        passwordTextField.setAlignmentX(Component.CENTER_ALIGNMENT); 
+        JPasswordField passwordTextField = new PlaceHolderPasswordField("Password", 20);
+        passwordTextField.setMaximumSize(passwordTextField.getPreferredSize());
+        passwordTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         char loginEchoChar = passwordTextField.getEchoChar();
         JButton showLoginPasswordButton = new JButton("Show Password");
         showLoginPasswordButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -113,75 +116,72 @@ public class Login_Registration {
             public void mouseExited(java.awt.event.MouseEvent e) {
                 passwordTextField.setEchoChar(loginEchoChar);
             }
-            
+
         });
 
-                
-        //Login button
-        JButton loginButton = new JButton("Login"); 
+        // Login button
+        JButton loginButton = new JButton("Login");
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginButton.setFont(new Font("Arial", Font.PLAIN, 30));
-        loginButton.setBackground(new Color(65, 105, 255 )); 
+        loginButton.setBackground(new Color(65, 105, 255));
         loginButton.setForeground(Color.white);
-        loginButton.setOpaque(true); 
+        loginButton.setOpaque(true);
         loginButton.setBorderPainted(false);
-        
-        //Register button
+
+        // Register button
         JButton registerButton = new JButton("Create an Account");
         registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         registerButton.setFont(new Font("Arial", Font.PLAIN, 30));
 
-       
         // Validate credentials before switching to Home.
-        loginButton.addActionListener(e -> { 
+        loginButton.addActionListener(e -> {
             String user = usernameTextField.getText().trim();
             String user_password = new String(passwordTextField.getPassword());
-           
-            if (userManager.login(user, user_password)) {
-                currentUser = userManager.getUser(user); //this tells the program the person who is logged in    
 
-                //based on kind of user, navbar is different
-                if(currentUser.getUserType().equals("Owner")) {
-                    CardLayout cl = (CardLayout) cards.getLayout(); 
-                     
+            if (userManager.login(user, user_password)) {
+                currentUser = userManager.getUser(user); // this tells the program the person who is logged in
+
+                // based on kind of user, navbar is different
+                if (currentUser.getUserType().equals("Owner")) {
+                    CardLayout cl = (CardLayout) cards.getLayout();
+
                     Map<String, Refreshable> registry = new HashMap<>();
                     HomePage home = new HomePage(cards, currentUser, userManager, registry);
                     SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
                     OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
-                    //SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
+                    // SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
                     Settings settings = new Settings(cards, currentUser, registry);
-                     
-                    //These cards can now be refreshed when looked up in the hashmap
+
+                    // These cards can now be refreshed when looked up in the hashmap
                     registry.put("home", home);
                     registry.put("schedule", schedule);
                     registry.put("offerVehicle", offer);
-                    //registry.put("submitJob", submit);
+                    // registry.put("submitJob", submit);
                     registry.put("settings", settings);
-                     
+
                     cards.add(home, "home");
                     cards.add(schedule, "schedule");
                     cards.add(offer, "offerVehicle");
-                    //cards.add(submit, "submitJob");
+                    // cards.add(submit, "submitJob");
                     cards.add(settings, "settings");
                     cl.show(cards, "home");
-                }
-                else { //for now a Client will have all access 
-                    CardLayout cl = (CardLayout) cards.getLayout(); 
-                     
+                } else { // for now a Client will have all access
+                    CardLayout cl = (CardLayout) cards.getLayout();
+
                     Map<String, Refreshable> registry = new HashMap<>();
                     HomePage home = new HomePage(cards, currentUser, userManager, registry);
                     SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
                     OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
                     SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
                     Settings settings = new Settings(cards, currentUser, registry);
-                     
-                    //These cards can now be refreshed when looked up in the hashmap
+
+                    // These cards can now be refreshed when looked up in the hashmap
                     registry.put("home", home);
                     registry.put("schedule", schedule);
                     registry.put("offerVehicle", offer);
                     registry.put("submitJob", submit);
                     registry.put("settings", settings);
-                     
+
                     cards.add(home, "home");
                     cards.add(schedule, "schedule");
                     cards.add(offer, "offerVehicle");
@@ -189,54 +189,52 @@ public class Login_Registration {
                     cards.add(settings, "settings");
                     cl.show(cards, "home");
                 }
-                
-            
-                /* 
-                CardLayout cl = (CardLayout) cards.getLayout(); 
-                
-                Map<String, Refreshable> registry = new HashMap<>();
-                HomePage home = new HomePage(cards, currentUser, userManager, registry);
-                SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
-                OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
-                SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
-                Settings settings = new Settings(cards, currentUser, registry);
-                
-                //These cards can now be refreshed when looked up in the hashmap
-                registry.put("home", home);
-                registry.put("schedule", schedule);
-                registry.put("offerVehicle", offer);
-                registry.put("submitJob", submit);
-                registry.put("settings", settings);
 
-                
-                cards.add(home, "home");
-                cards.add(schedule, "schedule");
-                cards.add(offer, "offerVehicle");
-                cards.add(submit, "submitJob");
-                cards.add(settings, "settings");
+                /*
+                 * CardLayout cl = (CardLayout) cards.getLayout();
+                 * 
+                 * Map<String, Refreshable> registry = new HashMap<>();
+                 * HomePage home = new HomePage(cards, currentUser, userManager, registry);
+                 * SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
+                 * OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
+                 * SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
+                 * Settings settings = new Settings(cards, currentUser, registry);
+                 * 
+                 * //These cards can now be refreshed when looked up in the hashmap
+                 * registry.put("home", home);
+                 * registry.put("schedule", schedule);
+                 * registry.put("offerVehicle", offer);
+                 * registry.put("submitJob", submit);
+                 * registry.put("settings", settings);
+                 * 
+                 * 
+                 * cards.add(home, "home");
+                 * cards.add(schedule, "schedule");
+                 * cards.add(offer, "offerVehicle");
+                 * cards.add(submit, "submitJob");
+                 * cards.add(settings, "settings");
+                 * 
+                 * 
+                 * cl.show(cards, "home");
+                 */
 
-
-                cl.show(cards, "home");
-                */
-
-
-                /* 
-                HomePage homePage = new HomePage(cards, currentUser, userManager);
-                cards.add(homePage, "home");
-
-                OfferVehiclePage offerVehiclePage = new OfferVehiclePage(cards, currentUser);
-                SchedulePage schedulePage = new SchedulePage(cards, currentUser);
-                SubmitJobPage submitJobPage = new SubmitJobPage(cards, currentUser);
-                Settings settingsPage = new Settings(cards, currentUser);
-                
-                cards.add(offerVehiclePage, "offerVehicle");
-                cards.add(schedulePage, "schedule");
-                cards.add(submitJobPage, "submitJob");
-                cards.add(settingsPage, "settings");
-                
-                cl.show(cards, "home");
-
-                */
+                /*
+                 * HomePage homePage = new HomePage(cards, currentUser, userManager);
+                 * cards.add(homePage, "home");
+                 * 
+                 * OfferVehiclePage offerVehiclePage = new OfferVehiclePage(cards, currentUser);
+                 * SchedulePage schedulePage = new SchedulePage(cards, currentUser);
+                 * SubmitJobPage submitJobPage = new SubmitJobPage(cards, currentUser);
+                 * Settings settingsPage = new Settings(cards, currentUser);
+                 * 
+                 * cards.add(offerVehiclePage, "offerVehicle");
+                 * cards.add(schedulePage, "schedule");
+                 * cards.add(submitJobPage, "submitJob");
+                 * cards.add(settingsPage, "settings");
+                 * 
+                 * cl.show(cards, "home");
+                 * 
+                 */
             } else {
                 JOptionPane.showMessageDialog(frame, "Invalid username or password.");
             }
@@ -246,47 +244,46 @@ public class Login_Registration {
         registerButton.addActionListener(e -> {
             meetAndSwitch(cards, loginPage, loginSidePanel, loginPanel, "register");
         });
-        
-        //Title on sidebar
+
+        // Title on sidebar
         JLabel title_label = new JLabel("VCRTS");
-        title_label.setAlignmentX(Component.CENTER_ALIGNMENT); 
-        title_label.setForeground(Color.white);  
+        title_label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title_label.setForeground(Color.white);
         title_label.setFont(new Font("Arial", Font.PLAIN, 50));
 
+        // Add all of the elements
 
-        //Add all of the elements
-
-        loginPanel.add(Box.createVerticalGlue()); 
-        loginPanel.add(loginLabel); 
-        loginPanel.add(Box.createVerticalStrut(30)); //creates padding between elements
-        loginPanel.add(usernameTextField); 
+        loginPanel.add(Box.createVerticalGlue());
+        loginPanel.add(loginLabel);
+        loginPanel.add(Box.createVerticalStrut(30)); // creates padding between elements
+        loginPanel.add(usernameTextField);
         loginPanel.add(Box.createVerticalStrut(20));
-        loginPanel.add(Box.createVerticalStrut(10)); 
-        loginPanel.add(passwordTextField); 
+        loginPanel.add(Box.createVerticalStrut(10));
+        loginPanel.add(passwordTextField);
         loginPanel.add(Box.createVerticalStrut(10));
         loginPanel.add(showLoginPasswordButton);
-        loginPanel.add(Box.createVerticalStrut(30)); 
-        loginPanel.add(loginButton); 
+        loginPanel.add(Box.createVerticalStrut(30));
+        loginPanel.add(loginButton);
         loginPanel.add(Box.createVerticalStrut(10));
-        loginPanel.add(Box.createVerticalGlue()); 
+        loginPanel.add(Box.createVerticalGlue());
 
-        loginSidePanel.add(Box.createVerticalGlue()); 
+        loginSidePanel.add(Box.createVerticalGlue());
         loginSidePanel.add(title_label);
         loginSidePanel.add(Box.createVerticalStrut(30));
         loginSidePanel.add(registerButton);
         loginSidePanel.add(Box.createVerticalGlue());
 
-        loginPage.add(loginPanel, BorderLayout.CENTER); 
+        loginPage.add(loginPanel, BorderLayout.CENTER);
         loginPage.add(loginSidePanel, BorderLayout.WEST);
 
-        loginPanel.setOpaque(true); //allows changing color
+        loginPanel.setOpaque(true); // allows changing color
         loginSidePanel.setOpaque(true);
 
-        //--------------------------------------------
+        // --------------------------------------------
 
         // Register screen
         JPanel registerSidePanel = new JPanel();
-        registerSidePanel.setBackground(new Color(65, 105, 255 ));
+        registerSidePanel.setBackground(new Color(65, 105, 255));
         registerSidePanel.setLayout(new BoxLayout(registerSidePanel, BoxLayout.Y_AXIS));
         registerSidePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         registerSidePanel.setPreferredSize(new Dimension(500, 800));
@@ -304,9 +301,8 @@ public class Login_Registration {
 
         JLabel registerHeader = new JLabel("Register");
         registerHeader.setAlignmentX(Component.CENTER_ALIGNMENT);
-        registerHeader.setForeground(new Color(65, 105, 255 ));
+        registerHeader.setForeground(new Color(65, 105, 255));
         registerHeader.setFont(new Font("Arial", Font.PLAIN, 40));
-
 
         JTextField regUsernameField = new PlaceHolderTextField("Username", 20);
         regUsernameField.setMaximumSize(regUsernameField.getPreferredSize());
@@ -339,21 +335,20 @@ public class Login_Registration {
                 regPasswordField.setEchoChar(loginEchoChar);
                 regConfirmPasswordField.setEchoChar(loginEchoChar);
             }
-            
+
         });
 
-        String[] user_type = {"Client", "Owner"}; 
-        // Create the JComboBox (the dropdown) 
-        JComboBox<String> comboBox = new JComboBox<>(user_type); 
-        comboBox.setBounds(50, 50, 10, 10); 
-
+        String[] user_type = { "Client", "Owner" };
+        // Create the JComboBox (the dropdown)
+        JComboBox<String> comboBox = new JComboBox<>(user_type);
+        comboBox.setBounds(50, 50, 10, 10);
 
         JButton submitRegisterButton = new JButton("Create Account");
         submitRegisterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         submitRegisterButton.setFont(new Font("Arial", Font.PLAIN, 30));
-        submitRegisterButton.setBackground(new Color(65, 105, 255 )); 
+        submitRegisterButton.setBackground(new Color(65, 105, 255));
         submitRegisterButton.setForeground(Color.white);
-        submitRegisterButton.setOpaque(true); 
+        submitRegisterButton.setOpaque(true);
         submitRegisterButton.setBorderPainted(false);
 
         JButton backToLoginButton = new JButton("Back to Login");
@@ -369,21 +364,21 @@ public class Login_Registration {
             //
             String userType = (String) comboBox.getSelectedItem();
             //
-            
 
             if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "All fields are required.");
                 return;
             }
-            
+
             if (!password.equals(confirmPassword)) {
                 JOptionPane.showMessageDialog(frame, "Passwords do not match. Please try again.");
                 regPasswordField.setText("");
                 regConfirmPasswordField.setText("");
                 return;
             }
-            
-            if(userManager.register(username, password, userType)) { //creates a User with username and passwords and puts them into system
+
+            if (userManager.register(username, password, userType)) { // creates a User with username and passwords and
+                                                                      // puts them into system
                 JOptionPane.showMessageDialog(frame, "User " + username + " created!");
                 regUsernameField.setText("");
                 regPasswordField.setText("");
@@ -391,8 +386,7 @@ public class Login_Registration {
                 CardLayout cl = (CardLayout) cards.getLayout();
                 cl.show(cards, "login");
                 return;
-            }
-            else { //checks if someone with repeat username
+            } else { // checks if someone with repeat username
                 JOptionPane.showMessageDialog(frame, "Username already exists. Try again");
                 regUsernameField.setText("");
                 regPasswordField.setText("");
@@ -432,12 +426,12 @@ public class Login_Registration {
         registerPanel.add(Box.createVerticalGlue());
 
         registerSidePanel.setOpaque(true);
-        
-        registerSidePanel.add(Box.createVerticalGlue());      // pushes content down
+
+        registerSidePanel.add(Box.createVerticalGlue()); // pushes content down
         registerSidePanel.add(registerTitleLabel);
         registerSidePanel.add(Box.createVerticalStrut(30));
         registerSidePanel.add(backToLoginButton);
-        registerSidePanel.add(Box.createVerticalGlue());      // pushes content up
+        registerSidePanel.add(Box.createVerticalGlue()); // pushes content up
 
         registerPage.add(registerPanel, BorderLayout.CENTER);
         registerPage.add(registerSidePanel, BorderLayout.EAST);
@@ -447,49 +441,49 @@ public class Login_Registration {
         frame.setVisible(true);
 
     }
-    
-    //animations from login => register and register => login
-    public static void meetAndSwitch(JPanel cards, JPanel currentCard, JPanel leftPanel, JPanel rightPanel, String nextCardName) {
+
+    // animations from login => register and register => login
+    public static void meetAndSwitch(JPanel cards, JPanel currentCard, JPanel leftPanel, JPanel rightPanel,
+            String nextCardName) {
         int halfWidth = currentCard.getWidth() / 2;
-        
+
         // Temporarily disable layout on the CURRENT card
         currentCard.setLayout(null);
-        
+
         // Starting positions
         leftPanel.setLocation(0, 0);
         rightPanel.setLocation(halfWidth, 0);
-        
+
         Timer timer = new Timer(5, null);
         timer.addActionListener(e -> {
             // Move left panel right
             leftPanel.setLocation(leftPanel.getX() + 10, 0);
-            
+
             // Move right panel left
             rightPanel.setLocation(rightPanel.getX() - 10, 0);
-            
+
             currentCard.repaint();
-            
+
             // Stop when they meet in the middle
             if (rightPanel.getX() <= halfWidth / 2) {
                 timer.stop();
 
-                currentCard.removeAll(); 
-                currentCard.setLayout(new BorderLayout()); 
-                
-                // Put the panels back where they originally belonged 
-                // Login page uses WEST + CENTER 
-                // Register page uses CENTER + EAST 
-                if (nextCardName.equals("register")) { 
-                    currentCard.add(leftPanel, BorderLayout.WEST); 
-                    currentCard.add(rightPanel, BorderLayout.CENTER); 
-                } 
-                else {
-                    currentCard.add(leftPanel, BorderLayout.CENTER); 
-                    currentCard.add(rightPanel, BorderLayout.EAST); 
-                } 
-                currentCard.revalidate(); 
+                currentCard.removeAll();
+                currentCard.setLayout(new BorderLayout());
+
+                // Put the panels back where they originally belonged
+                // Login page uses WEST + CENTER
+                // Register page uses CENTER + EAST
+                if (nextCardName.equals("register")) {
+                    currentCard.add(leftPanel, BorderLayout.WEST);
+                    currentCard.add(rightPanel, BorderLayout.CENTER);
+                } else {
+                    currentCard.add(leftPanel, BorderLayout.CENTER);
+                    currentCard.add(rightPanel, BorderLayout.EAST);
+                }
+                currentCard.revalidate();
                 currentCard.repaint();
-                
+
                 // Switch to the next card
                 CardLayout cl = (CardLayout) cards.getLayout();
                 cl.show(cards, nextCardName);
@@ -497,6 +491,6 @@ public class Login_Registration {
         });
         timer.start();
     }
-    //------------------------------
+    // ------------------------------
 
 }

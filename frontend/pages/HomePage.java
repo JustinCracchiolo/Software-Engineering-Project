@@ -5,7 +5,6 @@
 * This program controls the home page of the VCRTS system.
 */
 
-
 package pages;
 
 import javax.swing.*;
@@ -19,14 +18,17 @@ import classes.Vehicle;
 
 import java.awt.*;
 
+// ---------------------------------------------------------------
 public class HomePage extends JPanel implements Refreshable {
 
-    private JLabel name; //change variable name
+    private JLabel name; // change variable name
     private User user;
 
-    public HomePage(JPanel cards, User user, UserManager users,  Map<String, Refreshable> registry) {
-        //user = person logged in 
-        //users = every person in the system
+    // ---------------------------------------------------------------
+    // constructor that sets the user and the user manager
+    public HomePage(JPanel cards, User user, UserManager users, Map<String, Refreshable> registry) {
+        // user = person logged in
+        // users = every person in the system
         this.user = user;
 
         setLayout(new BorderLayout());
@@ -47,19 +49,21 @@ public class HomePage extends JPanel implements Refreshable {
         refresh();
     }
 
+    // ---------------------------------------------------------------
+    // refreshes home page => updating the # of vehicles a user has
     @Override
     public void refresh() {
         String username = user.getUsername();
         ArrayList<Vehicle> user_vehicle = user.getUserVehicles();
         int vehicles = 0;
-        for(Vehicle v: user_vehicle) {
+        for (Vehicle v : user_vehicle) {
             vehicles++;
         }
 
-        name.setText(username + " vehicles: " + vehicles);       
+        name.setText(username + " vehicles: " + vehicles);
 
-        revalidate(); 
+        revalidate();
         repaint();
     }
-    
+
 }

@@ -16,8 +16,12 @@ import java.util.Map;
 import classes.User;
 import classes.Vehicle;
 
-public class SchedulePage extends JPanel  implements Refreshable {
-    
+// ---------------------------------------------------------------
+// controls schedule page
+public class SchedulePage extends JPanel implements Refreshable {
+
+    // ---------------------------------------------------------------
+    // constructor: sets cards, user, and registry
     public SchedulePage(JPanel cards, User user, Map<String, Refreshable> registry) {
         setLayout(new BorderLayout());
         JLabel label = new JLabel("Schedule Page", SwingConstants.CENTER);
@@ -30,6 +34,8 @@ public class SchedulePage extends JPanel  implements Refreshable {
         add(label, BorderLayout.CENTER);
     }
 
+    // ---------------------------------------------------------------
+    // refreshes schedule page
     @Override
     public void refresh() {
     }

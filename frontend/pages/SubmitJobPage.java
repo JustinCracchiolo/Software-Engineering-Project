@@ -16,7 +16,12 @@ import java.util.Map;
 import classes.User;
 import classes.Vehicle;
 
+// ---------------------------------------------------------------
+// Submit Job Page
 public class SubmitJobPage extends JPanel implements Refreshable {
+
+    // ---------------------------------------------------------------
+    // constructor that sets the cards, user, and registry
     public SubmitJobPage(JPanel cards, User user, Map<String, Refreshable> registry) {
         setLayout(new BorderLayout());
         JLabel label = new JLabel("Submit Job Page", SwingConstants.CENTER);
@@ -29,8 +34,10 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         add(label, BorderLayout.CENTER);
     }
 
+    // ---------------------------------------------------------------
+    // refreshes submit job page
     @Override
     public void refresh() {
     }
-    
+
 }

@@ -12,11 +12,15 @@ import classes.User;
 import java.util.Map;
 import java.util.HashMap;
 
+// ---------------------------------------------------------------
+// class that controls the navigation bar at the top of the screen across pages
 public class NavBar extends JPanel {
 
     private final Map<String, Refreshable> refreshables;
     private JButton submitJobBtn;
 
+    // ---------------------------------------------------------------
+    // constructor
     public NavBar(JPanel cards, User user, Map<String, Refreshable> refreshables) {
         this.refreshables = refreshables;
 
@@ -28,14 +32,12 @@ public class NavBar extends JPanel {
         title.setForeground(Color.WHITE);
         title.setFont(new Font("Arial", Font.BOLD, 28));
 
-
         JButton homeBtn = new JButton("Home");
         JButton scheduleBtn = new JButton("Schedule");
 
-
         JButton offerVehicleBtn = new JButton("Offer Vehicle");
 
-        if(user.getUserType().equals("Client")) {
+        if (user.getUserType().equals("Client")) {
             submitJobBtn = new JButton("Submit Job");
         }
 
@@ -57,28 +59,26 @@ public class NavBar extends JPanel {
             ((CardLayout) cards.getLayout()).show(cards, "offerVehicle");
         });
 
-        if(user.getUserType().equals("Client")) {
+        if (user.getUserType().equals("Client")) {
             submitJobBtn.addActionListener(e -> {
                 refreshables.get("submitJob").refresh();
                 ((CardLayout) cards.getLayout()).show(cards, "submitJob");
             });
         }
 
-        /*  
-        submitJobBtn.addActionListener(e -> {
-            refreshables.get("submitJob").refresh();
-            ((CardLayout) cards.getLayout()).show(cards, "submitJob");
-        });
-        */
+        /*
+         * submitJobBtn.addActionListener(e -> {
+         * refreshables.get("submitJob").refresh();
+         * ((CardLayout) cards.getLayout()).show(cards, "submitJob");
+         * });
+         */
 
         settingsBtn.addActionListener(e -> {
             refreshables.get("settings").refresh();
             ((CardLayout) cards.getLayout()).show(cards, "settings");
         });
 
-        logoutBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "login")
-        );
+        logoutBtn.addActionListener(e -> ((CardLayout) cards.getLayout()).show(cards, "login"));
 
         add(Box.createHorizontalStrut(20));
         add(title);
@@ -90,11 +90,10 @@ public class NavBar extends JPanel {
         add(offerVehicleBtn);
         add(Box.createHorizontalStrut(10));
 
-        if(user.getUserType().equals("Client")) {
+        if (user.getUserType().equals("Client")) {
             add(submitJobBtn);
             add(Box.createHorizontalStrut(10));
         }
-        
 
         add(settingsBtn);
         add(Box.createHorizontalStrut(10));
@@ -107,129 +106,127 @@ public class NavBar extends JPanel {
     }
 }
 
-
-
-/* 
-public class NavBar extends JPanel {
-    
-    private final HomePage homePage;
-    private final OfferVehiclePage vehiclePage;
-    private final SchedulePage schedulePage;
-    private final Settings settings;
-    private final SubmitJobPage submitJobPage;
-
-    public NavBar(JPanel cards, User user) {
-
-        setBackground(new Color(30, 30, 30));
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        setPreferredSize(new Dimension(1000, 60));
-
-        JLabel title = new JLabel("VCRTS");
-        title.setForeground(Color.WHITE);
-        title.setFont(new Font("Arial", Font.BOLD, 28));
-
-        JButton homeBtn = new JButton("Home");
-        JButton scheduleBtn = new JButton("Schedule");
-        JButton offerVehicleBtn = new JButton("Offer Vehicle");
-        JButton submitJobBtn = new JButton("Submit Job");
-        JButton logoutBtn = new JButton("Log Out");
-        JButton settingsBtn = new JButton("Settings"); 
-
-        homeBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "home")
-        );
-
-        scheduleBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "schedule")
-        );
-
-        offerVehicleBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "offerVehicle")
-        );
-
-        submitJobBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "submitJob")
-        );
-
-        logoutBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "login")
-        );
-
-        settingsBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "settings")
-        );
-
-
-        add(Box.createHorizontalStrut(20));
-        add(title);
-        add(Box.createHorizontalGlue());
-        add(homeBtn);
-        add(Box.createHorizontalStrut(10));
-        add(scheduleBtn);
-        add(Box.createHorizontalStrut(10));
-        add(offerVehicleBtn);
-        add(Box.createHorizontalStrut(10));
-        add(submitJobBtn);
-        add(Box.createHorizontalStrut(10));
-        add(settingsBtn);
-        add(Box.createHorizontalStrut(10));
-        add(logoutBtn);
-        add(Box.createHorizontalStrut(30));
-    }
-
-    public NavBar(JPanel cards, User user, HomePage homePage) {
-        this.homePage = homePage;
-
-        setBackground(new Color(30, 30, 30));
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        setPreferredSize(new Dimension(1000, 60));
-
-        JLabel title = new JLabel("VCRTS");
-        title.setForeground(Color.WHITE);
-        title.setFont(new Font("Arial", Font.BOLD, 28));
-
-        JButton homeBtn = new JButton("Home");
-        JButton scheduleBtn = new JButton("Schedule");
-        JButton offerVehicleBtn = new JButton("Offer Vehicle");
-        JButton submitJobBtn = new JButton("Submit Job");
-        JButton logoutBtn = new JButton("Log Out");
-        JButton settingsBtn = new JButton("Settings");
-
-        homeBtn.addActionListener(e -> {
-            homePage.refresh();  // <-- THIS is what updates the number
-            ((CardLayout) cards.getLayout()).show(cards, "home");
-        });
-
-        scheduleBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "schedule")
-        );
-
-        offerVehicleBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "offerVehicle")
-        );
-
-        submitJobBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "submitJob")
-        );
-
-        logoutBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "login")
-        );
-
-        settingsBtn.addActionListener(e ->
-            ((CardLayout) cards.getLayout()).show(cards, "settings")
-        );
-
-        add(Box.createHorizontalStrut(20));
-        add(title);
-        add(Box.createHorizontalGlue());
-        add(homeBtn);
-        add(scheduleBtn);
-        add(offerVehicleBtn);
-        add(submitJobBtn);
-        add(settingsBtn);
-        add(logoutBtn);
-    }
-}
-
-*/
+/*
+ * public class NavBar extends JPanel {
+ * 
+ * private final HomePage homePage;
+ * private final OfferVehiclePage vehiclePage;
+ * private final SchedulePage schedulePage;
+ * private final Settings settings;
+ * private final SubmitJobPage submitJobPage;
+ * 
+ * public NavBar(JPanel cards, User user) {
+ * 
+ * setBackground(new Color(30, 30, 30));
+ * setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+ * setPreferredSize(new Dimension(1000, 60));
+ * 
+ * JLabel title = new JLabel("VCRTS");
+ * title.setForeground(Color.WHITE);
+ * title.setFont(new Font("Arial", Font.BOLD, 28));
+ * 
+ * JButton homeBtn = new JButton("Home");
+ * JButton scheduleBtn = new JButton("Schedule");
+ * JButton offerVehicleBtn = new JButton("Offer Vehicle");
+ * JButton submitJobBtn = new JButton("Submit Job");
+ * JButton logoutBtn = new JButton("Log Out");
+ * JButton settingsBtn = new JButton("Settings");
+ * 
+ * homeBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "home")
+ * );
+ * 
+ * scheduleBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "schedule")
+ * );
+ * 
+ * offerVehicleBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "offerVehicle")
+ * );
+ * 
+ * submitJobBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "submitJob")
+ * );
+ * 
+ * logoutBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "login")
+ * );
+ * 
+ * settingsBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "settings")
+ * );
+ * 
+ * 
+ * add(Box.createHorizontalStrut(20));
+ * add(title);
+ * add(Box.createHorizontalGlue());
+ * add(homeBtn);
+ * add(Box.createHorizontalStrut(10));
+ * add(scheduleBtn);
+ * add(Box.createHorizontalStrut(10));
+ * add(offerVehicleBtn);
+ * add(Box.createHorizontalStrut(10));
+ * add(submitJobBtn);
+ * add(Box.createHorizontalStrut(10));
+ * add(settingsBtn);
+ * add(Box.createHorizontalStrut(10));
+ * add(logoutBtn);
+ * add(Box.createHorizontalStrut(30));
+ * }
+ * 
+ * public NavBar(JPanel cards, User user, HomePage homePage) {
+ * this.homePage = homePage;
+ * 
+ * setBackground(new Color(30, 30, 30));
+ * setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+ * setPreferredSize(new Dimension(1000, 60));
+ * 
+ * JLabel title = new JLabel("VCRTS");
+ * title.setForeground(Color.WHITE);
+ * title.setFont(new Font("Arial", Font.BOLD, 28));
+ * 
+ * JButton homeBtn = new JButton("Home");
+ * JButton scheduleBtn = new JButton("Schedule");
+ * JButton offerVehicleBtn = new JButton("Offer Vehicle");
+ * JButton submitJobBtn = new JButton("Submit Job");
+ * JButton logoutBtn = new JButton("Log Out");
+ * JButton settingsBtn = new JButton("Settings");
+ * 
+ * homeBtn.addActionListener(e -> {
+ * homePage.refresh(); // <-- THIS is what updates the number
+ * ((CardLayout) cards.getLayout()).show(cards, "home");
+ * });
+ * 
+ * scheduleBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "schedule")
+ * );
+ * 
+ * offerVehicleBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "offerVehicle")
+ * );
+ * 
+ * submitJobBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "submitJob")
+ * );
+ * 
+ * logoutBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "login")
+ * );
+ * 
+ * settingsBtn.addActionListener(e ->
+ * ((CardLayout) cards.getLayout()).show(cards, "settings")
+ * );
+ * 
+ * add(Box.createHorizontalStrut(20));
+ * add(title);
+ * add(Box.createHorizontalGlue());
+ * add(homeBtn);
+ * add(scheduleBtn);
+ * add(offerVehicleBtn);
+ * add(submitJobBtn);
+ * add(settingsBtn);
+ * add(logoutBtn);
+ * }
+ * }
+ * 
+ */
