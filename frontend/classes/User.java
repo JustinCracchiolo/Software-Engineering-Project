@@ -9,8 +9,8 @@ package classes;
 
 import java.util.ArrayList;
 
+// ---------------------------------------------------------------
 //this class represents a user of the system, with a username and password. It is used by UserManager to store user data in memory and persist it to a file. The Owner class extends User to add additional fields for car owners.
-
 public class User {
     private static int increment = 1000;
     private String userId;
@@ -22,6 +22,8 @@ public class User {
 
     private ArrayList<Vehicle> user_vehciles = new ArrayList<>();
 
+    // ---------------------------------------------------------------
+    // constructor that sets the username, password, email, and user type
     public User(String username, String password, String email, String userType) {
         this.username = username;
         this.password = password;
@@ -31,34 +33,48 @@ public class User {
 
         this.userType = userType;
 
-        //read vehicle file for when user is loaded into the system
+        // read vehicle file for when user is loaded into the system
         // readUserVehicles()
     }
 
+    // ---------------------------------------------------------------
+    // returns the username of the user
     public String getUsername() {
         return username;
     }
 
+    // ---------------------------------------------------------------
+    // returns the password of the user
     public String getPassword() {
         return password;
     }
 
+    // ---------------------------------------------------------------
+    // returns the email of the user
     public String getEmail() {
         return email;
     }
 
+    // ---------------------------------------------------------------
+    // returns the user ID of the user
     public String getUserId() {
         return userId;
     }
 
+    // ---------------------------------------------------------------
+    // adds a vehicle to the user's list of vehicles
     public void addUserVehicles(Vehicle v) {
         user_vehciles.add(v);
     }
 
+    // ---------------------------------------------------------------
+    // returns the user's list of vehicles
     public ArrayList<Vehicle> getUserVehicles() {
         return user_vehciles;
     }
 
+    // ---------------------------------------------------------------
+    // returns the user type of the user
     public String getUserType() {
         return userType;
     }

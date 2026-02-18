@@ -8,6 +8,8 @@
 package classes;
 
 
+
+// ---------------------------------------------------------------
 public class VehicleDatabase {
     
     // Implementation of the VehicleDatabase class goes here

@@ -1,3 +1,9 @@
+/* Project: Vehicular Cloud Real Time System (VCRTS)
+ * Class: PlaceHolderPasswordField.java
+ * Authors: Group 2 (Justin Cracchiolo, Lauren Rodriguez, David Choi, Tristan Huertas, Ivan Lin, Anthony Vallejo, Sebastian Villavicencio)
+ * Date: February 2026
+ * The PlaceHolderPasswordField class extends the JPasswordField class to add a placeholder text to the password field.
+ */
 package classes;
 
 import javax.swing.*;
@@ -7,37 +13,54 @@ import javax.swing.event.DocumentListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
+// ---------------------------------------------------------------
 public class PlaceHolderPasswordField extends JPasswordField {
     private final String placeHolder;
 
+    // ---------------------------------------------------------------
+    // constructor generates password field + placeholder text
     public PlaceHolderPasswordField(String text, int cols) {
         super(cols);
         placeHolder = text;
 
         setBorder(BorderFactory.createCompoundBorder(
-            getBorder(), BorderFactory.createEmptyBorder(5, 10, 5, 10)
-        ));
+                getBorder(), BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 
-        // Repaint whenever text changes so placeholder updates correctly 
+        // Repaint whenever text changes so placeholder updates correctly
         // three different kinds of text changes
         getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void insertUpdate(DocumentEvent e) { repaint(); }
+            public void insertUpdate(DocumentEvent e) {
+                repaint();
+            }
+
             @Override
-            public void removeUpdate(DocumentEvent e) { repaint(); }
+            public void removeUpdate(DocumentEvent e) {
+                repaint();
+            }
+
             @Override
-            public void changedUpdate(DocumentEvent e) { repaint(); }
+            public void changedUpdate(DocumentEvent e) {
+                repaint();
+            }
         });
 
         // Repaint when user clicks in or out of the textfield
         addFocusListener(new FocusAdapter() {
             @Override
-            public void focusGained(FocusEvent e) { repaint(); }
+            public void focusGained(FocusEvent e) {
+                repaint();
+            }
+
             @Override
-            public void focusLost(FocusEvent e) { repaint(); }
+            public void focusLost(FocusEvent e) {
+                repaint();
+            }
         });
     }
 
+    // ---------------------------------------------------------------
+    // draws placeholder text
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

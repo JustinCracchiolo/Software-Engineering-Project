@@ -8,18 +8,23 @@
 
 package classes;
 
-public class Client extends User { // utilizes the User class to set client username and password
-
+// ---------------------------------------------------------------
+// utilizes the User class to set client username and password
+public class Client extends User {
     private String clientId;
 
-    //constructor for the client class; utilizes the constructor of the User class to set the username and password, and also sets the clientId.
+    // ---------------------------------------------------------------
+    // constructor for the client class; utilizes the constructor of the User class
+    // to set the username and password, and also sets the clientId.
     public Client(String username, String password) {
-        super(username, password, "", "Client"); //email is not needed for clients, so we can set it to an empty string
-        
-        //fix clientId
-        //this.clientId = clientId;
+        super(username, password, "", "Client"); // email is not needed for clients, so we can set it to an empty string
+
+        // fix clientId
+        // this.clientId = clientId;
     }
 
+    // ---------------------------------------------------------------
+    // This method returns the client's ID for a specific client.
     public String getClientId() {
         return clientId;
     }

@@ -7,7 +7,8 @@
  */
 package classes;
 
+// ---------------------------------------------------------------
 public class JobDatabase {
-    
+
     // Implementation of the JobDatabase class goes here
 }

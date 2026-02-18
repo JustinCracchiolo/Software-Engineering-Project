@@ -18,6 +18,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
+// ---------------------------------------------------------------
 /**
  * Stores users in memory and persists them to a tab-separated file.
  * Usernames are normalized for lookup (trimmed, lowercase).
@@ -27,21 +28,22 @@ public class UserManager {
 
     private Map<String, User> users = new HashMap<>(); //username => User
     private final Path USERS_FILE_PATH;
-    //------------------------------
+    // ---------------------------------------------------------------
 
     // Uses the default users file path under UserInfo/users.txt. 
     // calls other constructor
     public UserManager() {
         this(Paths.get("UserInfo", "users.txt"));
     }
-    //------------------------------
+    // ---------------------------------------------------------------
 
     // Loads users from the provided file path. 
     public UserManager(Path USERS_FILE_PATH) {
         this.USERS_FILE_PATH = USERS_FILE_PATH;
         loadUsersFromFile();
     }
-    //------------------------------
+    
+    // ---------------------------------------------------------------
 
     /** 
      * @param username: this is the users usersname when they make an account

@@ -8,47 +8,55 @@
 package classes;
 //Focus on the backend and make necessary classes to store information for the user and their vehicles (Sebastian)
 
+// ---------------------------------------------------------------
 // vehicle class
 //The system shall receive and verify the vehicle's number, license plate, make, and model.
-
-public class Vehicle { 
+public class Vehicle {
     private final String VIN_NUMBER;
     private String make;
     private String model;
     private String licensePlate;
 
+    // constructor
+    // ---------------------------------------------------------------
+    // add user as parameter in constructor
 
-    //constructor 
-
-    //add user as parameter in constructor 
-    
-    public Vehicle(String VIN_NUMBER, String make, String model , String licensePlate) {
+    public Vehicle(String VIN_NUMBER, String make, String model, String licensePlate) {
         this.VIN_NUMBER = VIN_NUMBER;
         this.make = make;
         this.model = model;
         this.licensePlate = licensePlate;
 
-    
-    //make sure vehicle has all the necessary information
-    if(VIN_NUMBER.equals("") || make == null || model == null || licensePlate == null){
-        throw new IllegalArgumentException("Vehicle information is incomplete");
-    }
+        // make sure vehicle has all the necessary information
+        if (VIN_NUMBER.equals("") || make == null || model == null || licensePlate == null) {
+            throw new IllegalArgumentException("Vehicle information is incomplete");
+        }
     }
 
-    //implementing the getters in order to access the private variables
+    // implementing the getters in order to access the private variables
 
+    // ---------------------------------------------------------------
+    // returns the VIN number of the vehicle
     public String getNumber() {
         return VIN_NUMBER;
     }
+
+    // ---------------------------------------------------------------
+    // returns the make of the vehicle
     public String getMake() {
         return make;
     }
+
+    // ---------------------------------------------------------------
+    // returns the model of the vehicle
     public String getModel() {
         return model;
     }
+
+    // ---------------------------------------------------------------
+    // returns the license plate of the vehicle
     public String getLicensePlate() {
         return licensePlate;
     }
-    
 
 }
