@@ -233,25 +233,25 @@ public class Login_Registration {
                     CardLayout cl = (CardLayout) cards.getLayout();
 
                     Map<String, Refreshable> registry = new HashMap<>();
-                    HomePage home = new HomePage(cards, currentUser, userManager, registry);
+                    AdminHome home = new AdminHome(cards, currentUser, userManager, registry);
                     SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
                     //OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
                     // SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
                     Settings settings = new Settings(cards, currentUser, registry);
 
                     // These cards can now be refreshed when looked up in the hashmap
-                    registry.put("home", home);
+                    registry.put("adminHome", home);
                     registry.put("schedule", schedule);
                     //registry.put("offerVehicle", offer);
                     // registry.put("submitJob", submit);
                     registry.put("settings", settings);
 
-                    cards.add(home, "home");
+                    cards.add(home, "adminHome");
                     cards.add(schedule, "schedule");
                     //cards.add(offer, "offerVehicle");
                     // cards.add(submit, "submitJob");
                     cards.add(settings, "settings");
-                    cl.show(cards, "home");
+                    cl.show(cards, "adminHome");
                 }
                 
                 else { // for now a Client will have all access

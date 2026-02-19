@@ -19,6 +19,7 @@ public class NavBar extends JPanel {
     private final Map<String, Refreshable> refreshables;
     private JButton submitJobBtn;
     private JButton offerVehicleBtn; 
+    private JButton homeBtn;
 
     // ---------------------------------------------------------------
     // constructor
@@ -32,8 +33,9 @@ public class NavBar extends JPanel {
         JLabel title = new JLabel("VCRTS");
         title.setForeground(Color.WHITE);
         title.setFont(new Font("Arial", Font.BOLD, 28));
+        
+        homeBtn = new JButton("Home");
 
-        JButton homeBtn = new JButton("Home");
         JButton scheduleBtn = new JButton("Schedule");
 
         if (user.getUserType().equals("Owner")) {
@@ -47,10 +49,19 @@ public class NavBar extends JPanel {
         JButton settingsBtn = new JButton("Settings");
         JButton logoutBtn = new JButton("Log Out");
 
-        homeBtn.addActionListener(e -> {
-            refreshables.get("home").refresh();
-            ((CardLayout) cards.getLayout()).show(cards, "home");
-        });
+        if (user.getUserType().equals("Admin")) {
+            homeBtn.addActionListener(e -> {
+                refreshables.get("adminHome").refresh();
+                ((CardLayout) cards.getLayout()).show(cards, "adminHome");
+            });
+        }
+        else {
+             homeBtn.addActionListener(e -> {
+                refreshables.get("home").refresh();
+                ((CardLayout) cards.getLayout()).show(cards, "home");
+            });
+        }
+
 
         scheduleBtn.addActionListener(e -> {
             refreshables.get("schedule").refresh();
@@ -94,7 +105,7 @@ public class NavBar extends JPanel {
         add(scheduleBtn);
         add(Box.createHorizontalStrut(10));
         
-         if (user.getUserType().equals("Owner")) {
+        if (user.getUserType().equals("Owner")) {
             add(offerVehicleBtn);
             add(Box.createHorizontalStrut(10));
         }
