@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class Owner extends User {
     private ArrayList<Vehicle> ownerVehicles = new ArrayList<>();
+    private String ownerId; // DO NOT REMOVE, WE NEED THIS FOR MILESTONE 2. REMOVE COMMENT BEFORE SUBMISSION
 
     // possibly change to recieve arrival and departure time from user application
     private int approximateResidencyTime;
@@ -28,6 +29,15 @@ public class Owner extends User {
     public Owner(String username, String password, int approximateResidencyTime) {
         super(username, password, "", "Owner");
         this.approximateResidencyTime = approximateResidencyTime;
+
+        // fix ownerId
+        // this.ownerId = ownerId;
+    }
+
+    // ---------------------------------------------------------------
+    // this method returns the owner's ID for a specific owner.
+    public String getOwnerId() {
+        return ownerId; 
     }
 
     // ---------------------------------------------------------------
@@ -37,7 +47,7 @@ public class Owner extends User {
     }
 
     // ---------------------------------------------------------------
-    // returns => owner's list of vehicles.
+    // returns => owner's list of vehicles
     public ArrayList<Vehicle> getVehicles() {
         return ownerVehicles;
     }

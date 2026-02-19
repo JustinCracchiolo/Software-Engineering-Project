@@ -8,10 +8,13 @@
 
 package classes;
 
+import java.util.ArrayList;
+
 // ---------------------------------------------------------------
 // utilizes the User class to set client username and password
 public class Client extends User {
-    private String clientId;
+    private ArrayList<Job> clientJobs = new ArrayList<>();
+    private String clientId; // DO NOT REMOVE, WE NEED THIS FOR MILESTONE 2. REMOVE COMMENT BEFORE SUBMISSION
 
     // ---------------------------------------------------------------
     // constructor for the client class; utilizes the constructor of the User class
@@ -29,4 +32,15 @@ public class Client extends User {
         return clientId;
     }
 
+    // ---------------------------------------------------------------
+    // adds a job to the client's list of jobs
+    public void addJob(Job job) {
+        clientJobs.add(job);
+    }
+
+    // ---------------------------------------------------------------
+    // returns => client's list of jobs
+    public ArrayList<Job> getClientJobs() {
+        return clientJobs;
+    }
 }
