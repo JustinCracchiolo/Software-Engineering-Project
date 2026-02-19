@@ -33,6 +33,7 @@ public class Owner extends User {
     // ---------------------------------------------------------------
     // adds a vehicle to the owner's list of vehicles
     public void addVehicle(Vehicle vehicle) {
+        //before add, call function for admin
         user_vehicles.add(vehicle);
     }
 
