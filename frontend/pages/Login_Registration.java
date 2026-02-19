@@ -211,7 +211,7 @@ public class Login_Registration {
                     Map<String, Refreshable> registry = new HashMap<>();
                     HomePage home = new HomePage(cards, currentUser, userManager, registry);
                     SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
-                    OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
+                    OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry, userManager); //I changed this for now
                     // SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
                     Settings settings = new Settings(cards, currentUser, registry);
 

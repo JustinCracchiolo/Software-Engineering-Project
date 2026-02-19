@@ -20,6 +20,9 @@ import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import classes.Admin;
+import classes.UserManager;
+
 import classes.Owner;
 import classes.PlaceHolderTextField;
 import classes.User;
@@ -40,7 +43,7 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
 
     // ---------------------------------------------------------------
     // constructor: sets user + user manager + registry
-    public OfferVehiclePage(JPanel cards, User user, Map<String, Refreshable> registry) {
+    public OfferVehiclePage(JPanel cards, User user, Map<String, Refreshable> registry, UserManager users) {
         setLayout(new BorderLayout());
 
         // NavBar
@@ -139,8 +142,24 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
             String model = vehicleModel.getText();
             String licensePlate = vehiclePlate.getText();
 
+
+            //gets an admin account
+            User admin = null;
+            Map<String, User> all_users = users.getAllUsers();
+            for(User u: all_users.values()) {
+                if(u.getUserType().equals("Admin")) {
+                    admin = u;
+                    break;
+                }
+            }
+
+            if (admin == null) { JOptionPane.showMessageDialog(this, "No admin account found."); return; }
+
+            //make new vehicle from form information
             Vehicle v = new Vehicle(VIN_NUMBER, make, model, licensePlate);
-            ((Owner) user).addVehicle(v);
+            
+            //((Owner) user).addVehicle(v);
+            ((Admin)admin).addPendingVehicle(user, v);
         });
 
         /*
