@@ -16,13 +16,13 @@ import java.time.LocalDateTime;
 //The system shall receive and verify the vehicle's jobId, approximateJobDuration, and jobDeadline.
 
 public class Job {
-    private final String JOB_ID;
-    private int approximateJobDuration; // in minutes or hours
+    private String JOB_ID;
+    private double approximateJobDuration; // in minutes or hours
     private LocalDateTime jobDeadline;
 
     // ---------------------------------------------------------------
     // constructor
-    public Job(String JOB_ID, int approximateJobDuration, LocalDateTime jobDeadline) {
+    public Job(String JOB_ID, double approximateJobDuration, LocalDateTime jobDeadline) {
         this.JOB_ID = JOB_ID;
         this.approximateJobDuration = approximateJobDuration;
         this.jobDeadline = jobDeadline;
@@ -37,13 +37,13 @@ public class Job {
 
     // ---------------------------------------------------------------
     // This method returns the job ID for a specific job.
-    public String getJob() {
+    public String getJobId() {
         return JOB_ID;
     }
 
     // ---------------------------------------------------------------
     // This method returns the approximate job duration for a specific job.
-    public int getApproximateJobDuration() {
+    public double getApproximateJobDuration() {
         return approximateJobDuration;
     }
 

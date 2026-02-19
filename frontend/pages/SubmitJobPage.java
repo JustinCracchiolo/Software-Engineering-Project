@@ -45,6 +45,10 @@ public class SubmitJobPage extends JPanel implements Refreshable {
     private JTextField deadlineField;
     private JTextField jobDescField;
 
+    private JTextField jobID;
+    private JTextField jobDuration;
+    private JTextField jobDeadline;
+
     // ---------------------------------------------------------------
        // ---------------------------------------------------------------
     // constructor: sets user + user manager + registry
@@ -79,15 +83,15 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         jobTitle.setForeground(new Color(65, 105, 255));
         jobTitle.setFont(new Font("Arial", Font.PLAIN, 36));
 
-        JTextField jobID = new PlaceHolderTextField("Job ID", 16); // adds more graphics to regular textfield
+        jobID = new PlaceHolderTextField("Job ID (Ex. xxxxx)", 16); // adds more graphics to regular textfield
         jobID.setMaximumSize(jobID.getPreferredSize());
         jobID.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JTextField jobDuration = new PlaceHolderTextField("Approximate Job Duration", 16); // adds more graphics to regular textfield
+        
+        jobDuration = new PlaceHolderTextField("Approximate Job Duration (in terms of hours) (Ex. 10, 0.2)", 16); // adds more graphics to regular textfield
         jobDuration.setMaximumSize(jobDuration.getPreferredSize());
         jobDuration.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextField jobDeadline = new PlaceHolderTextField("Deadline", 20); // adds more graphics to regular textfield
+        jobDeadline = new PlaceHolderTextField("Deadline (yyyy-mm-dd hh:mm:ss)", 20); // adds more graphics to regular textfield
         jobDeadline.setMaximumSize(jobDeadline.getPreferredSize());
         jobDeadline.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -112,9 +116,37 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         add(splitPanel, BorderLayout.CENTER);
 
         submitBtn.addActionListener(e -> {
-            String idText = jobID.getText();
-            String durationText = jobDuration.getText();
-            String deadlineText = jobDeadline.getText();
+            String idText = jobID.getText().trim();
+            String durationText = jobDuration.getText().trim();
+            String deadlineText = jobDeadline.getText().trim();
+
+            if(idText.isEmpty() || durationText.isEmpty() || deadlineText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Fields cannot be empty.");
+                return;
+            }
+
+            double duration; 
+            try { 
+                duration = Double.parseDouble(durationText); 
+                if (duration <= 0) { 
+                    JOptionPane.showMessageDialog(this, "Duration must be a positive number."); 
+                    return; 
+                } 
+            } 
+            catch (NumberFormatException ex) { 
+                JOptionPane.showMessageDialog(this, "Duration must be an integer or decimal."); 
+                return; 
+            }
+
+            LocalDateTime deadline; 
+            try { 
+                deadline = LocalDateTime.parse(deadlineText, DEADLINE_FORMAT); 
+            } 
+            catch (Exception ex) { 
+                JOptionPane.showMessageDialog(this, "Deadline must be in the format: yyyy-mm-dd hh:mm:ss\nExample: 2024-03-09 17:45:00"); 
+                return; 
+            }
+
 
             //gets an admin account
             User admin = null;
@@ -131,10 +163,14 @@ public class SubmitJobPage extends JPanel implements Refreshable {
             }
 
             //make new vehicle from form information
-            Job j = new Job(idText, Integer.parseInt(durationText), LocalDateTime.parse(deadlineText, DEADLINE_FORMAT));
+            Job j = new Job(idText, duration, deadline);
             
             //((Owner) user).addJob(v);
             ((Admin)admin).addPendingJob(user, j);
+
+            JOptionPane.showMessageDialog(this, "Submitted job application.");
+
+            refresh();
         });
     }
 
@@ -142,63 +178,12 @@ public class SubmitJobPage extends JPanel implements Refreshable {
     // refreshes submit job page
     @Override
     public void refresh() {
+        jobDeadline.setText("");
+        jobDuration.setText("");
+        jobID.setText("");
     }
 
 }
 
 
-/*
-// constructor that sets the cards, user, and registry
-    public SubmitJobPage(JPanel cards, User user, Map<String, Refreshable> registry) {
-        this.user = user;
 
-        setLayout(new BorderLayout());
-        add(new NavBar(cards, user, registry), BorderLayout.NORTH);
-
-        JPanel content = new JPanel();
-        content.setLayout(new BorderLayout());
-        content.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        JLabel header = new JLabel("Submit Job Page", SwingConstants.CENTER);
-        header.setFont(new Font("Arial", Font.BOLD, 24));
-        content.add(header, BorderLayout.NORTH);
-        content.add(buildForm(), BorderLayout.CENTER);
-        
-         // ---------------------------------------------------------------
-         status.setEditable(false);
-         status.setLineWrap(true);
-         status.setWrapStyleWord(true);
-         JScrollPane scrollPane = new JScrollPane(status);
-         scrollPane.setBorder(BorderFactory.createTitledBorder("Status"));
-         content.add(scrollPane, BorderLayout.SOUTH);
-
-         add(content, BorderLayout.CENTER);
-         refresh();
-    }
-    // ---------------------------------------------------------------
-    // builds the panel where the form is located
-    private JPanel buildForm() {
-        JPanel form = new JPanel(new GridLayout(4, 2));
-        form.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        clientIdLabel = new JLabel("Client ID:");
-        form.add(clientIdLabel);
-        durationField = new PlaceHolderTextField("Duration", 10);
-        form.add(durationField);
-        deadlineField = new PlaceHolderTextField("Deadline", 10);
-        form.add(deadlineField);
-        jobDescField = new PlaceHolderTextField("Job Description", 20);
-        form.add(jobDescField);
-
-        JButton submitBtn = new JButton("Submit");
-        form.add(submitBtn);
-
-        return form;
-    }
- */
-
-
-   
-    
-
- 

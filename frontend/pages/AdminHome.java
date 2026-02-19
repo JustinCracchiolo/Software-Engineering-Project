@@ -80,7 +80,7 @@ public class AdminHome extends JPanel implements Refreshable {
         else if (u.getUserType().equals("Client")) {
             userCard.add(new JLabel("Jobs"));
             for(Job j: ((Client)u).getClientJobs()) {
-                userCard.add(new JLabel("<enter stuff here>"));
+                userCard.add(new JLabel(" • " + j.getJobId() + " • " + j.getApproximateJobDuration() + " • " + j.getJobDeadline()));
             }
         }
 

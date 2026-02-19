@@ -56,29 +56,6 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         // NavBar
         add(new NavBar(cards, user, registry), BorderLayout.NORTH);
 
-        /*
-         * 
-         * JPanel center = new JPanel();
-         * center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
-         * center.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-         * 
-         * JLabel header = new JLabel("Offer Vehicle Menu");
-         * header.setFont(new Font("Arial", Font.BOLD, 26));
-         * header.setAlignmentX(Component.CENTER_ALIGNMENT);
-         * 
-         * //Buttons
-         * JPanel buttonRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
-         * 
-         * JButton addBtn = new JButton("Add Vehicle");
-         * JButton removeBtn = new JButton("Remove Vehicle");
-         * JButton editBtn = new JButton("Edit Vehicle Info");
-         * JButton viewBtn = new JButton("View Vehicles");
-         * 
-         * addBtn.setFont(new Font("Arial", Font.PLAIN, 16));
-         * removeBtn.setFont(new Font("Arial", Font.PLAIN, 16));
-         * editBtn.setFont(new Font("Arial", Font.PLAIN, 16));
-         * viewBtn.setFont(new Font("Arial", Font.PLAIN, 16));
-         */
 
         JPanel splitPanel = new JPanel(new GridLayout(1, 2));
 
@@ -116,8 +93,7 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         vehicleModel.setMaximumSize(vehicleModel.getPreferredSize());
         vehicleModel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        vehiclePlate = new PlaceHolderTextField("License Plate", 16); // adds more graphics to regular
-                                                                                 // textfield
+        vehiclePlate = new PlaceHolderTextField("License Plate", 16);
         vehiclePlate.setMaximumSize(vehiclePlate.getPreferredSize());
         vehiclePlate.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -144,11 +120,15 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         add(splitPanel, BorderLayout.CENTER);
 
         submitBtn.addActionListener(e -> {
-            String VIN_NUMBER = vehicleVin.getText();
-            String make = vehicleMake.getText();
-            String model = vehicleModel.getText();
+            String VIN_NUMBER = vehicleVin.getText().trim();
+            String make = vehicleMake.getText().trim();
+            String model = vehicleModel.getText().trim();
             String licensePlate = vehiclePlate.getText();
 
+            if(VIN_NUMBER.isEmpty() || make.isEmpty() || model.isEmpty() || licensePlate.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Fields cannot be empty.");
+                return;
+            }
 
             //gets an admin account
             User admin = null;
@@ -168,6 +148,7 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
             //((Owner) user).addVehicle(v);
             ((Admin)admin).addPendingVehicle(user, v);
 
+            JOptionPane.showMessageDialog(this, "Succesfully sent a vehicle request.");
             refresh();
         });
 

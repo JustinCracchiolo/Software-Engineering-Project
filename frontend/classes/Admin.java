@@ -65,8 +65,8 @@ public class Admin extends User {
     public void allowJob(User u, Job j) { 
         String userId = u.getUserId();
         for(int i = 0; i < pendingJobs.get(userId).size(); i++) {
-            if (pendingJobs.get(userId).get(i).getJob().equals(j.getJob())) {
-                ((Owner) u).addJob(pendingJobs.get(userId).get(i));
+            if (pendingJobs.get(userId).get(i).getJobId().equals(j.getJobId())) {
+                ((Client) u).addJob(pendingJobs.get(userId).get(i));
                 pendingJobs.get(userId).remove(i);
                 break;
             }
