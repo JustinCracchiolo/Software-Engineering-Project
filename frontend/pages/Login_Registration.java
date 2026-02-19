@@ -105,11 +105,6 @@ public class Login_Registration {
         toRegisterButton.setOpaque(true);
         toRegisterButton.setBorderPainted(false);
 
-        toLoginButton.addActionListener(e -> {
-            CardLayout c = (CardLayout) cards.getLayout();
-            c.show(cards, "login");
-        });
-
         toRegisterButton.addActionListener(e -> {
             CardLayout c = (CardLayout) cards.getLayout();
             c.show(cards, "register");
@@ -367,6 +362,15 @@ public class Login_Registration {
 
         loginPanel.setOpaque(true); // allows changing color
         loginSidePanel.setOpaque(true);
+
+        // Set up the toLoginButton listener now that text fields are created
+        toLoginButton.addActionListener(e -> {
+            CardLayout c = (CardLayout) cards.getLayout();
+            c.show(cards, "login");
+            // Clear login fields when returning to login page
+            usernameTextField.setText("");
+            passwordTextField.setText("");
+        });
 
         // --------------------------------------------
 
