@@ -43,6 +43,9 @@ public class Admin extends User {
             if(pendingVehicles.get(userId).get(i).getNumber().equals(v.getNumber())) {
                 ((Owner) u).addVehicle(pendingVehicles.get(userId).get(i));
                 pendingVehicles.get(userId).remove(i);
+                
+                UserManager.updateVehiclesFile(u);
+
                 break;
             }
         }

@@ -29,7 +29,7 @@ public class UserManager {
 
     private Map<String, User> users = new HashMap<>(); //username => User
     private final Path USERS_FILE_PATH;
-    private final Path VEHICLES_FILE_PATH = Paths.get("VehicleInfo", "vehicles.txt"); // Currently hardcoded, change if necessary
+    private static final Path VEHICLES_FILE_PATH = Paths.get("VehicleInfo", "vehicles.txt"); // Currently hardcoded, change if necessary
     private final Path JOBS_FILE_PATH = Paths.get("JobInfo", "jobs.txt"); // Currently hardcoded, change if necessary
     // ---------------------------------------------------------------
 
@@ -179,40 +179,6 @@ public class UserManager {
     //-----------------
 
 
-
-    /* 
-    private void loadUsersFromFile() {
-        if (!Files.exists(USERS_FILE_PATH)) {
-            return;
-        }
-
-        //try reading it by line and using next()
-        try (BufferedReader reader = Files.newBufferedReader(USERS_FILE_PATH, StandardCharsets.UTF_8)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String trimmed = line.trim();
-                if (trimmed.isEmpty()) {
-                    continue;
-                }
-                int sepIndex = trimmed.indexOf('\t');
-                if (sepIndex <= 0) {
-                    continue;
-                }
-                String username = trimmed.substring(0, sepIndex);
-                String password = trimmed.substring(sepIndex + 1);
-                String normalizedUsername = normalizeUsername(username);
-                if (!username.isEmpty() && !users.containsKey(normalizedUsername)) {
-                    users.put(normalizedUsername, new User(username, password, ""));
-                }
-            }
-        } catch (IOException e) {
-            // If the file is unreadable, continue with an empty in-memory list.
-        }
-        
-    }
-    */
-    //------------------------------
-
     /** 
      * @param username: from the user when they register
      * @param password: from the user when they register
@@ -280,6 +246,30 @@ public class UserManager {
             // If the file is unreadable, continue with an empty in-memory list.
         }
     }
+
+
+    public static void updateVehiclesFile(User u) {
+        if (!Files.exists(VEHICLES_FILE_PATH)) {
+            return;
+        }
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                    VEHICLES_FILE_PATH,
+                    StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
+            )) 
+            {
+                Vehicle new_vehicle = ((Owner) u).getVehicles().get(((Owner) u).getVehicles().size()-1);
+                writer.write(u.getUsername() + "|" + new_vehicle.getNumber() + "|" + new_vehicle.getMake() + "|" + new_vehicle.getMake() + 
+                 "|" + new_vehicle.getLicensePlate());
+                writer.newLine();
+        }
+        
+        catch (IOException e) {
+            // If the file is unreadable, continue with an empty in-memory list.
+        }
+    }
+
 
     /** 
      * Read all user informaton from jobs.txt
