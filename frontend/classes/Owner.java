@@ -17,7 +17,7 @@ import java.util.ArrayList;
 // It also includes methods to add vehicles and retrieve the owner's information.
 
 public class Owner extends User {
-    private ArrayList<Vehicle> user_vehicles = new ArrayList<>();
+    private ArrayList<Vehicle> ownerVehicles = new ArrayList<>();
 
     // possibly change to recieve arrival and departure time from user application
     private int approximateResidencyTime;
@@ -33,13 +33,13 @@ public class Owner extends User {
     // ---------------------------------------------------------------
     // adds a vehicle to the owner's list of vehicles
     public void addVehicle(Vehicle vehicle) {
-        user_vehicles.add(vehicle);
+        ownerVehicles.add(vehicle);
     }
 
     // ---------------------------------------------------------------
     // returns => owner's list of vehicles.
     public ArrayList<Vehicle> getVehicles() {
-        return user_vehicles;
+        return ownerVehicles;
     }
 
     // ---------------------------------------------------------------
