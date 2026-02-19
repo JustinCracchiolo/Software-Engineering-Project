@@ -497,8 +497,12 @@ public class Login_Registration {
             }
         });
 
-        // Return without changes.
+        // Return without changes. Textfield reset when user clicks back to login.
         backToLoginButton.addActionListener(e -> {
+            regUsernameField.setText("");
+            regPasswordField.setText("");
+            regConfirmPasswordField.setText("");
+            comboBox.setSelectedIndex(-1);
             meetAndSwitch(cards, registerPage, registerPanel, registerSidePanel, "login");
         });
 
