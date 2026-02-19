@@ -30,7 +30,7 @@ public class UserManager {
     private Map<String, User> users = new HashMap<>(); //username => User
     private final Path USERS_FILE_PATH;
     private static final Path VEHICLES_FILE_PATH = Paths.get("VehicleInfo", "vehicles.txt"); // Currently hardcoded, change if necessary
-    private final Path JOBS_FILE_PATH = Paths.get("JobInfo", "jobs.txt"); // Currently hardcoded, change if necessary
+    private static final Path JOBS_FILE_PATH = Paths.get("JobInfo", "jobs.txt"); // Currently hardcoded, change if necessary
     // ---------------------------------------------------------------
 
     // Uses the default users file path under UserInfo/users.txt. 
@@ -270,6 +270,28 @@ public class UserManager {
         }
     }
 
+    public static void updateJobFile(User u) {
+        if (!Files.exists(JOBS_FILE_PATH)) {
+            return;
+        }
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                    JOBS_FILE_PATH,
+                    StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
+            )) 
+            {
+                Job new_job = ((Client) u).getClientJobs().get(((Client) u).getClientJobs().size()-1);
+                writer.write(u.getUsername() + "|" + new_job.getJobId() + "|" + new_job.getApproximateJobDuration() + "|"
+                 + new_job.getJobDeadline());
+                writer.newLine();
+        }
+        
+        catch (IOException e) {
+            // If the file is unreadable, continue with an empty in-memory list.
+        }
+    }
+
 
     /** 
      * Read all user informaton from jobs.txt
@@ -297,7 +319,7 @@ public class UserManager {
                 
                 String normalizedUsername = normalizeUsername(username);
 
-                Job job = new Job(jobId, Integer.parseInt(approximateJobDuration), LocalDateTime.parse(jobDeadline));
+                Job job = new Job(jobId, Double.parseDouble(approximateJobDuration), LocalDateTime.parse(jobDeadline));
                 
                 // Add the job to the corresponding client
                 for (User user : users.values()) {

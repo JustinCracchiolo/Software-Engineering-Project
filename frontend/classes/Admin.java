@@ -71,6 +71,9 @@ public class Admin extends User {
             if (pendingJobs.get(userId).get(i).getJobId().equals(j.getJobId())) {
                 ((Client) u).addJob(pendingJobs.get(userId).get(i));
                 pendingJobs.get(userId).remove(i);
+
+                UserManager.updateJobFile(u);
+
                 break;
             }
         }
