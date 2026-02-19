@@ -70,36 +70,50 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
          * viewBtn.setFont(new Font("Arial", Font.PLAIN, 16));
          */
 
+        JPanel splitPanel = new JPanel(new GridLayout(1, 2));
+
+        JPanel leftPanel = new JPanel();
+        leftPanel.setBackground(new Color(65, 105, 255));
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+
+        JLabel leftTitle = new JLabel("Offer Vehicle");
+        leftTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        leftTitle.setForeground(Color.WHITE);
+        leftTitle.setFont(new Font("Arial", Font.PLAIN, 50));
+
+        leftPanel.add(Box.createVerticalGlue());
+        leftPanel.add(leftTitle);
+        leftPanel.add(Box.createVerticalGlue());
+
         JPanel vehicleForm = new JPanel();
-        vehicleForm.setBackground(new Color(65, 105, 255));
+        vehicleForm.setBackground(Color.WHITE);
         vehicleForm.setLayout(new BoxLayout(vehicleForm, BoxLayout.Y_AXIS)); // center everything vertically
-        vehicleForm.setAlignmentX(Component.CENTER_ALIGNMENT); // center horizontally
-        vehicleForm.setPreferredSize(new Dimension(500, 800));
 
         JLabel vehicleLabel = new JLabel("Enter vehicle information");
         vehicleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        vehicleLabel.setForeground(Color.WHITE);
-        vehicleLabel.setFont(new Font("Arial", Font.PLAIN, 40));
+        vehicleLabel.setForeground(new Color(65, 105, 255));
+        vehicleLabel.setFont(new Font("Arial", Font.PLAIN, 36));
 
-        JTextField vehicleVin = new PlaceHolderTextField("Vin", 20); // adds more graphics to regular textfield
-        // vehicleVin.setMaximumSize(vehicleVin.getPreferredSize());
+        JTextField vehicleVin = new PlaceHolderTextField("Vin", 16); // adds more graphics to regular textfield
+        vehicleVin.setMaximumSize(vehicleVin.getPreferredSize());
         vehicleVin.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextField vehicleMake = new PlaceHolderTextField("Make", 20); // adds more graphics to regular textfield
-        // vehicleVin.setMaximumSize(vehicleVin.getPreferredSize());
-        vehicleVin.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JTextField vehicleMake = new PlaceHolderTextField("Make", 16); // adds more graphics to regular textfield
+        vehicleMake.setMaximumSize(vehicleMake.getPreferredSize());
+        vehicleMake.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextField vehicleModel = new PlaceHolderTextField("Model", 20); // adds more graphics to regular textfield
-        // vehicleVin.setMaximumSize(vehicleVin.getPreferredSize());
-        vehicleVin.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JTextField vehicleModel = new PlaceHolderTextField("Model", 16); // adds more graphics to regular textfield
+        vehicleModel.setMaximumSize(vehicleModel.getPreferredSize());
+        vehicleModel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextField vehiclePlate = new PlaceHolderTextField("License Plate", 20); // adds more graphics to regular
+        JTextField vehiclePlate = new PlaceHolderTextField("License Plate", 16); // adds more graphics to regular
                                                                                  // textfield
-        // vehicleVin.setMaximumSize(vehicleVin.getPreferredSize());
-        vehicleVin.setAlignmentX(Component.CENTER_ALIGNMENT);
+        vehiclePlate.setMaximumSize(vehiclePlate.getPreferredSize());
+        vehiclePlate.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.PLAIN, 16));
+        submitBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         vehicleForm.add(Box.createVerticalGlue());
         vehicleForm.add(vehicleLabel);
@@ -113,8 +127,11 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         vehicleForm.add(vehiclePlate);
         vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
         vehicleForm.add(submitBtn);
+        vehicleForm.add(Box.createVerticalGlue());
 
-        add(vehicleForm, BorderLayout.SOUTH);
+        splitPanel.add(leftPanel);
+        splitPanel.add(vehicleForm);
+        add(splitPanel, BorderLayout.CENTER);
 
         submitBtn.addActionListener(e -> {
             String VIN_NUMBER = vehicleVin.getText();
