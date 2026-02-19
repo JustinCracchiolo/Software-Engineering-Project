@@ -10,6 +10,7 @@ package pages;
 
 import classes.User;
 import classes.UserManager;
+import classes.Vehicle;
 import classes.PlaceHolderTextField;
 import classes.PlaceHolderPasswordField;
 
@@ -29,6 +30,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -424,6 +426,7 @@ public class Login_Registration {
         DefaultListCellRenderer centeredRenderer = new DefaultListCellRenderer();
         centeredRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         comboBox.setRenderer(centeredRenderer);
+        comboBox.setSelectedIndex(-1);
 
         JLabel registerAsLabel = new JLabel("Register As:");
         registerAsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -460,6 +463,11 @@ public class Login_Registration {
                 return;
             }
 
+            if (userType == null || userType.isBlank()) {
+                JOptionPane.showMessageDialog(frame, "Please select a user type.");
+                return;
+            }
+
             if (!password.equals(confirmPassword)) {
                 JOptionPane.showMessageDialog(frame, "Passwords do not match. Please try again.");
                 regPasswordField.setText("");
@@ -473,6 +481,7 @@ public class Login_Registration {
                 regUsernameField.setText("");
                 regPasswordField.setText("");
                 regConfirmPasswordField.setText("");
+                comboBox.setSelectedIndex(-1);
                 CardLayout cl = (CardLayout) cards.getLayout();
                 cl.show(cards, "login");
                 return;
@@ -481,6 +490,7 @@ public class Login_Registration {
                 regUsernameField.setText("");
                 regPasswordField.setText("");
                 regConfirmPasswordField.setText("");
+                comboBox.setSelectedIndex(-1);
                 CardLayout cl = (CardLayout) cards.getLayout();
                 cl.show(cards, "register");
                 return;
