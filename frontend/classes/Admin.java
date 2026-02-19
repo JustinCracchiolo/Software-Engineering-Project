@@ -7,5 +7,4 @@ public class Admin extends User {
         super(username, password, "", "Admin"); // email is not needed for clients, so we can set it to an empty string
 
     }
-
 }
