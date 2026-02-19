@@ -10,6 +10,7 @@ package pages;
 
 import classes.User;
 import classes.UserManager;
+import classes.Admin;
 import classes.Vehicle;
 import classes.PlaceHolderTextField;
 import classes.PlaceHolderPasswordField;
@@ -243,26 +244,52 @@ public class Login_Registration {
                     // cards.add(submit, "submitJob");
                     cards.add(settings, "settings");
                     cl.show(cards, "home");
-                } else { // for now a Client will have all access
+                } 
+                else if (currentUser.getUserType().equals("Admin")) {
                     CardLayout cl = (CardLayout) cards.getLayout();
 
                     Map<String, Refreshable> registry = new HashMap<>();
                     HomePage home = new HomePage(cards, currentUser, userManager, registry);
                     SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
-                    OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
+                    //OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
+                    // SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
+                    Settings settings = new Settings(cards, currentUser, registry);
+
+                    // These cards can now be refreshed when looked up in the hashmap
+                    registry.put("home", home);
+                    registry.put("schedule", schedule);
+                    //registry.put("offerVehicle", offer);
+                    // registry.put("submitJob", submit);
+                    registry.put("settings", settings);
+
+                    cards.add(home, "home");
+                    cards.add(schedule, "schedule");
+                    //cards.add(offer, "offerVehicle");
+                    // cards.add(submit, "submitJob");
+                    cards.add(settings, "settings");
+                    cl.show(cards, "home");
+                }
+                
+                else { // for now a Client will have all access
+                    CardLayout cl = (CardLayout) cards.getLayout();
+
+                    Map<String, Refreshable> registry = new HashMap<>();
+                    HomePage home = new HomePage(cards, currentUser, userManager, registry);
+                    SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
+                    //OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
                     SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
                     Settings settings = new Settings(cards, currentUser, registry);
 
                     // These cards can now be refreshed when looked up in the hashmap
                     registry.put("home", home);
                     registry.put("schedule", schedule);
-                    registry.put("offerVehicle", offer);
+                    //registry.put("offerVehicle", offer);
                     registry.put("submitJob", submit);
                     registry.put("settings", settings);
 
                     cards.add(home, "home");
                     cards.add(schedule, "schedule");
-                    cards.add(offer, "offerVehicle");
+                    //cards.add(offer, "offerVehicle");
                     cards.add(submit, "submitJob");
                     cards.add(settings, "settings");
                     cl.show(cards, "home");

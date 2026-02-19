@@ -20,8 +20,6 @@ public class User {
 
     private String userType;
 
-    private ArrayList<Vehicle> user_vehciles = new ArrayList<>();
-
     // ---------------------------------------------------------------
     // constructor that sets the username, password, email, and user type
     public User(String username, String password, String email, String userType) {

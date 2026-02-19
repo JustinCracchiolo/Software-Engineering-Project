@@ -146,6 +146,9 @@ public class UserManager {
                     if(type.equals("Owner")) {
                         users.put(normalizedUsername, new Owner(username, password, 0));
                     }
+                    else if(type.equals("Admin")) {
+                        users.put(normalizedUsername, new Admin(username, password));
+                    }
                     else {
                         users.put(normalizedUsername, new Client(username, password));
                     }

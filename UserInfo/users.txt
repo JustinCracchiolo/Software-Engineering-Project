@@ -1,6 +1,6 @@
 Justin|password|Owner
 Lauren|lauren|Client
-admin|admin|Client
+admin|admin|Admin
 test|test|Owner
 test2|test2|Client
 a|a|Client

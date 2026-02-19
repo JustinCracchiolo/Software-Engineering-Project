@@ -18,6 +18,7 @@ public class NavBar extends JPanel {
 
     private final Map<String, Refreshable> refreshables;
     private JButton submitJobBtn;
+    private JButton offerVehicleBtn; 
 
     // ---------------------------------------------------------------
     // constructor
@@ -35,7 +36,9 @@ public class NavBar extends JPanel {
         JButton homeBtn = new JButton("Home");
         JButton scheduleBtn = new JButton("Schedule");
 
-        JButton offerVehicleBtn = new JButton("Offer Vehicle");
+        if (user.getUserType().equals("Owner")) {
+            offerVehicleBtn = new JButton("Offer Vehicle");
+        }
 
         if (user.getUserType().equals("Client")) {
             submitJobBtn = new JButton("Submit Job");
@@ -54,10 +57,13 @@ public class NavBar extends JPanel {
             ((CardLayout) cards.getLayout()).show(cards, "schedule");
         });
 
-        offerVehicleBtn.addActionListener(e -> {
-            refreshables.get("offerVehicle").refresh();
-            ((CardLayout) cards.getLayout()).show(cards, "offerVehicle");
-        });
+        if (user.getUserType().equals("Owner")) {
+            offerVehicleBtn.addActionListener(e -> {
+                refreshables.get("offerVehicle").refresh();
+                ((CardLayout) cards.getLayout()).show(cards, "offerVehicle");
+            });
+        }
+
 
         if (user.getUserType().equals("Client")) {
             submitJobBtn.addActionListener(e -> {
@@ -87,8 +93,12 @@ public class NavBar extends JPanel {
         add(Box.createHorizontalStrut(10));
         add(scheduleBtn);
         add(Box.createHorizontalStrut(10));
-        add(offerVehicleBtn);
-        add(Box.createHorizontalStrut(10));
+        
+         if (user.getUserType().equals("Owner")) {
+            add(offerVehicleBtn);
+            add(Box.createHorizontalStrut(10));
+        }
+        
 
         if (user.getUserType().equals("Client")) {
             add(submitJobBtn);
