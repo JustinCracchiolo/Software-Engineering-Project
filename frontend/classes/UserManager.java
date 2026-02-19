@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +29,8 @@ public class UserManager {
 
     private Map<String, User> users = new HashMap<>(); //username => User
     private final Path USERS_FILE_PATH;
+    private final Path VEHICLES_FILE_PATH = Paths.get("VehicleInfo", "vehicles.txt"); // Currently hardcoded, change if necessary
+    private final Path JOBS_FILE_PATH = Paths.get("JobInfo", "jobs.txt"); // Currently hardcoded, change if necessary
     // ---------------------------------------------------------------
 
     // Uses the default users file path under UserInfo/users.txt. 
@@ -220,6 +223,87 @@ public class UserManager {
         }
     }
     //------------------------------
+
+    /** 
+     * Read all user informaton from vehicles.txt
+     * Put all their information in the ArrayList. Keeps registrations after application closed
+     */
+    public void loadVehiclesFromFile() {
+        if (!Files.exists(VEHICLES_FILE_PATH)) {
+            return;
+        }
+        try (BufferedReader reader = Files.newBufferedReader(VEHICLES_FILE_PATH, StandardCharsets.UTF_8)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String trimmed = line.trim();
+                if (trimmed.isEmpty()) {
+                    continue;
+                }
+                // Split using "|" as the delimiter
+                String[] parts = trimmed.split("\\|");
+              
+                //will have to change if more fields are added to the vehicle class
+                String username = parts[0].trim();
+                String vinNumber = parts[1].trim();
+                String make = parts[2].trim();
+                String model = parts[3].trim();
+                String licensePlate = parts[4].trim();
+                
+                String normalizedUsername = normalizeUsername(username);
+
+                Vehicle vehicle = new Vehicle(vinNumber, make, model, licensePlate);
+                
+                // Add the vehicle to the corresponding owner
+                for (User user : users.values()) {
+                    if (user instanceof Owner && normalizeUsername(user.getUsername()).equals(normalizedUsername)) {
+                        ((Owner) user).addVehicle(vehicle);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            // If the file is unreadable, continue with an empty in-memory list.
+        }
+    }
+
+    /** 
+     * Read all user informaton from jobs.txt
+     * Put all their information in the ArrayList. Keeps registrations after application closed
+     */
+    public void loadJobsFromFile() {
+        if (!Files.exists(JOBS_FILE_PATH)) {
+            return;
+        }
+        try (BufferedReader reader = Files.newBufferedReader(JOBS_FILE_PATH, StandardCharsets.UTF_8)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String trimmed = line.trim();
+                if (trimmed.isEmpty()) {
+                    continue;
+                }
+                // Split using "|" as the delimiter
+                String[] parts = trimmed.split("\\|");
+              
+                //will have to change if more fields are added to the jobs class
+                String username = parts[0].trim();
+                String jobId = parts[1].trim();
+                String approximateJobDuration = parts[2].trim();
+                String jobDeadline = parts[3].trim();
+                
+                String normalizedUsername = normalizeUsername(username);
+
+                Job job = new Job(jobId, Integer.parseInt(approximateJobDuration), LocalDateTime.parse(jobDeadline));
+                
+                // Add the job to the corresponding client
+                for (User user : users.values()) {
+                    if (user instanceof Client && normalizeUsername(user.getUsername()).equals(normalizedUsername)) {
+                        ((Client) user).addJob(job);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            // If the file is unreadable, continue with an empty in-memory list.
+        }
+    }
 
     //Make Username no longer case sensitive and trim space.
     private String normalizeUsername(String username) {
