@@ -62,18 +62,6 @@ public class User {
     }
 
     // ---------------------------------------------------------------
-    // adds a vehicle to the user's list of vehicles
-    public void addUserVehicles(Vehicle v) {
-        user_vehciles.add(v);
-    }
-
-    // ---------------------------------------------------------------
-    // returns the user's list of vehicles
-    public ArrayList<Vehicle> getUserVehicles() {
-        return user_vehciles;
-    }
-
-    // ---------------------------------------------------------------
     // returns the user type of the user
     public String getUserType() {
         return userType;
