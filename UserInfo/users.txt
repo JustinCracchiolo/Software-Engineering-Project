@@ -1,6 +1,10 @@
-Justin|password|Owner
-Lauren|lauren|Client
-admin|admin|Admin
-test|test|Owner
-test2|test2|Client
-a|a|Client
+Justin|password||Owner
+Lauren|lauren||Client
+admin|admin||Admin
+test|test||Owner
+test2|test2||Client
+a|a||Client
+bee|bee|bee@gmail.com|Client
+apple|apple|apple@gmail.com|Owner
+banana|banana|banana@gmail.com|Client
+cat|cat|cat@gmail.com|Client

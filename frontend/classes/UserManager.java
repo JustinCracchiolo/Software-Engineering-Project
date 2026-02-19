@@ -51,12 +51,13 @@ public class UserManager {
     /** 
      * @param username: this is the users usersname when they make an account
      * @param password: this is the users password when they make an account
+     * @param email: this is the users email when they make an account
      * @param Username undergoes normalization 
      * @see User is put into the system 
      * @return boolean: force person to register again or put them to login screen
      */
 
-    public boolean register(String username, String password, String userType) {
+    public boolean register(String username, String password, String email, String userType) {
         User newUser;
         String normalizedUsername = normalizeUsername(username);
        
@@ -68,10 +69,13 @@ public class UserManager {
         //will have problem with residency time
 
         if(userType.equals("Owner")) {
-            newUser = new Owner(username, password, 0);
+            newUser = new Owner(username, password, email, 0);
+        }
+        else if(userType.equals("Admin")) {
+            newUser = new Admin(username, password, email);
         }
         else {
-            newUser = new Client(username, password);
+            newUser = new Client(username, password, email);
         }
 
 
@@ -81,7 +85,7 @@ public class UserManager {
         
         users.put(normalizedUsername, newUser);
         // Save to file once
-        addUserToFile(username, password, userType);
+        addUserToFile(username, password, email, userType);
         return true;
     }   
 
@@ -134,12 +138,23 @@ public class UserManager {
                 }
                 // Split using "|" as the delimiter
                 String[] parts = trimmed.split("\\|");
+                if (parts.length < 3) {
+                    continue;
+                }
               
                 //will have to change this it we have more than one user type per person
                 //will also have to chnage to get expected residence time once implemented
                 String username = parts[0].trim();
                 String password = parts[1].trim();
-                String type = parts[2].trim();
+                String email = "";
+                String type;
+
+                if (parts.length >= 4) {
+                    email = parts[2].trim();
+                    type = parts[3].trim();
+                } else {
+                    type = parts[2].trim();
+                }
                 
                 String normalizedUsername = normalizeUsername(username);
 
@@ -147,13 +162,13 @@ public class UserManager {
 
                 if (!username.isEmpty() && !users.containsKey(normalizedUsername)) {
                     if(type.equals("Owner")) {
-                        users.put(normalizedUsername, new Owner(username, password, 0));
+                        users.put(normalizedUsername, new Owner(username, password, email, 0));
                     }
                     else if(type.equals("Admin")) {
-                        users.put(normalizedUsername, new Admin(username, password));
+                        users.put(normalizedUsername, new Admin(username, password, email));
                     }
                     else {
-                        users.put(normalizedUsername, new Client(username, password));
+                        users.put(normalizedUsername, new Client(username, password, email));
                     }
                 }
             }
@@ -201,9 +216,10 @@ public class UserManager {
     /** 
      * @param username: from the user when they register
      * @param password: from the user when they register
+     * @param email: from the user when they register
      * Put their information into the txt file
      */
-    private void addUserToFile(String username, String password, String userType) {
+    private void addUserToFile(String username, String password, String email, String userType) {
         try {
             Path parent = USERS_FILE_PATH.getParent();
             if (parent != null) {
@@ -215,7 +231,7 @@ public class UserManager {
                     StandardOpenOption.CREATE,
                     StandardOpenOption.APPEND
             )) {
-                writer.write(username + "|" + password + "|" + userType);
+                writer.write(username + "|" + password + "|" + email + "|" + userType);
                 writer.newLine();
             }
         } catch (IOException e) {
