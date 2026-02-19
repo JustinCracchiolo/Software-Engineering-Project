@@ -20,6 +20,7 @@ import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import classes.Owner;
 import classes.PlaceHolderTextField;
 import classes.User;
 import classes.Vehicle;
@@ -122,7 +123,7 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
             String licensePlate = vehiclePlate.getText();
 
             Vehicle v = new Vehicle(VIN_NUMBER, make, model, licensePlate);
-            user.addUserVehicles(v);
+            ((Owner) user).addVehicle(v);
         });
 
         /*

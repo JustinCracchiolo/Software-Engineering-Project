@@ -9,6 +9,7 @@ package pages;
 
 import javax.swing.*;
 
+import classes.Owner;
 import classes.User;
 import classes.UserManager;
 import java.util.ArrayList;
@@ -54,13 +55,17 @@ public class HomePage extends JPanel implements Refreshable {
     @Override
     public void refresh() {
         String username = user.getUsername();
-        ArrayList<Vehicle> user_vehicle = user.getUserVehicles();
-        int vehicles = 0;
-        for (Vehicle v : user_vehicle) {
-            vehicles++;
+        if(user.getUserType().equals("Owner")) {
+            ArrayList<Vehicle> user_vehicle = ((Owner) user).getVehicles();
+            int vehicles = 0;
+            for (Vehicle v : user_vehicle) {
+                vehicles++;
+            }
+            name.setText(username + " vehicles: " + vehicles);
         }
-
-        name.setText(username + " vehicles: " + vehicles);
+        else {
+            name.setText(username);
+        }
 
         revalidate();
         repaint();
