@@ -17,7 +17,8 @@ import java.util.ArrayList;
 // It also includes methods to add vehicles and retrieve the owner's information.
 
 public class Owner extends User {
-    private ArrayList<Vehicle> user_vehicles = new ArrayList<>();
+    private ArrayList<Vehicle> ownerVehicles = new ArrayList<>();
+    private String ownerId; // DO NOT REMOVE, WE NEED THIS FOR MILESTONE 2. REMOVE COMMENT BEFORE SUBMISSION
 
     // possibly change to recieve arrival and departure time from user application
     private int approximateResidencyTime;
@@ -28,19 +29,27 @@ public class Owner extends User {
     public Owner(String username, String password, int approximateResidencyTime) {
         super(username, password, "", "Owner");
         this.approximateResidencyTime = approximateResidencyTime;
+
+        // fix ownerId
+        // this.ownerId = ownerId;
+    }
+
+    // ---------------------------------------------------------------
+    // this method returns the owner's ID for a specific owner.
+    public String getOwnerId() {
+        return ownerId; 
     }
 
     // ---------------------------------------------------------------
     // adds a vehicle to the owner's list of vehicles
     public void addVehicle(Vehicle vehicle) {
-        //before add, call function for admin
-        user_vehicles.add(vehicle);
+        ownerVehicles.add(vehicle);
     }
 
     // ---------------------------------------------------------------
-    // returns => owner's list of vehicles.
+    // returns => owner's list of vehicles
     public ArrayList<Vehicle> getVehicles() {
-        return user_vehicles;
+        return ownerVehicles;
     }
 
     // ---------------------------------------------------------------
