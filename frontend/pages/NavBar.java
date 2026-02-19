@@ -78,7 +78,7 @@ public class NavBar extends JPanel {
             ((CardLayout) cards.getLayout()).show(cards, "settings");
         });
 
-        logoutBtn.addActionListener(e -> ((CardLayout) cards.getLayout()).show(cards, "login"));
+        logoutBtn.addActionListener(e -> ((CardLayout) cards.getLayout()).show(cards, "about"));
 
         add(Box.createHorizontalStrut(20));
         add(title);

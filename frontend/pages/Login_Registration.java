@@ -62,15 +62,91 @@ public class Login_Registration {
         JPanel cards = new JPanel(new CardLayout());
 
         // Creation of different screens
+
+        JPanel aboutPage = new JPanel(new BorderLayout());
+
         JPanel loginPage = new JPanel(new BorderLayout());
 
         JPanel registerPage = new JPanel(new BorderLayout());
 
+        cards.add(aboutPage, "about");
         cards.add(loginPage, "login");
         cards.add(registerPage, "register");
-
         // --------------------------------------------
 
+        //About page 
+        JPanel aboutPanel = new JPanel();
+        aboutPanel.setBackground(new Color(65, 105, 255));
+        aboutPanel.setLayout(new BoxLayout(aboutPanel, BoxLayout.Y_AXIS)); // center everything vertically
+        aboutPanel.setAlignmentX(Component.CENTER_ALIGNMENT); // center horizontally
+        aboutPanel.setPreferredSize(new Dimension(500, 800));
+
+        JLabel aboutTitle = new JLabel("VCRTS");
+        aboutTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        aboutTitle.setForeground(Color.white);
+        aboutTitle.setFont(new Font("Arial", Font.PLAIN, 40));
+
+        JLabel aboutInfo = new JLabel("<Enter text here>");
+        aboutInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        aboutInfo.setForeground(Color.white);
+        aboutInfo.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        JPanel startPanel = new JPanel();
+        startPanel.setBackground(Color.WHITE);
+        startPanel.setLayout(new BoxLayout(startPanel, BoxLayout.Y_AXIS));
+        startPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        startPanel.setPreferredSize(new Dimension(600, 800));
+
+        JLabel startLabel = new JLabel("Get Started");
+        startLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        startLabel.setForeground(new Color(65, 105, 255));
+        startLabel.setFont(new Font("Arial", Font.PLAIN, 40));
+
+        JButton toLoginButton = new JButton("Login");
+        toLoginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toLoginButton.setFont(new Font("Arial", Font.PLAIN, 30));
+        toLoginButton.setBackground(new Color(65, 105, 255));
+        toLoginButton.setForeground(Color.white);
+        toLoginButton.setOpaque(true);
+        toLoginButton.setBorderPainted(false);
+
+        JButton toRegisterButton = new JButton("Create an Account");
+        toRegisterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        toRegisterButton.setFont(new Font("Arial", Font.PLAIN, 30));
+        toRegisterButton.setBackground(new Color(65, 105, 255));
+        toRegisterButton.setForeground(Color.white);
+        toRegisterButton.setOpaque(true);
+        toRegisterButton.setBorderPainted(false);
+
+        toLoginButton.addActionListener(e -> {
+            CardLayout c = (CardLayout) cards.getLayout();
+            c.show(cards, "login");
+        });
+
+        toRegisterButton.addActionListener(e -> {
+            CardLayout c = (CardLayout) cards.getLayout();
+            c.show(cards, "register");
+        });
+
+        aboutPanel.add(Box.createVerticalGlue());
+        aboutPanel.add(aboutTitle);
+        aboutPanel.add(Box.createVerticalStrut(30)); // creates padding between elements
+        aboutPanel.add(aboutInfo);
+        aboutPanel.add(Box.createVerticalGlue());
+
+        startPanel.add(Box.createVerticalGlue());
+        startPanel.add(startLabel);
+        startPanel.add(Box.createVerticalStrut(10));
+        startPanel.add(toLoginButton);
+        startPanel.add(Box.createVerticalStrut(30));
+        startPanel.add(toRegisterButton);
+        startPanel.add(Box.createVerticalGlue());
+        
+        aboutPanel.setOpaque(true);
+        
+        aboutPage.add(aboutPanel, BorderLayout.WEST);
+        aboutPage.add(startPanel, BorderLayout.CENTER);
+        // -------------------------------------------
         // Login page
 
         JPanel loginSidePanel = new JPanel();
