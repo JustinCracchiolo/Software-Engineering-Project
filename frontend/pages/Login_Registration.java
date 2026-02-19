@@ -413,6 +413,10 @@ public class Login_Registration {
         regUsernameField.setMaximumSize(regUsernameField.getPreferredSize());
         regUsernameField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        JTextField regEmailField = new PlaceHolderTextField("Email", 20);
+        regEmailField.setMaximumSize(regEmailField.getPreferredSize());
+        regEmailField.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         JPasswordField regPasswordField = new PlaceHolderPasswordField("Password", 20);
         regPasswordField.setMaximumSize(regPasswordField.getPreferredSize());
         regPasswordField.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -478,6 +482,7 @@ public class Login_Registration {
         // Create a new account in memory and return to Login.
         submitRegisterButton.addActionListener(e -> {
             String username = regUsernameField.getText().trim();
+            String email = regEmailField.getText().trim();
             String password = new String(regPasswordField.getPassword());
             String confirmPassword = new String(regConfirmPasswordField.getPassword());
 
@@ -485,7 +490,7 @@ public class Login_Registration {
             String userType = (String) comboBox.getSelectedItem();
             //
 
-            if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "All fields are required.");
                 return;
             }
@@ -502,10 +507,11 @@ public class Login_Registration {
                 return;
             }
 
-            if (userManager.register(username, password, userType)) { // creates a User with username and passwords and
+            if (userManager.register(username, password, email, userType)) { // creates a User with username and passwords and
                                                                       // puts them into system
                 JOptionPane.showMessageDialog(frame, "User " + username + " created!");
                 regUsernameField.setText("");
+                regEmailField.setText("");
                 regPasswordField.setText("");
                 regConfirmPasswordField.setText("");
                 comboBox.setSelectedIndex(-1);
@@ -515,6 +521,7 @@ public class Login_Registration {
             } else { // checks if someone with repeat username
                 JOptionPane.showMessageDialog(frame, "Username already exists. Try again");
                 regUsernameField.setText("");
+                regEmailField.setText("");
                 regPasswordField.setText("");
                 regConfirmPasswordField.setText("");
                 comboBox.setSelectedIndex(-1);
@@ -527,6 +534,7 @@ public class Login_Registration {
         // Return without changes. Textfield reset when user clicks back to login.
         backToLoginButton.addActionListener(e -> {
             regUsernameField.setText("");
+            regEmailField.setText("");
             regPasswordField.setText("");
             regConfirmPasswordField.setText("");
             comboBox.setSelectedIndex(-1);
@@ -538,6 +546,9 @@ public class Login_Registration {
         registerPanel.add(Box.createVerticalStrut(20));
         registerPanel.add(Box.createVerticalStrut(10));
         registerPanel.add(regUsernameField);
+        registerPanel.add(Box.createVerticalStrut(20));
+        registerPanel.add(Box.createVerticalStrut(10));
+        registerPanel.add(regEmailField);
         registerPanel.add(Box.createVerticalStrut(20));
         registerPanel.add(Box.createVerticalStrut(10));
         registerPanel.add(regPasswordField);
