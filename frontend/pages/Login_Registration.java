@@ -1,5 +1,5 @@
 /* Project: Vehicular Cloud Real Time System (VCRTS)
-* Class: UI.java
+* Class: Login_Registration.java
 * Authors: Group 2 (Justin Cracchiolo, Lauren Rodriguez, David Choi, Tristan Huertas, Ivan Lin, Anthony Vallejo, Sebastian Villavicencio)
 * Date: February 2026
 * This program builds and controls the main Swing GUI for VCRTS, including login, registration, and home navigation using CardLayout. 
@@ -261,7 +261,7 @@ public class Login_Registration {
                     HomePage home = new HomePage(cards, currentUser, userManager, registry);
                     SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
                     //OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
-                    SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
+                    SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry, userManager);
                     Settings settings = new Settings(cards, currentUser, registry);
 
                     // These cards can now be refreshed when looked up in the hashmap

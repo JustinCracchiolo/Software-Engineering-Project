@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class Owner extends User {
     private ArrayList<Vehicle> ownerVehicles = new ArrayList<>();
+    private ArrayList<Job> ownerJobs = new ArrayList<>();
     private String ownerId; // DO NOT REMOVE, WE NEED THIS FOR MILESTONE 2. REMOVE COMMENT BEFORE SUBMISSION
 
     // possibly change to recieve arrival and departure time from user application
@@ -61,4 +62,15 @@ public class Owner extends User {
         return approximateResidencyTime;
     }
 
+    // ---------------------------------------------------------------
+    // adds a job to the owner's list of jobs
+    public void addJob(Job job) {
+        ownerJobs.add(job);
+    }
+
+    // ---------------------------------------------------------------
+    // returns => owner's list of jobs
+    public ArrayList<Job> getJobs() {
+        return ownerJobs;
+    }
 }

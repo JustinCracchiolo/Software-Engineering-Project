@@ -8,3 +8,6 @@ bee|bee|bee@gmail.com|Client
 apple|apple|apple@gmail.com|Owner
 banana|banana|banana@gmail.com|Client
 cat|cat|cat@gmail.com|Client
+l|a|Owner
+register|a|Client
+ab|ab|ab|Owner
