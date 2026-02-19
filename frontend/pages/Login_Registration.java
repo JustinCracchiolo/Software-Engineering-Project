@@ -38,7 +38,8 @@ public class Login_Registration {
 
         // management tool for keeping track of who creates accounts.
         UserManager userManager = new UserManager();
-        // Add code to read vehicles and jobs ---- call the user manager functions to read
+        userManager.loadVehiclesFromFile(); // this tells the program to load the vehicles from the file for the current user
+        userManager.loadJobsFromFile(); // this tells the program to load the jobs from the file for the current user
 
         JFrame frame = new JFrame("VCRTS App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -202,8 +203,6 @@ public class Login_Registration {
 
             if (userManager.login(user, user_password)) {
                 currentUser = userManager.getUser(user); // this tells the program the person who is logged in
-                userManager.loadVehiclesFromFile(); // this tells the program to load the vehicles from the file for the current user
-                userManager.loadJobsFromFile(); // this tells the program to load the jobs from the file for the current user
 
                 // based on kind of user, navbar is different
                 if (currentUser.getUserType().equals("Owner")) {
