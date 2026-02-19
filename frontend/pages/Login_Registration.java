@@ -341,7 +341,21 @@ public class Login_Registration {
         String[] user_type = { "Client", "Owner" };
         // Create the JComboBox (the dropdown)
         JComboBox<String> comboBox = new JComboBox<>(user_type);
-        comboBox.setBounds(50, 50, 10, 10);
+        Dimension comboBoxSize = new Dimension(140, 28);
+        comboBox.setPreferredSize(comboBoxSize);
+        comboBox.setMaximumSize(comboBoxSize);
+        comboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        DefaultListCellRenderer centeredRenderer = new DefaultListCellRenderer();
+        centeredRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        comboBox.setRenderer(centeredRenderer);
+
+        JLabel registerAsLabel = new JLabel("Register As:");
+        registerAsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel registerAsRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
+        registerAsRow.setOpaque(false);
+        registerAsRow.add(registerAsLabel);
+        registerAsRow.add(comboBox);
 
         JButton submitRegisterButton = new JButton("Create Account");
         submitRegisterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -417,7 +431,7 @@ public class Login_Registration {
         registerPanel.add(showRegistrationPasswordButton);
         registerPanel.add(Box.createVerticalStrut(20));
 
-        registerPanel.add(comboBox);
+        registerPanel.add(registerAsRow);
         registerPanel.add(Box.createVerticalStrut(10));
         registerPanel.add(Box.createVerticalGlue());
 
