@@ -17,15 +17,19 @@ import java.time.LocalDateTime;
 
 public class Job {
     private String JOB_ID;
+    private static int increment;
+    private String description;
     private double approximateJobDuration; // in minutes or hours
     private LocalDateTime jobDeadline;
 
     // ---------------------------------------------------------------
     // constructor
-    public Job(String JOB_ID, double approximateJobDuration, LocalDateTime jobDeadline) {
-        this.JOB_ID = JOB_ID;
+    public Job(String description, double approximateJobDuration, LocalDateTime jobDeadline) {
+        increment++;
+        this.JOB_ID = Integer.toString(increment);
         this.approximateJobDuration = approximateJobDuration;
         this.jobDeadline = jobDeadline;
+        this.description = description;
 
         // make sure job has all the necessary information
         if (JOB_ID.equals("") || approximateJobDuration <= 0 || jobDeadline == null) {
@@ -63,6 +67,10 @@ public class Job {
     // This method updates the deadline for a specific job.
     public void setJobDeadline(LocalDateTime jobDeadline) {
         this.jobDeadline = jobDeadline;
+    }
+
+    public String getJobDescription() {
+        return description;
     }
 
 }

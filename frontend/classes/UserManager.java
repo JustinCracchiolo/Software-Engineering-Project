@@ -290,6 +290,10 @@ public class UserManager {
         }
     }
 
+    /* 
+    jobs.txt format: username|description|hrs|deadline|jobId
+    */
+
     public static void updateJobFile(User u) {
         if (!Files.exists(JOBS_FILE_PATH)) {
             return;
@@ -302,8 +306,8 @@ public class UserManager {
             )) 
             {
                 Job new_job = ((Client) u).getClientJobs().get(((Client) u).getClientJobs().size()-1);
-                writer.write(u.getUsername() + "|" + new_job.getJobId() + "|" + new_job.getApproximateJobDuration() + "|"
-                 + new_job.getJobDeadline());
+                writer.write(u.getUsername() + "|" + new_job.getJobDescription() + "|" + new_job.getApproximateJobDuration() + "|"
+                 + new_job.getJobDeadline() + "|" + new_job.getJobId());
                 writer.newLine();
         }
         
@@ -317,6 +321,9 @@ public class UserManager {
      * Read all user informaton from jobs.txt
      * Put all their information in the ArrayList. Keeps registrations after application closed
      */
+     /* 
+    jobs.txt format: username|description|hrs|deadline|jobId
+    */
     public void loadJobsFromFile() {
         if (!Files.exists(JOBS_FILE_PATH)) {
             return;
@@ -333,13 +340,13 @@ public class UserManager {
               
                 //will have to change if more fields are added to the jobs class
                 String username = parts[0].trim();
-                String jobId = parts[1].trim();
+                String jobDescription = parts[1].trim();
                 String approximateJobDuration = parts[2].trim();
                 String jobDeadline = parts[3].trim();
                 
                 String normalizedUsername = normalizeUsername(username);
 
-                Job job = new Job(jobId, Double.parseDouble(approximateJobDuration), LocalDateTime.parse(jobDeadline));
+                Job job = new Job(jobDescription, Double.parseDouble(approximateJobDuration), LocalDateTime.parse(jobDeadline));
                 
                 // Add the job to the corresponding client
                 for (User user : users.values()) {

@@ -73,17 +73,18 @@ public class AdminHome extends JPanel implements Refreshable {
         userCard.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); 
 
         if(u.getUserType().equals("Owner")) {
-            userCard.add(new JLabel("Vehicle:"));
             userCard.add(new JLabel("Owner Id:" + ((Owner)u).getOwnerId()));
+            userCard.add(new JLabel("Vehicles:"));
             for(Vehicle v: ((Owner)u).getVehicles()) {
-                userCard.add(new JLabel(" • " + v.getMake() + " • " + v.getModel() + " • " + v.getNumber() + " • " + v.getLicensePlate()));
+                userCard.add(new JLabel(" Make: " + v.getMake() + " Model " + v.getModel() + " VIN " + v.getNumber() + " License Plate " + v.getLicensePlate()));
             }
         }
         else if (u.getUserType().equals("Client")) {
-            userCard.add(new JLabel("Jobs"));
             userCard.add(new JLabel("Client Id:" + ((Client)u).getClientId()));
+            userCard.add(new JLabel("Jobs"));
             for(Job j: ((Client)u).getClientJobs()) {
-                userCard.add(new JLabel(" • " + j.getJobId() + " • " + j.getApproximateJobDuration() + " • " + j.getJobDeadline()));
+                userCard.add(new JLabel("Job Id: " + j.getJobId() + " Job duration: " + j.getApproximateJobDuration() + 
+                " Deadline: " + j.getJobDeadline() + " Description: " + j.getJobDescription()));
             }
         }
         else {

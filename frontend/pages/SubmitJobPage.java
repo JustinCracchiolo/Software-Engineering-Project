@@ -45,7 +45,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
     private JTextField deadlineField;
     private JTextField jobDescField;
 
-    private JTextField jobID;
+    private JTextField jobDescription;
     private JTextField jobDuration;
     private JTextField jobDeadline;
 
@@ -83,11 +83,11 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         jobTitle.setForeground(new Color(65, 105, 255));
         jobTitle.setFont(new Font("Arial", Font.PLAIN, 36));
 
-        jobID = new PlaceHolderTextField("Job ID (Ex. xxxxx)", 16); // adds more graphics to regular textfield
-        jobID.setMaximumSize(jobID.getPreferredSize());
-        jobID.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jobDescription = new PlaceHolderTextField("Job Description", 16); // adds more graphics to regular textfield
+        jobDescription.setMaximumSize(jobDescription.getPreferredSize());
+        jobDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        jobDuration = new PlaceHolderTextField("Approximate Job Duration (in terms of hours) (Ex. 10, 0.2)", 16); // adds more graphics to regular textfield
+        jobDuration = new PlaceHolderTextField("Approximate Job Duration (in terms of hours)", 25); // adds more graphics to regular textfield
         jobDuration.setMaximumSize(jobDuration.getPreferredSize());
         jobDuration.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -102,7 +102,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         jobForm.add(Box.createVerticalGlue());
         jobForm.add(jobTitle);
         jobForm.add(Box.createVerticalStrut(30)); // creates padding between elements
-        jobForm.add(jobID);
+        jobForm.add(jobDescription);
         jobForm.add(Box.createVerticalStrut(30)); // creates padding between elements
         jobForm.add(jobDuration);
         jobForm.add(Box.createVerticalStrut(30)); // creates padding between elements
@@ -116,7 +116,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         add(splitPanel, BorderLayout.CENTER);
 
         submitBtn.addActionListener(e -> {
-            String idText = jobID.getText().trim();
+            String idText = jobDescription.getText().trim();
             String durationText = jobDuration.getText().trim();
             String deadlineText = jobDeadline.getText().trim();
 
@@ -180,7 +180,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
     public void refresh() {
         jobDeadline.setText("");
         jobDuration.setText("");
-        jobID.setText("");
+        jobDescription.setText("");
     }
 
 }
