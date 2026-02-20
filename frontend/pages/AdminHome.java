@@ -76,7 +76,8 @@ public class AdminHome extends JPanel implements Refreshable {
             userCard.add(new JLabel("Owner Id:" + ((Owner)u).getOwnerId()));
             userCard.add(new JLabel("Vehicles:"));
             for(Vehicle v: ((Owner)u).getVehicles()) {
-                userCard.add(new JLabel(" Make: " + v.getMake() + " Model " + v.getModel() + " VIN " + v.getNumber() + " License Plate " + v.getLicensePlate()));
+                userCard.add(new JLabel(" Make: " + v.getMake() + " Model " + v.getModel() + " VIN " + v.getNumber() 
+                + " License Plate " + v.getLicensePlate() + " Year: " + v.getYear() + " Approximate parked time: " + v.approxTime()));
             }
         }
         else if (u.getUserType().equals("Client")) {

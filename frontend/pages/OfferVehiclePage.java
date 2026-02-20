@@ -47,6 +47,10 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
     private JTextField vehicleModel;
     private JTextField vehiclePlate;
 
+    private JTextField vehicleYear;
+    private JTextField vehicleArrival;
+    private JTextField vehicleDeparture;
+
 
     // ---------------------------------------------------------------
     // constructor: sets user + user manager + registry
@@ -97,6 +101,19 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         vehiclePlate.setMaximumSize(vehiclePlate.getPreferredSize());
         vehiclePlate.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        vehicleYear = new PlaceHolderTextField("Year (xxxx)", 16);
+        vehicleYear.setMaximumSize(vehiclePlate.getPreferredSize());
+        vehicleYear.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        vehicleArrival = new PlaceHolderTextField("Expected arrival (yyyy-mm-dd hh:mm:ss)", 30);
+        vehicleArrival.setMaximumSize(vehiclePlate.getPreferredSize());
+        vehicleArrival.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        vehicleDeparture = new PlaceHolderTextField("Expected departure (yyyy-mm-dd hh:mm:ss)", 30);
+        vehicleDeparture.setMaximumSize(vehiclePlate.getPreferredSize());
+        vehicleDeparture.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.PLAIN, 16));
         submitBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -112,6 +129,14 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
         vehicleForm.add(vehiclePlate);
         vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(vehicleYear);
+        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(vehicleArrival);
+        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(vehicleDeparture);
+        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+
+
         vehicleForm.add(submitBtn);
         vehicleForm.add(Box.createVerticalGlue());
 
@@ -123,9 +148,14 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
             String VIN_NUMBER = vehicleVin.getText().trim();
             String make = vehicleMake.getText().trim();
             String model = vehicleModel.getText().trim();
-            String licensePlate = vehiclePlate.getText();
+            String licensePlate = vehiclePlate.getText().trim();
+            String year = vehicleYear.getText().trim();
+            String arrivalText = vehicleArrival.getText().trim();
+            String departureText = vehicleDeparture.getText().trim();
 
-            if(VIN_NUMBER.isEmpty() || make.isEmpty() || model.isEmpty() || licensePlate.isEmpty()) {
+
+            if(VIN_NUMBER.isEmpty() || make.isEmpty() || model.isEmpty() || licensePlate.isEmpty() || year.isEmpty() 
+             || arrivalText.isEmpty() || departureText.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Fields cannot be empty.");
                 return;
             }
@@ -143,7 +173,7 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
             if (admin == null) { JOptionPane.showMessageDialog(this, "No admin account found."); return; }
 
             //make new vehicle from form information
-            Vehicle v = new Vehicle(VIN_NUMBER, make, model, licensePlate);
+            Vehicle v = new Vehicle(VIN_NUMBER, make, model, licensePlate, year, arrivalText, departureText);
             
             //((Owner) user).addVehicle(v);
             ((Admin)admin).addPendingVehicle(user, v);
@@ -163,5 +193,8 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         vehicleMake.setText("");
         vehicleModel.setText("");
         vehiclePlate.setText("");
+        vehicleArrival.setText("");
+        vehicleYear.setText("");
+        vehicleDeparture.setText("");
     }
 }

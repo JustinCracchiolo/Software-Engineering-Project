@@ -8,6 +8,10 @@
 package classes;
 //Focus on the backend and make necessary classes to store information for the user and their vehicles (Sebastian)
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.Duration;
+
 // ---------------------------------------------------------------
 // vehicle class
 //The system shall receive and verify the vehicle's number, license plate, make, and model.
@@ -18,22 +22,46 @@ public class Vehicle {
     private String licensePlate;
     
     private String year;
-    private String apporxResidencyTime;
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    Duration duration;
+    private String apporxResidencyTime; // in hrs
 
     // constructor
     // ---------------------------------------------------------------
     // add user as parameter in constructor
 
-    public Vehicle(String VIN_NUMBER, String make, String model, String licensePlate) {
+    public Vehicle(String VIN_NUMBER, String make, String model, String licensePlate, String year, String arrive, String depart) {
         this.VIN_NUMBER = VIN_NUMBER;
         this.make = make;
         this.model = model;
         this.licensePlate = licensePlate;
+        this.year = year;
+
+        LocalDateTime arrival = LocalDateTime.parse(arrive, formatter);
+        LocalDateTime departure = LocalDateTime.parse(depart, formatter);
+        duration = Duration.between(arrival, departure);
+        int approx_hrs = (int) duration.toHours();
+        this.apporxResidencyTime = Integer.toString(approx_hrs);
+
 
         // make sure vehicle has all the necessary information
-        if (VIN_NUMBER.equals("") || make == null || model == null || licensePlate == null) {
+        if (VIN_NUMBER.equals("") || make == null || model == null || licensePlate == null 
+        || year == null || apporxResidencyTime == null) {
             throw new IllegalArgumentException("Vehicle information is incomplete");
         }
+    }
+
+    //overloading from reading from vehicle file
+    public Vehicle(String VIN_NUMBER, String make, String model, String licensePlate, String year, String approxTime) {
+        this.VIN_NUMBER = VIN_NUMBER;
+        this.make = make;
+        this.model = model;
+        this.licensePlate = licensePlate;
+        this.year = year;
+        this.apporxResidencyTime = approxTime;
+
     }
 
     // implementing the getters in order to access the private variables
@@ -60,6 +88,14 @@ public class Vehicle {
     // returns the license plate of the vehicle
     public String getLicensePlate() {
         return licensePlate;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public String approxTime() {
+        return apporxResidencyTime;
     }
 
 }

@@ -230,6 +230,9 @@ public class UserManager {
      * Read all user informaton from vehicles.txt
      * Put all their information in the ArrayList. Keeps registrations after application closed
      */
+    /* 
+     vehicle txt format: username|vin|model|make|plate|year|approxTime
+    */
     public void loadVehiclesFromFile() {
         if (!Files.exists(VEHICLES_FILE_PATH)) {
             return;
@@ -250,10 +253,12 @@ public class UserManager {
                 String make = parts[2].trim();
                 String model = parts[3].trim();
                 String licensePlate = parts[4].trim();
+                String year = parts[5].trim();
+                String approxTime = parts[6].trim();
                 
                 String normalizedUsername = normalizeUsername(username);
 
-                Vehicle vehicle = new Vehicle(vinNumber, make, model, licensePlate);
+                Vehicle vehicle = new Vehicle(vinNumber, make, model, licensePlate, year, approxTime);
                 
                 // Add the vehicle to the corresponding owner
                 for (User user : users.values()) {
@@ -267,7 +272,9 @@ public class UserManager {
         }
     }
 
-
+    /* 
+     vehicle txt format: username|vin|model|make|plate|year|approxTime
+    */
     public static void updateVehiclesFile(User u) {
         if (!Files.exists(VEHICLES_FILE_PATH)) {
             return;
@@ -280,8 +287,8 @@ public class UserManager {
             )) 
             {
                 Vehicle new_vehicle = ((Owner) u).getVehicles().get(((Owner) u).getVehicles().size()-1);
-                writer.write(u.getUsername() + "|" + new_vehicle.getNumber() + "|" + new_vehicle.getMake() + "|" + new_vehicle.getMake() + 
-                 "|" + new_vehicle.getLicensePlate());
+                writer.write(u.getUsername() + "|" + new_vehicle.getNumber() + "|" + new_vehicle.getModel() + "|" + new_vehicle.getMake() + 
+                 "|" + new_vehicle.getLicensePlate() + "|" + new_vehicle.getYear() + "|" + new_vehicle.approxTime());
                 writer.newLine();
         }
         
