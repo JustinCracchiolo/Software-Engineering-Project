@@ -166,7 +166,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
             Job j = new Job(idText, duration, deadline);
             
             //((Owner) user).addJob(v);
-            ((Admin)admin).addPendingJob(user, j);
+            Admin.addPendingJob(user, j, true);
 
             JOptionPane.showMessageDialog(this, "Submitted job application.");
 

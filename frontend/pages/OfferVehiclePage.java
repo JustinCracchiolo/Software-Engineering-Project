@@ -176,7 +176,7 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
             Vehicle v = new Vehicle(VIN_NUMBER, make, model, licensePlate, year, arrivalText, departureText);
             
             //((Owner) user).addVehicle(v);
-            ((Admin)admin).addPendingVehicle(user, v);
+            Admin.addPendingVehicle(user, v, true);
 
             JOptionPane.showMessageDialog(this, "Succesfully sent a vehicle request.");
             refresh();

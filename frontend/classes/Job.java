@@ -37,6 +37,19 @@ public class Job {
         }
     }
 
+    public Job(String description, String hrs,LocalDateTime jobDeadline, String id) {
+        increment++;
+        this.JOB_ID = id;
+        this.approximateJobDuration = Double.parseDouble(hrs);
+        this.jobDeadline = jobDeadline;
+        this.description = description;
+
+        // make sure job has all the necessary information
+        if (JOB_ID.equals("") || approximateJobDuration <= 0 || jobDeadline == null) {
+            throw new IllegalArgumentException("Job information is incomplete");
+        }
+    }
+
     // implementing the getters and setters in order to access the private variables
 
     // ---------------------------------------------------------------

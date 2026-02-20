@@ -31,7 +31,7 @@ public class Admin extends User {
         return adminId;
     }
 
-    public void addPendingVehicle(User u, Vehicle v) {
+    public static void addPendingVehicle(User u, Vehicle v, boolean add_to_pending_file) {
         if(pendingVehicles.containsKey(u.getUserId())) {
             pendingVehicles.get(u.getUserId()).add(v);
         }
@@ -40,7 +40,11 @@ public class Admin extends User {
             list.add(v); 
             pendingVehicles.put(u.getUserId(), list);
         }
-        allowVehicle(u, v);
+        if(add_to_pending_file) {
+            UserManager.updatePendingFile(u, v);
+        }
+        
+        //allowVehicle(u, v);
 
     }
 
@@ -59,7 +63,7 @@ public class Admin extends User {
         
     }
 
-    public void addPendingJob(User u, Job j) {
+    public static void addPendingJob(User u, Job j, boolean add_to_pending_file) {
         if(pendingJobs.containsKey(u.getUserId())) {
             pendingJobs.get(u.getUserId()).add(j);
         }
@@ -68,7 +72,12 @@ public class Admin extends User {
             list.add(j); 
             pendingJobs.put(u.getUserId(), list);
         }
-        allowJob(u, j);
+
+        if(add_to_pending_file) {
+            UserManager.updatePendingFile(u, j);
+        }
+        
+        // allowJob(u, j);
 
     }
 

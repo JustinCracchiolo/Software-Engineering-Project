@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.time.Instant;
+
 // ---------------------------------------------------------------
 /**
  * Stores users in memory and persists them to a tab-separated file.
@@ -31,6 +33,10 @@ public class UserManager {
     private final Path USERS_FILE_PATH;
     private static final Path VEHICLES_FILE_PATH = Paths.get("VehicleInfo", "vehicles.txt"); // Currently hardcoded, change if necessary
     private static final Path JOBS_FILE_PATH = Paths.get("JobInfo", "jobs.txt"); // Currently hardcoded, change if necessary
+
+    private static final Path PENDING_TRANSACTIONS_PATH = Paths.get("Transactions", "pending_transactions.txt");
+    private static final Path COMPLETED_TRANSACTIONS_PATH = Paths.get("Transactions", "completed_transactions.txt");
+
     // ---------------------------------------------------------------
 
     // Uses the default users file path under UserInfo/users.txt. 
@@ -366,6 +372,110 @@ public class UserManager {
             // If the file is unreadable, continue with an empty in-memory list.
         }
     }
+
+    /* 
+    pending transaction file structure: userId|userType|vin|model|make|plate|year|approxTime|timestamp
+    */
+
+    public static void updatePendingFile(User u,Vehicle v) {
+        if (!Files.exists(PENDING_TRANSACTIONS_PATH)) {
+            return;
+        }
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                    PENDING_TRANSACTIONS_PATH,
+                    StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
+            )) 
+            {
+                Instant timestamp = Instant.now();
+                writer.write(u.getUsername() + "|" + u.getUserType() +"|" + v.getNumber() + "|" + v.getModel() + "|" + v.getMake() + 
+                "|" + v.getYear() + "|" + v.approxTime() + "|" + timestamp.toString());
+                writer.newLine();
+        }
+        
+        catch (IOException e) {
+            // If the file is unreadable, continue with an empty in-memory list.
+        }
+    }
+
+    
+    /* 
+    pending transaction file structure: userId|userType|description|hrs|deadline|jobId|timestamp
+    */
+    public static void updatePendingFile(User u, Job j) {
+        if (!Files.exists(PENDING_TRANSACTIONS_PATH)) {
+            return;
+        }
+        try (BufferedWriter writer = Files.newBufferedWriter(
+                    PENDING_TRANSACTIONS_PATH,
+                    StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
+            )) 
+            {
+                Instant timestamp = Instant.now();
+                writer.write(u.getUsername() + "|" + u.getUserType() +"|" + j.getJobDescription() + "|" + 
+                j.getApproximateJobDuration() + "|" + j.getJobDeadline() + "|" + j.getJobId() + "|" + timestamp.toString());
+                writer.newLine();
+        }
+        
+        catch (IOException e) {
+            // If the file is unreadable, continue with an empty in-memory list.
+        }
+    }
+
+    
+    /* 
+    pending transaction file structure: 
+        userId|userType|description|hrs|deadline|jobId|timestamp
+        or 
+        userId|userType|vin|model|make|plate|year|approxTime|timestamp
+    */
+    public void loadPendingRequests() {
+        if (!Files.exists(PENDING_TRANSACTIONS_PATH)) {
+            return;
+        }
+        try (BufferedReader reader = Files.newBufferedReader(PENDING_TRANSACTIONS_PATH, StandardCharsets.UTF_8)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String trimmed = line.trim();
+                if (trimmed.isEmpty()) {
+                    continue;
+                }
+                // Split using "|" as the delimiter
+                String[] parts = trimmed.split("\\|");
+              
+                //will have to change if more fields are added to the jobs class
+                String username = parts[0].trim();
+                String userType = parts[1].trim();
+                String normalizedUsername = normalizeUsername(username);
+                if(userType.equals("Owner")) {
+                    String vin = parts[2].trim();
+                    String model = parts[3].trim();
+                    String make = parts[4].trim();
+                    String plate = parts[5].trim();
+                    String year = parts[6].trim();
+                    String approxTime = parts[7].trim();
+                    Vehicle v = new Vehicle(vin, make, model, plate, year, approxTime);
+                    Admin.addPendingVehicle(users.get(normalizedUsername), v, false);
+                }
+                else {
+                    String desc = parts[2].trim();
+                    String hrs = parts[3].trim();
+                    String deadline = parts[4].trim();
+                    String jobdId = parts[5].trim();
+                    Job j = new Job(desc, hrs, LocalDateTime.parse(deadline), jobdId);
+                    Admin.addPendingJob(users.get(normalizedUsername), j, false);
+                }
+            }
+        } catch (IOException e) {
+            // If the file is unreadable, continue with an empty in-memory list.
+        }
+    }
+
+
+
 
     //Make Username no longer case sensitive and trim space.
     private String normalizeUsername(String username) {
