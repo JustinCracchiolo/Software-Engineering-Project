@@ -12,6 +12,7 @@ import classes.Owner;
 import classes.Client;
 import classes.Vehicle;
 import classes.Job;
+import classes.Admin;
 
 
 import classes.User;
@@ -67,21 +68,26 @@ public class AdminHome extends JPanel implements Refreshable {
         userCard.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
         userCard.add(new JLabel("Name: " + u.getUsername())); 
         userCard.add(new JLabel("Email: " + u.getEmail())); 
-        userCard.add(new JLabel("User Tyoe: " + u.getUserType())); 
-        userCard.add(new JLabel("ID: " + u.getUserId())); 
+        userCard.add(new JLabel("User Type: " + u.getUserType())); 
+        userCard.add(new JLabel("User ID: " + u.getUserId())); 
         userCard.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); 
 
         if(u.getUserType().equals("Owner")) {
             userCard.add(new JLabel("Vehicle:"));
+            userCard.add(new JLabel("Owner Id:" + ((Owner)u).getOwnerId()));
             for(Vehicle v: ((Owner)u).getVehicles()) {
-                userCard.add(new JLabel(" • " + v.getMake() + " " + v.getModel() + " • " + v.getNumber() + " • " + v.getLicensePlate()));
+                userCard.add(new JLabel(" • " + v.getMake() + " • " + v.getModel() + " • " + v.getNumber() + " • " + v.getLicensePlate()));
             }
         }
         else if (u.getUserType().equals("Client")) {
             userCard.add(new JLabel("Jobs"));
+            userCard.add(new JLabel("Client Id:" + ((Client)u).getClientId()));
             for(Job j: ((Client)u).getClientJobs()) {
                 userCard.add(new JLabel(" • " + j.getJobId() + " • " + j.getApproximateJobDuration() + " • " + j.getJobDeadline()));
             }
+        }
+        else {
+            userCard.add(new JLabel("Admin Id:" + ((Admin)u).getAdminId()));
         }
 
         return userCard; 

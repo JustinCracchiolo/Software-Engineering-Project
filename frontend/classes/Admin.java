@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Admin extends User {
-    private String AdminId;
+    private String adminId;
+    private static int increment = 0;
     private static Map<String, ArrayList<Vehicle>> pendingVehicles= new HashMap<>();;
     private static Map<String, ArrayList<Job>> pendingJobs = new HashMap<>();
 
@@ -21,7 +22,13 @@ public class Admin extends User {
 
     public Admin(String username, String password, String email) {
         super(username, password, email, "Admin");
+        increment++;
+        adminId = Integer.toString(increment);
+        
+    }
 
+    public String getAdminId() {
+        return adminId;
     }
 
     public void addPendingVehicle(User u, Vehicle v) {

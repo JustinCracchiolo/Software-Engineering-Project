@@ -35,6 +35,16 @@ public class User {
         // readUserVehicles()
     }
 
+    //this overloaded constructor is for reading users from the text file. They already have assigned user ids
+    public User(String username, String password, String userId, String email, String userType) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        increment++;
+        this.userType = userType;
+        this.userId = userId;
+    }
+
     // ---------------------------------------------------------------
     // returns the username of the user
     public String getUsername() {

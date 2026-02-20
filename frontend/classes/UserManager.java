@@ -69,13 +69,16 @@ public class UserManager {
         //will have problem with residency time
 
         if(userType.equals("Owner")) {
-            newUser = new Owner(username, password, email, 0);
+            newUser = new Owner(username, password, email);
+            addUserToFile(username, password, newUser.getUserId(), email, userType, ((Owner) newUser).getOwnerId());
         }
         else if(userType.equals("Admin")) {
             newUser = new Admin(username, password, email);
+            addUserToFile(username, password, newUser.getUserId(), email, userType, ((Admin) newUser).getAdminId());
         }
         else {
             newUser = new Client(username, password, email);
+            addUserToFile(username, password, newUser.getUserId(), email, userType, ((Client)newUser).getClientId());
         }
 
 
@@ -85,7 +88,9 @@ public class UserManager {
         
         users.put(normalizedUsername, newUser);
         // Save to file once
-        addUserToFile(username, password, email, userType);
+
+        //addUserToFile(username, password, email, userType);
+
         return true;
     }   
 
@@ -125,6 +130,10 @@ public class UserManager {
      * Read all user informaton from users.txt
      * Put all their information in the hashmap. Keeps registrations after application closed
      */
+
+    /* 
+    users.txt structure: username|password|userId|email|userType|typeId
+    */
     private void loadUsersFromFile() {
         if (!Files.exists(USERS_FILE_PATH)) {
             return;
@@ -138,31 +147,38 @@ public class UserManager {
                 }
                 // Split using "|" as the delimiter
                 String[] parts = trimmed.split("\\|");
-                if (parts.length < 3) {
+
+                /* 
+                 if (parts.length < 3) {
                     continue;
                 }
+                
+                */
               
                 //will have to change this it we have more than one user type per person
                 //will also have to chnage to get expected residence time once implemented
                 String username = parts[0].trim();
                 String password = parts[1].trim();
-                String email = "";
-                String type;
+                String userId = parts[2].trim();
+                String email = parts[3].trim();
+                String type = parts[4].trim();
+                String typeId = parts[5].trim();
 
+                /* 
                 if (parts.length >= 4) {
                     email = parts[2].trim();
                     type = parts[3].trim();
                 } else {
                     type = parts[2].trim();
                 }
+                 */
                 
                 String normalizedUsername = normalizeUsername(username);
 
-                //will have to update this for admin type
-
+                //If the person you just read from the file is not in the map of current users, add them
                 if (!username.isEmpty() && !users.containsKey(normalizedUsername)) {
                     if(type.equals("Owner")) {
-                        users.put(normalizedUsername, new Owner(username, password, email, 0));
+                        users.put(normalizedUsername, new Owner(username, password, email));
                     }
                     else if(type.equals("Admin")) {
                         users.put(normalizedUsername, new Admin(username, password, email));
@@ -185,7 +201,11 @@ public class UserManager {
      * @param email: from the user when they register
      * Put their information into the txt file
      */
-    private void addUserToFile(String username, String password, String email, String userType) {
+    /* 
+    users.txt structure: username|password|userId|email|userType|typeId
+    */
+
+    private void addUserToFile(String username, String password, String userId, String email, String userType, String typeId) {
         try {
             Path parent = USERS_FILE_PATH.getParent();
             if (parent != null) {
@@ -197,7 +217,7 @@ public class UserManager {
                     StandardOpenOption.CREATE,
                     StandardOpenOption.APPEND
             )) {
-                writer.write(username + "|" + password + "|" + email + "|" + userType);
+                writer.write(username + "|" + password + "|" + userId + "|" + email + "|" + userType + "|" + typeId);
                 writer.newLine();
             }
         } catch (IOException e) {
