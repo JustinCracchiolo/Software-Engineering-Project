@@ -230,6 +230,7 @@ public class Login_Registration {
 
                     Map<String, Refreshable> registry = new HashMap<>();
                     AdminHome home = new AdminHome(cards, currentUser, userManager, registry);
+                    AdminPending pending = new AdminPending(cards, currentUser, userManager, registry);
                     SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
                     //OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
                     // SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
@@ -237,12 +238,14 @@ public class Login_Registration {
 
                     // These cards can now be refreshed when looked up in the hashmap
                     registry.put("adminHome", home);
+                    registry.put("pending", pending);
                     registry.put("schedule", schedule);
                     //registry.put("offerVehicle", offer);
                     // registry.put("submitJob", submit);
                     registry.put("settings", settings);
 
                     cards.add(home, "adminHome");
+                    cards.add(pending, "pending");
                     cards.add(schedule, "schedule");
                     //cards.add(offer, "offerVehicle");
                     // cards.add(submit, "submitJob");

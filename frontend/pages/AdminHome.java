@@ -44,7 +44,8 @@ public class AdminHome extends JPanel implements Refreshable {
        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); 
        
        // Make it scrollable 
-       JScrollPane scroll = new JScrollPane(listPanel); add(scroll, BorderLayout.CENTER); 
+       JScrollPane scroll = new JScrollPane(listPanel); 
+       add(scroll, BorderLayout.CENTER); 
        
        refresh();
     }

@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -474,7 +475,35 @@ public class UserManager {
         }
     }
 
-
+    public static void transactionUpdate(String unique_for_type, boolean accepted) throws IOException {
+        Path tempFile = Files.createTempFile("pending_transactions", ".txt");
+        try (
+            BufferedReader pendingRead  = Files.newBufferedReader(PENDING_TRANSACTIONS_PATH);
+            BufferedWriter pendingRewrite = Files.newBufferedWriter(tempFile);
+            BufferedWriter completedWrite = Files.newBufferedWriter(COMPLETED_TRANSACTIONS_PATH);
+        ) {
+            String line;
+            while ((line = pendingRead.readLine()) != null) {
+                if (line.contains(unique_for_type)) {
+                    // Write the removed line to the new file
+                    if(accepted) {
+                        completedWrite.write(line + "|accepted");
+                    }
+                    else {
+                        completedWrite.write(line + "|rejected");
+                    }
+                    completedWrite.newLine();
+                } 
+                else {
+                    // Keep the line in the original file
+                    pendingRewrite.write(line);
+                    pendingRewrite.newLine();
+                }
+            }
+        }
+        // Replace original file with the filtered temp file
+        Files.move(tempFile, PENDING_TRANSACTIONS_PATH, StandardCopyOption.REPLACE_EXISTING);
+    }
 
 
     //Make Username no longer case sensitive and trim space.

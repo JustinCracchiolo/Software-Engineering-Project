@@ -20,6 +20,7 @@ public class NavBar extends JPanel {
     private JButton submitJobBtn;
     private JButton offerVehicleBtn; 
     private JButton homeBtn;
+    private JButton pendingBtn;
 
     // ---------------------------------------------------------------
     // constructor
@@ -36,6 +37,9 @@ public class NavBar extends JPanel {
         
         homeBtn = new JButton("Home");
 
+        if(user.getUserType().equals("Admin")) {
+            pendingBtn = new JButton("Pending");
+        }
         JButton scheduleBtn = new JButton("Schedule");
 
         if (user.getUserType().equals("Owner")) {
@@ -83,6 +87,13 @@ public class NavBar extends JPanel {
             });
         }
 
+        if (user.getUserType().equals("Admin")) {
+            pendingBtn.addActionListener(e -> {
+                refreshables.get("pending").refresh();
+                ((CardLayout) cards.getLayout()).show(cards, "pending");
+            });
+        }
+
         /*
          * submitJobBtn.addActionListener(e -> {
          * refreshables.get("submitJob").refresh();
@@ -104,6 +115,12 @@ public class NavBar extends JPanel {
         add(Box.createHorizontalStrut(10));
         add(scheduleBtn);
         add(Box.createHorizontalStrut(10));
+
+         if (user.getUserType().equals("Admin")) {
+            add(pendingBtn);
+            add(Box.createHorizontalStrut(10));
+        }
+        
         
         if (user.getUserType().equals("Owner")) {
             add(offerVehicleBtn);
