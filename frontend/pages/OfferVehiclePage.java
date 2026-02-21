@@ -151,6 +151,7 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
                 return;
             }
 
+            /* 
             //gets an admin account
             User admin = null;
             Map<String, User> allUsers = users.getAllUsers();
@@ -162,6 +163,7 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
             }
 
             if (admin == null) { JOptionPane.showMessageDialog(this, "No admin account found."); return; }
+            */
 
             //make new vehicle from form information
             Vehicle v = new Vehicle(VIN_NUMBER, make, model, licensePlate, year, arrivalText, departureText);

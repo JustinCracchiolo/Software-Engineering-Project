@@ -3,4 +3,5 @@ Lauren|Website|3.0|2024-03-09T17:45|2
 Lauren|Website|0.2|2024-03-09T17:45|3
 test2|Does something|2.0|2024-03-09T17:45|4
 Lauren|this does something new new|3.0|2024-03-09T17:45|5
+Lauren|cool|3.0|2024-03-09T17:45|6
 bee|Math simulation|3.0|2024-03-09T17:45|6

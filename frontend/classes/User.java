@@ -7,7 +7,7 @@
  */
 package classes;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 // ---------------------------------------------------------------
 //this class represents a user of the system, with a username and password. It is used by UserManager to store user data in memory and persist it to a file. The Owner class extends User to add additional fields for car owners.

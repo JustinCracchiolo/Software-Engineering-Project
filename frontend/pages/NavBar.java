@@ -26,7 +26,7 @@ public class NavBar extends JPanel {
     public NavBar(JPanel cards, User user, Map<String, Refreshable> refreshables) {
         this.refreshables = refreshables;
 
-        setBackground(new Color(30, 30, 30));
+        setBackground(new Color(70, 80, 120));
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setPreferredSize(new Dimension(1000, 60));
 

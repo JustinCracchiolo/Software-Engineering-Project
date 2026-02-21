@@ -33,6 +33,7 @@ public class AdminHome extends JPanel implements Refreshable {
         setLayout(new BorderLayout());
         add(new NavBar(cards, user, registry), BorderLayout.NORTH);
 
+       JPanel titlePanel = new JPanel();
        JLabel title = new JLabel("All Users", SwingConstants.CENTER); 
        
        add(Box.createVerticalStrut(10));
@@ -42,9 +43,13 @@ public class AdminHome extends JPanel implements Refreshable {
        // Panel that will hold all user entries 
        listPanel = new JPanel(); 
        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); 
+       listPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
        
        // Make it scrollable 
        JScrollPane scroll = new JScrollPane(listPanel); 
+       scroll.setBorder(BorderFactory.createEmptyBorder());
+
        add(scroll, BorderLayout.CENTER); 
        
        refresh();
@@ -65,12 +70,17 @@ public class AdminHome extends JPanel implements Refreshable {
 
     private JPanel createUserCard (User u) { 
         JPanel userCard = new JPanel(); 
-        userCard.setLayout(new GridLayout(0, 1)); 
+        userCard.setLayout(new BoxLayout(userCard, BoxLayout.Y_AXIS));
+        //userCard.setLayout(new GridLayout(0, 1)); 
         userCard.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
         userCard.add(new JLabel("Name: " + u.getUsername())); 
+        userCard.add(Box.createVerticalStrut(5));
         userCard.add(new JLabel("Email: " + u.getEmail())); 
+        userCard.add(Box.createVerticalStrut(5));
         userCard.add(new JLabel("User Type: " + u.getUserType())); 
+        userCard.add(Box.createVerticalStrut(5));
         userCard.add(new JLabel("User ID: " + u.getUserId())); 
+        userCard.add(Box.createVerticalStrut(5));
         userCard.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); 
 
         if(u.getUserType().equals("Owner")) {
@@ -92,6 +102,9 @@ public class AdminHome extends JPanel implements Refreshable {
         else {
             userCard.add(new JLabel("Admin Id:" + ((Admin)u).getAdminId()));
         }
+
+        userCard.setBackground(new Color(80, 80, 120));
+        userCard.setOpaque(true);
 
         return userCard; 
     }

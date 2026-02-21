@@ -165,10 +165,10 @@ public class UserManager {
                 //will also have to chnage to get expected residence time once implemented
                 String username = parts[0].trim();
                 String password = parts[1].trim();
-                String userId = parts[2].trim();
+                //String userId = parts[2].trim();
                 String email = parts[3].trim();
                 String type = parts[4].trim();
-                String typeId = parts[5].trim();
+                //String typeId = parts[5].trim();
 
                 /* 
                 if (parts.length >= 4) {
