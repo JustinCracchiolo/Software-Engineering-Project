@@ -142,23 +142,6 @@ public class SubmitJobPage extends JPanel implements Refreshable {
                 return; 
             }
 
-
-            /* 
-            //gets an admin account
-            User admin = null;
-            Map<String, User> allUsers = users.getAllUsers();
-            for(User u: allUsers.values()) {
-                if(u.getUserType().equals("Admin")) {
-                    admin = u;
-                    break;
-                }
-            }
-            if (admin == null) {
-                JOptionPane.showMessageDialog(this, "No admin account found.");
-                return;
-            }
-            */
-
             //make new vehicle from form information
             Job j = new Job(idText, duration, deadline);
             
