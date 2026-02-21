@@ -1,24 +1,18 @@
 package pages;
 
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.*;
-import java.awt.GridLayout;
-import java.awt.Font;
-import java.awt.Color;
-
-import classes.Owner;
-import classes.Client;
-import classes.Vehicle;
-import classes.Job;
 import classes.Admin;
-
-
+import classes.Job;
+import classes.Owner;
 import classes.User;
 import classes.UserManager;
+import classes.Vehicle;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.Map;
+import javax.swing.*;
 
 public class AdminPending extends JPanel implements Refreshable{
 
@@ -52,6 +46,7 @@ public class AdminPending extends JPanel implements Refreshable{
        refresh();
     }
     
+    @Override
     public void refresh() {
         listPanel.removeAll(); 
         // clear old content 

@@ -164,14 +164,17 @@ public class Login_Registration {
         showLoginPasswordButton.setMargin(new Insets(2, 8, 2, 8));
         showLoginPasswordButton.addMouseListener(new java.awt.event.MouseAdapter() {
 
+            @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
                 passwordTextField.setEchoChar((char) 0);
             }
 
+            @Override
             public void mouseReleased(java.awt.event.MouseEvent e) {
                 passwordTextField.setEchoChar(loginEchoChar);
             }
 
+            @Override
             public void mouseExited(java.awt.event.MouseEvent e) {
                 passwordTextField.setEchoChar(loginEchoChar);
             }
@@ -422,16 +425,19 @@ public class Login_Registration {
         showRegistrationPasswordButton.setMargin(new Insets(2, 8, 2, 8));
         showRegistrationPasswordButton.addMouseListener(new java.awt.event.MouseAdapter() {
 
+            @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
                 regPasswordField.setEchoChar((char) 0);
                 regConfirmPasswordField.setEchoChar((char) 0);
             }
 
+            @Override
             public void mouseReleased(java.awt.event.MouseEvent e) {
                 regPasswordField.setEchoChar(loginEchoChar);
                 regConfirmPasswordField.setEchoChar(loginEchoChar);
             }
 
+            @Override
             public void mouseExited(java.awt.event.MouseEvent e) {
                 regPasswordField.setEchoChar(loginEchoChar);
                 regConfirmPasswordField.setEchoChar(loginEchoChar);
