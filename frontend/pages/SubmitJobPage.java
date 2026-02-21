@@ -57,7 +57,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         JPanel splitPanel = new JPanel(new GridLayout(1, 2));
 
         JPanel leftPanel = new JPanel();
-        leftPanel.setBackground(new Color(65, 105, 255));
+        leftPanel.setBackground(new Color(50, 75, 155));
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
         JLabel leftTitle = new JLabel("Submit Job");
@@ -70,7 +70,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         leftPanel.add(Box.createVerticalGlue());
 
         JPanel jobForm = new JPanel();
-        jobForm.setBackground(Color.WHITE);
+        jobForm.setBackground(new Color(242, 245, 249));
         jobForm.setLayout(new BoxLayout(jobForm, BoxLayout.Y_AXIS)); // center everything vertically
 
         JLabel jobTitle = new JLabel("Enter Job information");
@@ -93,6 +93,8 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         JButton submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.PLAIN, 16));
         submitBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        submitBtn.setBackground(new Color(77, 163, 255));
+        submitBtn.setForeground(Color.DARK_GRAY);
 
         jobForm.add(Box.createVerticalGlue());
         jobForm.add(jobTitle);

@@ -111,7 +111,7 @@ public class Login_Registration {
         toLoginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         toLoginButton.setFont(new Font("Arial", Font.PLAIN, 30));
         toLoginButton.setBackground(new Color(77, 163, 255));
-        toLoginButton.setForeground(Color.GRAY);
+        toLoginButton.setForeground(Color.DARK_GRAY);
         //toLoginButton.setOpaque(true);
         //toLoginButton.setBorderPainted(false);
 
@@ -119,7 +119,7 @@ public class Login_Registration {
         toRegisterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         toRegisterButton.setFont(new Font("Arial", Font.PLAIN, 30));
         toRegisterButton.setBackground(new Color(77, 163, 255));
-        toRegisterButton.setForeground(Color.GRAY);
+        toRegisterButton.setForeground(Color.DARK_GRAY);
         //toRegisterButton.setOpaque(true);
        // toRegisterButton.setBorderPainted(false);
 
@@ -203,7 +203,7 @@ public class Login_Registration {
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginButton.setFont(new Font("Arial", Font.PLAIN, 30));
         loginButton.setBackground(new Color(77, 163, 255));
-        loginButton.setForeground(Color.GRAY);
+        loginButton.setForeground(Color.DARK_GRAY);
         //loginButton.setOpaque(true);
        // loginButton.setBorderPainted(false);
 
@@ -407,7 +407,7 @@ public class Login_Registration {
 
         JLabel registerTitleLabel = new JLabel("VCRTS");
         registerTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        registerTitleLabel.setForeground(Color.GRAY);
+        registerTitleLabel.setForeground(Color.DARK_GRAY);
         registerTitleLabel.setFont(new Font("Arial", Font.PLAIN, 50));
 
         JPanel registerPanel = new JPanel();
@@ -494,7 +494,7 @@ public class Login_Registration {
         submitRegisterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         submitRegisterButton.setFont(new Font("Arial", Font.PLAIN, 30));
         submitRegisterButton.setBackground(new Color(77, 163, 255));
-        submitRegisterButton.setForeground(Color.GRAY);
+        submitRegisterButton.setForeground(Color.DARK_GRAY);
        // submitRegisterButton.setOpaque(true);
        // submitRegisterButton.setBorderPainted(false);
 
