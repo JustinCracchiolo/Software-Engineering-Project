@@ -33,7 +33,16 @@ public class NavBar extends JPanel {
         JLabel title = new JLabel("VCRTS");
         title.setForeground(Color.WHITE);
         title.setFont(new Font("Arial", Font.BOLD, 28));
-        
+
+        String displayName = "User";
+            if (user != null) {
+                displayName = user.getUsername();
+            }
+        JLabel welcomeLabel = new JLabel("  Welcome, " + displayName + "!");
+        welcomeLabel.setForeground(Color.WHITE);
+        welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+
+
         homeBtn = new JButton("Home");
 
         if(user.getUserType().equals("Admin")) {
@@ -109,6 +118,8 @@ public class NavBar extends JPanel {
 
         add(Box.createHorizontalStrut(20));
         add(title);
+        add(Box.createHorizontalStrut(15));
+        add(welcomeLabel);  
         add(Box.createHorizontalGlue());
         add(homeBtn);
         add(Box.createHorizontalStrut(10));
