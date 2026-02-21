@@ -51,17 +51,16 @@ public class HomePage extends JPanel implements Refreshable {
     // refreshes home page => updating the # of vehicles a user has
     @Override
     public void refresh() {
-        String username = user.getUsername();
         if(user.getUserType().equals("Owner")) {
             ArrayList<Vehicle> userVehicles = ((Owner) user).getVehicles();
             int vehicles = 0;
             for (Vehicle v : userVehicles) {
                 vehicles++;
             }
-            name.setText(username + " vehicles: " + vehicles);
+            name.setText(" vehicles: " + vehicles);
         }
         else {
-            name.setText(username);
+            name.setText("");
         }
 
         revalidate();
