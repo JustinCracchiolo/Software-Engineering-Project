@@ -165,10 +165,10 @@ public class UserManager {
                 //will also have to chnage to get expected residence time once implemented
                 String username = parts[0].trim();
                 String password = parts[1].trim();
-                String userId = parts[2].trim();
+                //String userId = parts[2].trim();
                 String email = parts[3].trim();
                 String type = parts[4].trim();
-                String typeId = parts[5].trim();
+                //String typeId = parts[5].trim();
 
                 /* 
                 if (parts.length >= 4) {
@@ -479,7 +479,7 @@ public class UserManager {
         try (
             BufferedReader pendingRead  = Files.newBufferedReader(PENDING_TRANSACTIONS_PATH);
             BufferedWriter pendingRewrite = Files.newBufferedWriter(tempFile);
-            BufferedWriter completedWrite = Files.newBufferedWriter(COMPLETED_TRANSACTIONS_PATH);
+            BufferedWriter completedWrite = Files.newBufferedWriter(COMPLETED_TRANSACTIONS_PATH, StandardOpenOption.APPEND);
         ) {
             String line;
             while ((line = pendingRead.readLine()) != null) {

@@ -143,6 +143,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
             }
 
 
+            /* 
             //gets an admin account
             User admin = null;
             Map<String, User> allUsers = users.getAllUsers();
@@ -156,6 +157,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
                 JOptionPane.showMessageDialog(this, "No admin account found.");
                 return;
             }
+            */
 
             //make new vehicle from form information
             Job j = new Job(idText, duration, deadline);

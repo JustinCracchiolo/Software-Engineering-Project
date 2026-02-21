@@ -74,10 +74,27 @@ public class Login_Registration {
         aboutTitle.setForeground(Color.white);
         aboutTitle.setFont(new Font("Arial", Font.PLAIN, 40));
 
-        JLabel aboutInfo = new JLabel("<Enter text here>");
+        String text = "The purpose of the Vehicular Cloud Real-Time System (VCRTS) is to utilize the unused computing power of parked vehicles by pooling their computational resources and renting them out to consumers who require computing services. \n Vehicles parked in a dedicated parking lot serve as possible computing nodes. \n VCRTS manages job execution, resource allocation, real-time monitoring, and reporting to ensure everything is running smoothly. \n The VCRTS attempts to optimize resources by pulling computational power from unused vehicles. \n This helps maximize computing power and minimize load on other systems.";
+        JTextArea aboutInfo = new JTextArea(text);
+        aboutInfo.setLineWrap(true); 
+        aboutInfo.setWrapStyleWord(true); 
+        aboutInfo.setEditable(false); 
+        aboutInfo.setOpaque(false);      
+        aboutInfo.setBackground(new Color(0,0,0,0));
+        aboutInfo.setBorder(null);
+        //JLabel aboutInfo = new JLabel("The purpose of the Ve");
         aboutInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         aboutInfo.setForeground(Color.white);
         aboutInfo.setFont(new Font("Arial", Font.PLAIN, 20));
+        aboutInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        aboutInfo.setMaximumSize(new Dimension(450, Integer.MAX_VALUE));
+        aboutInfo.setOpaque(false);  
+        aboutInfo.setForeground(Color.WHITE);
+        aboutPanel.add(Box.createVerticalGlue());
+        aboutPanel.add(aboutTitle);
+        aboutPanel.add(Box.createVerticalStrut(100));
+        aboutPanel.add(aboutInfo);
+        aboutPanel.add(Box.createVerticalGlue());
 
         JPanel startPanel = new JPanel();
         startPanel.setBackground(Color.WHITE);
