@@ -407,7 +407,7 @@ public class Login_Registration {
 
         JLabel registerTitleLabel = new JLabel("VCRTS");
         registerTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        registerTitleLabel.setForeground(Color.DARK_GRAY);
+        registerTitleLabel.setForeground(Color.WHITE);
         registerTitleLabel.setFont(new Font("Arial", Font.PLAIN, 50));
 
         JPanel registerPanel = new JPanel();
