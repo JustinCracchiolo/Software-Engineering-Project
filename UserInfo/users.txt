@@ -11,3 +11,5 @@ cat|cat|1010|cat@gmail.com|Client|6
 l|a|1011||Owner|4
 register|a|1012||Client|7
 ab|ab|1013|ab|Owner|5
+client|client|1014|client@gmail.com|Client|8
+owner|owner|1015|owner@gmail.com|Owner|6

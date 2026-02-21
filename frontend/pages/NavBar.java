@@ -6,11 +6,10 @@
 */
 package pages;
 
-import javax.swing.*;
-import java.awt.*;
 import classes.User;
+import java.awt.*;
 import java.util.Map;
-import java.util.HashMap;
+import javax.swing.*;
 
 // ---------------------------------------------------------------
 // class that controls the navigation bar at the top of the screen across pages
@@ -113,7 +112,8 @@ public class NavBar extends JPanel {
         add(Box.createHorizontalGlue());
         add(homeBtn);
         add(Box.createHorizontalStrut(10));
-        add(scheduleBtn);
+        // TODO: SCHEDULE BUTTON IS COMMENTED OUT FOR NOW, AS SCHEDULE PAGE IS NOT IMPLEMENTED. UNCOMMENT WHEN SCHEDULE PAGE IS READY
+        // add(scheduleBtn);
         add(Box.createHorizontalStrut(10));
 
          if (user.getUserType().equals("Admin")) {
@@ -133,7 +133,8 @@ public class NavBar extends JPanel {
             add(Box.createHorizontalStrut(10));
         }
 
-        add(settingsBtn);
+        // TODO: COMMENTED FOR NOW, AS SETTINGS PAGE IS NOT IMPLEMENTED. UNCOMMENT WHEN SETTINGS PAGE IS READY
+        // add(settingsBtn);
         add(Box.createHorizontalStrut(10));
         add(logoutBtn);
         add(Box.createHorizontalStrut(30));
