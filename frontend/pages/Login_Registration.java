@@ -64,7 +64,7 @@ public class Login_Registration {
 
         //About page 
         JPanel aboutPanel = new JPanel();
-        aboutPanel.setBackground(new Color(65, 105, 255));
+        aboutPanel.setBackground(new Color(50, 75, 155));
         aboutPanel.setLayout(new BoxLayout(aboutPanel, BoxLayout.Y_AXIS)); // center everything vertically
         aboutPanel.setAlignmentX(Component.CENTER_ALIGNMENT); // center horizontally
         aboutPanel.setPreferredSize(new Dimension(500, 800));
@@ -97,7 +97,7 @@ public class Login_Registration {
         aboutPanel.add(Box.createVerticalGlue());
 
         JPanel startPanel = new JPanel();
-        startPanel.setBackground(Color.WHITE);
+        startPanel.setBackground(new Color(242, 245, 249));
         startPanel.setLayout(new BoxLayout(startPanel, BoxLayout.Y_AXIS));
         startPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         startPanel.setPreferredSize(new Dimension(600, 800));
@@ -110,18 +110,18 @@ public class Login_Registration {
         JButton toLoginButton = new JButton("Login");
         toLoginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         toLoginButton.setFont(new Font("Arial", Font.PLAIN, 30));
-        toLoginButton.setBackground(new Color(65, 105, 255));
-        toLoginButton.setForeground(Color.white);
-        toLoginButton.setOpaque(true);
-        toLoginButton.setBorderPainted(false);
+        toLoginButton.setBackground(new Color(77, 163, 255));
+        toLoginButton.setForeground(Color.GRAY);
+        //toLoginButton.setOpaque(true);
+        //toLoginButton.setBorderPainted(false);
 
         JButton toRegisterButton = new JButton("Create an Account");
         toRegisterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         toRegisterButton.setFont(new Font("Arial", Font.PLAIN, 30));
-        toRegisterButton.setBackground(new Color(65, 105, 255));
-        toRegisterButton.setForeground(Color.white);
-        toRegisterButton.setOpaque(true);
-        toRegisterButton.setBorderPainted(false);
+        toRegisterButton.setBackground(new Color(77, 163, 255));
+        toRegisterButton.setForeground(Color.GRAY);
+        //toRegisterButton.setOpaque(true);
+       // toRegisterButton.setBorderPainted(false);
 
         toRegisterButton.addActionListener(e -> {
             CardLayout c = (CardLayout) cards.getLayout();
@@ -150,13 +150,13 @@ public class Login_Registration {
         // Login page
 
         JPanel loginSidePanel = new JPanel();
-        loginSidePanel.setBackground(new Color(65, 105, 255));
+        loginSidePanel.setBackground(new Color(50, 75, 155));
         loginSidePanel.setLayout(new BoxLayout(loginSidePanel, BoxLayout.Y_AXIS)); // center everything vertically
         loginSidePanel.setAlignmentX(Component.CENTER_ALIGNMENT); // center horizontally
         loginSidePanel.setPreferredSize(new Dimension(500, 800));
 
         JPanel loginPanel = new JPanel();
-        loginPanel.setBackground(Color.WHITE);
+        loginPanel.setBackground(new Color(242, 245, 249));
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
         loginPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginPanel.setPreferredSize(new Dimension(600, 800));
@@ -202,10 +202,10 @@ public class Login_Registration {
         JButton loginButton = new JButton("Login");
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginButton.setFont(new Font("Arial", Font.PLAIN, 30));
-        loginButton.setBackground(new Color(65, 105, 255));
-        loginButton.setForeground(Color.white);
-        loginButton.setOpaque(true);
-        loginButton.setBorderPainted(false);
+        loginButton.setBackground(new Color(77, 163, 255));
+        loginButton.setForeground(Color.GRAY);
+        //loginButton.setOpaque(true);
+       // loginButton.setBorderPainted(false);
 
         // Register button
         JButton registerButton = new JButton("Create an Account");
@@ -356,7 +356,7 @@ public class Login_Registration {
         // Title on sidebar
         JLabel title_label = new JLabel("VCRTS");
         title_label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title_label.setForeground(Color.white);
+        title_label.setForeground(Color.WHITE);
         title_label.setFont(new Font("Arial", Font.PLAIN, 50));
 
         // Add all of the elements
@@ -400,18 +400,18 @@ public class Login_Registration {
 
         // Register screen
         JPanel registerSidePanel = new JPanel();
-        registerSidePanel.setBackground(new Color(65, 105, 255));
+        registerSidePanel.setBackground(new Color(50, 75, 155));
         registerSidePanel.setLayout(new BoxLayout(registerSidePanel, BoxLayout.Y_AXIS));
         registerSidePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         registerSidePanel.setPreferredSize(new Dimension(500, 800));
 
         JLabel registerTitleLabel = new JLabel("VCRTS");
         registerTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        registerTitleLabel.setForeground(Color.white);
+        registerTitleLabel.setForeground(Color.GRAY);
         registerTitleLabel.setFont(new Font("Arial", Font.PLAIN, 50));
 
         JPanel registerPanel = new JPanel();
-        registerPanel.setBackground(Color.WHITE);
+        registerPanel.setBackground(new Color(242, 245, 249));
         registerPanel.setLayout(new BoxLayout(registerPanel, BoxLayout.Y_AXIS));
         registerPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         registerPanel.setPreferredSize(new Dimension(600, 800));
@@ -478,17 +478,25 @@ public class Login_Registration {
         registerAsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel registerAsRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
+        registerAsRow.setLayout(new BoxLayout(registerAsRow, BoxLayout.Y_AXIS));
         registerAsRow.setOpaque(false);
         registerAsRow.add(registerAsLabel);
+        registerAsRow.add(comboBox);
+        registerAsRow.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        comboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        registerAsRow.add(registerAsLabel);
+        registerAsRow.add(Box.createVerticalStrut(8));
         registerAsRow.add(comboBox);
 
         JButton submitRegisterButton = new JButton("Create Account");
         submitRegisterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         submitRegisterButton.setFont(new Font("Arial", Font.PLAIN, 30));
-        submitRegisterButton.setBackground(new Color(65, 105, 255));
-        submitRegisterButton.setForeground(Color.white);
-        submitRegisterButton.setOpaque(true);
-        submitRegisterButton.setBorderPainted(false);
+        submitRegisterButton.setBackground(new Color(77, 163, 255));
+        submitRegisterButton.setForeground(Color.GRAY);
+       // submitRegisterButton.setOpaque(true);
+       // submitRegisterButton.setBorderPainted(false);
 
         JButton backToLoginButton = new JButton("Back to Login");
         backToLoginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
