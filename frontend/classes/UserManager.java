@@ -479,7 +479,7 @@ public class UserManager {
         try (
             BufferedReader pendingRead  = Files.newBufferedReader(PENDING_TRANSACTIONS_PATH);
             BufferedWriter pendingRewrite = Files.newBufferedWriter(tempFile);
-            BufferedWriter completedWrite = Files.newBufferedWriter(COMPLETED_TRANSACTIONS_PATH);
+            BufferedWriter completedWrite = Files.newBufferedWriter(COMPLETED_TRANSACTIONS_PATH, StandardOpenOption.APPEND);
         ) {
             String line;
             while ((line = pendingRead.readLine()) != null) {
