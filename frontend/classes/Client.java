@@ -14,7 +14,7 @@ import java.util.ArrayList;
 // utilizes the User class to set client username and password
 public class Client extends User {
     private ArrayList<Job> clientJobs = new ArrayList<>();
-    private String clientId; // DO NOT REMOVE, WE NEED THIS FOR MILESTONE 2. REMOVE COMMENT BEFORE SUBMISSION
+    private String clientId; 
     private static int increment = 0;
 
     // ---------------------------------------------------------------

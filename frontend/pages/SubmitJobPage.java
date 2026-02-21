@@ -8,22 +8,17 @@
 
 package pages;
 
+import classes.Admin;
 import classes.Job;
 import classes.PlaceHolderTextField;
 import classes.User;
-
-import javax.swing.*;
+import classes.UserManager;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Map;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
-import classes.UserManager;
-import classes.Admin;
+import java.util.Map;
+import javax.swing.*;
 
 
 // ---------------------------------------------------------------
@@ -150,8 +145,8 @@ public class SubmitJobPage extends JPanel implements Refreshable {
 
             //gets an admin account
             User admin = null;
-            Map<String, User> all_users = users.getAllUsers();
-            for(User u: all_users.values()) {
+            Map<String, User> allUsers = users.getAllUsers();
+            for(User u: allUsers.values()) {
                 if(u.getUserType().equals("Admin")) {
                     admin = u;
                     break;

@@ -16,11 +16,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-
-import java.time.Instant;
 
 // ---------------------------------------------------------------
 /**
@@ -293,9 +292,9 @@ public class UserManager {
                     StandardOpenOption.APPEND
             )) 
             {
-                Vehicle new_vehicle = ((Owner) u).getVehicles().get(((Owner) u).getVehicles().size()-1);
-                writer.write(u.getUsername() + "|" + new_vehicle.getNumber() + "|" + new_vehicle.getModel() + "|" + new_vehicle.getMake() + 
-                 "|" + new_vehicle.getLicensePlate() + "|" + new_vehicle.getYear() + "|" + new_vehicle.approxTime());
+                Vehicle newVehicle = ((Owner) u).getVehicles().get(((Owner) u).getVehicles().size()-1);
+                writer.write(u.getUsername() + "|" + newVehicle.getNumber() + "|" + newVehicle.getModel() + "|" + newVehicle.getMake() + 
+                 "|" + newVehicle.getLicensePlate() + "|" + newVehicle.getYear() + "|" + newVehicle.approxTime());
                 writer.newLine();
         }
         
@@ -319,9 +318,9 @@ public class UserManager {
                     StandardOpenOption.APPEND
             )) 
             {
-                Job new_job = ((Client) u).getClientJobs().get(((Client) u).getClientJobs().size()-1);
-                writer.write(u.getUsername() + "|" + new_job.getJobDescription() + "|" + new_job.getApproximateJobDuration() + "|"
-                 + new_job.getJobDeadline() + "|" + new_job.getJobId());
+                Job newJob = ((Client) u).getClientJobs().get(((Client) u).getClientJobs().size()-1);
+                writer.write(u.getUsername() + "|" + newJob.getJobDescription() + "|" + newJob.getApproximateJobDuration() + "|"
+                 + newJob.getJobDeadline() + "|" + newJob.getJobId());
                 writer.newLine();
         }
         
@@ -475,7 +474,7 @@ public class UserManager {
         }
     }
 
-    public static void transactionUpdate(String unique_for_type, boolean accepted) throws IOException {
+    public static void transactionUpdate(String uniqueForType, boolean accepted) throws IOException {
         Path tempFile = Files.createTempFile("pending_transactions", ".txt");
         try (
             BufferedReader pendingRead  = Files.newBufferedReader(PENDING_TRANSACTIONS_PATH);
@@ -484,7 +483,7 @@ public class UserManager {
         ) {
             String line;
             while ((line = pendingRead.readLine()) != null) {
-                if (line.contains(unique_for_type)) {
+                if (line.contains(uniqueForType)) {
                     // Write the removed line to the new file
                     if(accepted) {
                         completedWrite.write(line + "|accepted");

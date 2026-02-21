@@ -8,9 +8,9 @@
 package classes;
 //Focus on the backend and make necessary classes to store information for the user and their vehicles (Sebastian)
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.Duration;
 
 // ---------------------------------------------------------------
 // vehicle class
@@ -42,8 +42,8 @@ public class Vehicle {
         LocalDateTime arrival = LocalDateTime.parse(arrive, formatter);
         LocalDateTime departure = LocalDateTime.parse(depart, formatter);
         duration = Duration.between(arrival, departure);
-        int approx_hrs = (int) duration.toHours();
-        this.apporxResidencyTime = Integer.toString(approx_hrs);
+        int approxHrs = (int) duration.toHours();
+        this.apporxResidencyTime = Integer.toString(approxHrs);
 
 
         // make sure vehicle has all the necessary information

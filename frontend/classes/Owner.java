@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class Owner extends User {
     private ArrayList<Vehicle> ownerVehicles = new ArrayList<>();
     private ArrayList<Job> ownerJobs = new ArrayList<>();
-    private String ownerId; // DO NOT REMOVE, WE NEED THIS FOR MILESTONE 2. REMOVE COMMENT BEFORE SUBMISSION
+    private String ownerId; 
     private static int increment = 0;
 
     // possibly change to recieve arrival and departure time from user application

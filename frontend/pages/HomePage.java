@@ -7,17 +7,14 @@
 
 package pages;
 
-import javax.swing.*;
-
 import classes.Owner;
 import classes.User;
 import classes.UserManager;
+import classes.Vehicle;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
-
-import classes.Vehicle;
-
-import java.awt.*;
+import javax.swing.*;
 
 // ---------------------------------------------------------------
 public class HomePage extends JPanel implements Refreshable {
@@ -56,9 +53,9 @@ public class HomePage extends JPanel implements Refreshable {
     public void refresh() {
         String username = user.getUsername();
         if(user.getUserType().equals("Owner")) {
-            ArrayList<Vehicle> user_vehicle = ((Owner) user).getVehicles();
+            ArrayList<Vehicle> userVehicles = ((Owner) user).getVehicles();
             int vehicles = 0;
-            for (Vehicle v : user_vehicle) {
+            for (Vehicle v : userVehicles) {
                 vehicles++;
             }
             name.setText(username + " vehicles: " + vehicles);

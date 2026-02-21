@@ -8,25 +8,16 @@
 
 package pages;
 
+import classes.Admin;
+import classes.PlaceHolderTextField;
+import classes.User;
+import classes.UserManager;
+import classes.Vehicle;
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
-import classes.Admin;
-import classes.UserManager;
-
-import classes.Owner;
-import classes.PlaceHolderTextField;
-import classes.User;
-import classes.Vehicle;
 
 // ---------------------------------------------------------------
 // class that controls the offer vehicle page
@@ -162,8 +153,8 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
 
             //gets an admin account
             User admin = null;
-            Map<String, User> all_users = users.getAllUsers();
-            for(User u: all_users.values()) {
+            Map<String, User> allUsers = users.getAllUsers();
+            for(User u: allUsers.values()) {
                 if(u.getUserType().equals("Admin")) {
                     admin = u;
                     break;

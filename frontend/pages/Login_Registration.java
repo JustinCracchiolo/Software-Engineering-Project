@@ -195,9 +195,9 @@ public class Login_Registration {
         // Validate credentials before switching to Home.
         loginButton.addActionListener(e -> {
             String user = usernameTextField.getText().trim();
-            String user_password = new String(passwordTextField.getPassword());
+            String userPassword = new String(passwordTextField.getPassword());
 
-            if (userManager.login(user, user_password)) {
+            if (userManager.login(user, userPassword)) {
                 currentUser = userManager.getUser(user); // this tells the program the person who is logged in
 
                 // based on kind of user, navbar is different
@@ -439,9 +439,9 @@ public class Login_Registration {
 
         });
 
-        String[] user_type = { "Client", "Owner" };
+        String[] userTypes = { "Client", "Owner" };
         // Create the JComboBox (the dropdown)
-        JComboBox<String> comboBox = new JComboBox<>(user_type);
+        JComboBox<String> comboBox = new JComboBox<>(userTypes);
         Dimension comboBoxSize = new Dimension(140, 28);
         comboBox.setPreferredSize(comboBoxSize);
         comboBox.setMaximumSize(comboBoxSize);
