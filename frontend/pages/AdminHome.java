@@ -56,7 +56,8 @@ public class AdminHome extends JPanel implements Refreshable {
         // clear old content 
         
         for (User u : users.getAllUsers().values()) { 
-            listPanel.add(createUserCard(u)); 
+            listPanel.add(createUserCard(u));
+            listPanel.add(Box.createVerticalStrut(10)); //This separates the boxes
         } 
 
         listPanel.revalidate(); 
