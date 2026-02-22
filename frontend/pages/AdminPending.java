@@ -82,8 +82,8 @@ public class AdminPending extends JPanel implements Refreshable{
         pendingCard.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
         pendingCard.add(new JLabel("Name: " + u.getUsername())); 
         pendingCard.add(new JLabel("User Type: " + u.getUserType())); 
-        pendingCard.add(new JLabel("User ID: " + u.getUserId()));
-        pendingCard.add(new JLabel("Owner ID: " + ((Owner)u).getOwnerId()));
+        pendingCard.add(new JLabel("User Id: " + u.getUserId()));
+        pendingCard.add(new JLabel("Owner Id: " + ((Owner)u).getOwnerId()));
         pendingCard.add(new JLabel("Vin Number: " + v.getNumber())); 
         pendingCard.add(new JLabel("Licenese Plate: " + v.getLicensePlate())); 
         pendingCard.add(new JLabel("Model: " + v.getModel()));
@@ -92,7 +92,10 @@ public class AdminPending extends JPanel implements Refreshable{
         pendingCard.add(new JLabel("Approximate Residency: " + v.approxTime()));
        
         JButton acceptBtn = new JButton("Accept");
+        acceptBtn.setBackground(new Color(153, 255, 153));
         JButton rejectBtn = new JButton("Reject");
+        rejectBtn.setBackground(new Color(255, 51, 51));
+
         pendingCard.add(acceptBtn);
         pendingCard.add(rejectBtn);
         
@@ -109,7 +112,11 @@ public class AdminPending extends JPanel implements Refreshable{
 
         });
       
-        pendingCard.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); 
+        pendingCard.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+        
+        pendingCard.setBackground(new Color(153, 204, 255));
+        pendingCard.setOpaque(true);
+
         return pendingCard;
     }
 
@@ -119,15 +126,17 @@ public class AdminPending extends JPanel implements Refreshable{
         pendingCard.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
         pendingCard.add(new JLabel("Name: " + u.getUsername())); 
         pendingCard.add(new JLabel("User Type: " + u.getUserType())); 
-        pendingCard.add(new JLabel("User ID: " + u.getUserId()));
-        pendingCard.add(new JLabel("Job ID: " + j.getJobId()));
+        pendingCard.add(new JLabel("User Id: " + u.getUserId()));
+        pendingCard.add(new JLabel("Job Id: " + j.getJobId()));
         pendingCard.add(new JLabel("Job Description: " + j.getJobDescription())); 
         pendingCard.add(new JLabel("Job Id: " + j.getJobId())); 
         pendingCard.add(new JLabel("Deadline: " + j.getJobDeadline()));
         pendingCard.add(new JLabel("Duration: " + j.getApproximateJobDuration()));
        
         JButton acceptBtn = new JButton("Accept");
+        acceptBtn.setBackground(new Color(153, 255, 153));
         JButton rejectBtn = new JButton("Reject");
+        rejectBtn.setBackground(new Color(255, 51, 51));
         pendingCard.add(acceptBtn);
         pendingCard.add(rejectBtn);
         
@@ -144,8 +153,13 @@ public class AdminPending extends JPanel implements Refreshable{
 
         });
       
-        pendingCard.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); 
+        pendingCard.setBorder(BorderFactory.createLineBorder(Color.black, 3)); 
+
+        pendingCard.setBackground(new Color(153, 204, 255));
+        pendingCard.setOpaque(true);
+
         return pendingCard;
+        
     }
 
 }

@@ -76,7 +76,7 @@ public class AdminHome extends JPanel implements Refreshable {
         userCard.add(Box.createVerticalStrut(5));
         userCard.add(new JLabel("User Id: " + u.getUserId())); 
         userCard.add(Box.createVerticalStrut(5));
-        userCard.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); 
+        userCard.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3)); 
 
         if(u.getUserType().equals("Owner")) {
             userCard.add(new JLabel("Owner Id: " + ((Owner)u).getOwnerId()));
