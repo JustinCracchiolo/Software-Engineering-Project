@@ -7,7 +7,9 @@
 
 package pages;
 
+import classes.Job;
 import classes.Owner;
+import classes.Client;
 import classes.User;
 import classes.UserManager;
 import classes.Vehicle;
@@ -19,8 +21,9 @@ import javax.swing.*;
 // ---------------------------------------------------------------
 public class HomePage extends JPanel implements Refreshable {
 
-    private JLabel name; // change variable name
+    private JLabel name_of_view;
     private User user;
+    private JPanel listPanel;
 
     // ---------------------------------------------------------------
     // constructor that sets the user and the user manager
@@ -32,39 +35,110 @@ public class HomePage extends JPanel implements Refreshable {
         setLayout(new BorderLayout());
         add(new NavBar(cards, user, registry), BorderLayout.NORTH);
 
-        JLabel label = new JLabel("Home Page", SwingConstants.CENTER);
+        /* 
+         JLabel label = new JLabel("Home Page", SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 24));
 
-        name = new JLabel("", SwingConstants.CENTER);
-        name.setFont(new Font("Arial", Font.BOLD, 24));
+         */
 
+        name_of_view = new JLabel("", SwingConstants.CENTER);
+        name_of_view.setFont(new Font("Arial", Font.BOLD, 24));
+        name_of_view.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
+        JPanel viewPanel = new JPanel();
+        viewPanel.setLayout(new BoxLayout(viewPanel, BoxLayout.Y_AXIS));
+
+        /* 
         JPanel panel = new JPanel();
         panel.add(label, BorderLayout.CENTER);
         panel.add(name, BorderLayout.CENTER);
+        */
+        listPanel = new JPanel(); 
+        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); 
+       
+       // Make it scrollable 
+       JScrollPane scroll = new JScrollPane(listPanel);  
 
-        add(panel, BorderLayout.CENTER);
+       viewPanel.add(name_of_view);
+       viewPanel.add(scroll); 
 
-        refresh();
+
+       add(viewPanel, BorderLayout.CENTER);
+
+       refresh();
     }
 
     // ---------------------------------------------------------------
     // refreshes home page => updating the # of vehicles a user has
     @Override
     public void refresh() {
+        listPanel.removeAll();
         if(user.getUserType().equals("Owner")) {
+            name_of_view.setText("Your vehicles");
             ArrayList<Vehicle> userVehicles = ((Owner) user).getVehicles();
-            int vehicles = 0;
             for (Vehicle v : userVehicles) {
-                vehicles++;
+                listPanel.add(vehicleCard(v));
             }
-            //name.setText(" vehicles: " + vehicles);
         }
         else {
-            name.setText("");
+            name_of_view.setText("Your jobs");
+            ArrayList<Job> userJobs = ((Client) user).getClientJobs();
+            for (Job j : userJobs) {
+                listPanel.add(jobCard(j));
+            }
         }
 
-        revalidate();
-        repaint();
+        listPanel.revalidate();
+        listPanel.repaint();
     }
+
+    private JPanel vehicleCard(Vehicle v) {
+        JPanel vehicleCard = new JPanel();
+        vehicleCard.setLayout(new BoxLayout(vehicleCard, BoxLayout.Y_AXIS));
+        vehicleCard.add(new JLabel("Vin Number: " + v.getNumber()));
+        vehicleCard.add(Box.createVerticalStrut(20)); 
+        vehicleCard.add(new JLabel("Licenese Plate: " + v.getLicensePlate())); 
+        vehicleCard.add(Box.createVerticalStrut(20)); 
+        vehicleCard.add(new JLabel("Model: " + v.getModel()));
+        vehicleCard.add(Box.createVerticalStrut(20)); 
+        vehicleCard.add(new JLabel("Make: " + v.getMake()));
+        vehicleCard.add(Box.createVerticalStrut(20)); 
+        vehicleCard.add(new JLabel("Year: " + v.getYear())); 
+        vehicleCard.add(Box.createVerticalStrut(20)); 
+        vehicleCard.add(new JLabel("Approximate Residency: " + v.approxTime()));
+        vehicleCard.add(Box.createVerticalStrut(20)); 
+        vehicleCard.add(new JLabel("Day Registered: " + v.getDayRegistered()));
+
+        vehicleCard.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+
+        
+        vehicleCard.setBackground(new Color(153, 204, 255));
+        vehicleCard.setOpaque(true);
+
+        return vehicleCard;
+    }
+
+     private JPanel jobCard(Job j) {
+        JPanel jobCard = new JPanel();
+        jobCard.setLayout(new BoxLayout(jobCard, BoxLayout.Y_AXIS));
+        jobCard.add(new JLabel("Job Id: " + j.getJobId()));
+        jobCard.add(Box.createVerticalStrut(20));
+        jobCard.add(new JLabel("Job Description: " + j.getJobDescription())); 
+        jobCard.add(Box.createVerticalStrut(20));
+        jobCard.add(new JLabel("Job Id: " + j.getJobId())); 
+        jobCard.add(Box.createVerticalStrut(20));
+        jobCard.add(new JLabel("Deadline: " + j.getJobDeadline()));
+        jobCard.add(Box.createVerticalStrut(20));
+        jobCard.add(new JLabel("Duration: " + j.getApproximateJobDuration()));
+
+        jobCard.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+        
+        jobCard.setBackground(new Color(153, 204, 255));
+        jobCard.setOpaque(true);
+
+        return jobCard;
+    }
+
 
 }

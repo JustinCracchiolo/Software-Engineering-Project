@@ -90,6 +90,7 @@ public class AdminPending extends JPanel implements Refreshable{
         pendingCard.add(new JLabel("Make: " + v.getMake()));
         pendingCard.add(new JLabel("Year: " + v.getYear())); 
         pendingCard.add(new JLabel("Approximate Residency: " + v.approxTime()));
+        pendingCard.add(new JLabel("Day Registered: " + v.getDayRegistered()));
        
         JButton acceptBtn = new JButton("Accept");
         acceptBtn.setBackground(new Color(153, 255, 153));

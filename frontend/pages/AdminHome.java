@@ -9,6 +9,7 @@ import classes.UserManager;
 import classes.Vehicle;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.util.Map;
 import javax.swing.*;
@@ -18,6 +19,7 @@ public class AdminHome extends JPanel implements Refreshable {
     private User user;
     private UserManager users;
     private JPanel listPanel;
+    private JLabel name_of_view;
 
     public AdminHome(JPanel cards, User user, UserManager users, Map<String, Refreshable> registry) {
         // user = person logged in
@@ -27,33 +29,35 @@ public class AdminHome extends JPanel implements Refreshable {
 
         setLayout(new BorderLayout());
         add(new NavBar(cards, user, registry), BorderLayout.NORTH);
+        
+        name_of_view = new JLabel("", SwingConstants.CENTER);
+        name_of_view.setFont(new Font("Arial", Font.BOLD, 24));
+        name_of_view.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-       JPanel titlePanel = new JPanel();
-       JLabel title = new JLabel("All Users", SwingConstants.CENTER); 
-       
-       add(Box.createVerticalStrut(10));
-       title.setFont(new Font("Arial", Font.BOLD, 26)); 
-       add(title); 
-       
-       // Panel that will hold all user entries 
-       listPanel = new JPanel(); 
-       listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); 
-       listPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel viewPanel = new JPanel();
+        viewPanel.setLayout(new BoxLayout(viewPanel, BoxLayout.Y_AXIS));
+        
+        // Panel that will hold all user entries 
+        listPanel = new JPanel(); 
+        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); 
+        listPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        // Make it scrollable 
+        JScrollPane scroll = new JScrollPane(listPanel); 
+        scroll.setBorder(BorderFactory.createEmptyBorder());
+        
+        viewPanel.add(name_of_view);
+        viewPanel.add(scroll);
 
-       
-       // Make it scrollable 
-       JScrollPane scroll = new JScrollPane(listPanel); 
-       scroll.setBorder(BorderFactory.createEmptyBorder());
-
-       add(scroll, BorderLayout.CENTER); 
-       
-       refresh();
+        add(viewPanel, BorderLayout.CENTER);
+        
+        refresh();
     }
 
     @Override 
     public void refresh() { 
         listPanel.removeAll(); 
         // clear old content 
+        name_of_view.setText("All Users");
         
         for (User u : users.getAllUsers().values()) { 
             listPanel.add(createUserCard(u));
@@ -84,7 +88,8 @@ public class AdminHome extends JPanel implements Refreshable {
             userCard.add(new JLabel("Vehicles:"));
             for(Vehicle v: ((Owner)u).getVehicles()) {
                 userCard.add(new JLabel("[Make: " + v.getMake() + " || Model: " + v.getModel() + " || VIN: " + v.getNumber() 
-                + " || License Plate: " + v.getLicensePlate() + " || Year: " + v.getYear() + " || Approximate parked time: " + v.approxTime() + "]"));
+                + " || License Plate: " + v.getLicensePlate() + " || Year: " + v.getYear() + " || Approximate parked time: " + v.approxTime() +
+                " || Day Registered " + v.getDayRegistered() + "]"));
             }
         }
         else if (u.getUserType().equals("Client")) {

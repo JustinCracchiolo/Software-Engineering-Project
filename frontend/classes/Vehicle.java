@@ -9,6 +9,7 @@ package classes;
 //Focus on the backend and make necessary classes to store information for the user and their vehicles (Sebastian)
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -26,7 +27,8 @@ public class Vehicle {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     Duration duration;
-    private String apporxResidencyTime; // in hrs
+    private double approxResidencyTime; // in hrs
+    private String dayRegistered;
 
     // constructor
     // ---------------------------------------------------------------
@@ -43,25 +45,26 @@ public class Vehicle {
         LocalDateTime departure = LocalDateTime.parse(depart, formatter);
         duration = Duration.between(arrival, departure);
         int approxHrs = (int) duration.toHours();
-        this.apporxResidencyTime = Integer.toString(approxHrs);
+        this.approxResidencyTime = approxHrs;
+        dayRegistered = arrive.substring(0, 10);
 
 
         // make sure vehicle has all the necessary information
         if (VIN_NUMBER.equals("") || make == null || model == null || licensePlate == null 
-        || year == null || apporxResidencyTime == null) {
+        || year == null || approxResidencyTime == 0) {
             throw new IllegalArgumentException("Vehicle information is incomplete");
         }
     }
 
     //overloading from reading from vehicle file
-    public Vehicle(String VIN_NUMBER, String make, String model, String licensePlate, String year, String approxTime) {
+    public Vehicle(String VIN_NUMBER, String make, String model, String licensePlate, String year, double approxTime, String dayRegistered) {
         this.VIN_NUMBER = VIN_NUMBER;
         this.make = make;
         this.model = model;
         this.licensePlate = licensePlate;
         this.year = year;
-        this.apporxResidencyTime = approxTime;
-
+        this.approxResidencyTime = approxTime;
+        this.dayRegistered = dayRegistered;
     }
 
     // implementing the getters in order to access the private variables
@@ -94,8 +97,12 @@ public class Vehicle {
         return year;
     }
 
-    public String approxTime() {
-        return apporxResidencyTime;
+    public double approxTime() {
+        return approxResidencyTime;
+    }
+
+    public String getDayRegistered() {
+        return dayRegistered;
     }
 
 }

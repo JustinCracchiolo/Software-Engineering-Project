@@ -237,7 +237,7 @@ public class UserManager {
      * Put all their information in the ArrayList. Keeps registrations after application closed
      */
     /* 
-     vehicle txt format: username|vin|model|make|plate|year|approxTime
+     vehicle txt format: username|vin|model|make|plate|year|approxTime|day registered
     */
     public void loadVehiclesFromFile() {
         if (!Files.exists(VEHICLES_FILE_PATH)) {
@@ -261,10 +261,11 @@ public class UserManager {
                 String licensePlate = parts[4].trim();
                 String year = parts[5].trim();
                 String approxTime = parts[6].trim();
+                String dayRegistered = parts[7].trim();
                 
                 String normalizedUsername = normalizeUsername(username);
 
-                Vehicle vehicle = new Vehicle(vinNumber, make, model, licensePlate, year, approxTime);
+                Vehicle vehicle = new Vehicle(vinNumber, make, model, licensePlate, year, Double.parseDouble(approxTime), dayRegistered);
                 
                 // Add the vehicle to the corresponding owner
                 for (User user : users.values()) {
@@ -279,7 +280,7 @@ public class UserManager {
     }
 
     /* 
-     vehicle txt format: username|vin|model|make|plate|year|approxTime
+     vehicle txt format: username|vin|model|make|plate|year|approxTime|day registered
     */
     public static void updateVehiclesFile(User u) {
         if (!Files.exists(VEHICLES_FILE_PATH)) {
@@ -294,7 +295,7 @@ public class UserManager {
             {
                 Vehicle newVehicle = ((Owner) u).getVehicles().get(((Owner) u).getVehicles().size()-1);
                 writer.write(u.getUsername() + "|" + newVehicle.getNumber() + "|" + newVehicle.getModel() + "|" + newVehicle.getMake() + 
-                 "|" + newVehicle.getLicensePlate() + "|" + newVehicle.getYear() + "|" + newVehicle.approxTime());
+                 "|" + newVehicle.getLicensePlate() + "|" + newVehicle.getYear() + "|" + newVehicle.approxTime() + "|" + newVehicle.getDayRegistered());
                 writer.newLine();
         }
         
@@ -374,7 +375,7 @@ public class UserManager {
     }
 
     /* 
-    pending transaction file structure: userId|userType|vin|model|make|plate|year|approxTime|timestamp
+    pending transaction file structure: userId|userType|vin|model|make|plate|year|approxTime|day registered|timestamp
     */
 
     public static void updatePendingFile(User u,Vehicle v) {
@@ -390,7 +391,7 @@ public class UserManager {
             {
                 Instant timestamp = Instant.now();
                 writer.write(u.getUsername() + "|" + u.getUserType() +"|" + v.getNumber() + "|" + v.getModel() + "|" + v.getMake() + 
-                "|" + v.getLicensePlate() + "|" + v.getYear() + "|" + v.approxTime() + "|" + timestamp.toString());
+                "|" + v.getLicensePlate() + "|" + v.getYear() + "|" + v.approxTime() + "|" + v.getDayRegistered() + "|" + timestamp.toString());
                 writer.newLine();
         }
         
@@ -430,7 +431,7 @@ public class UserManager {
     pending transaction file structure: 
         userId|userType|description|hrs|deadline|jobId|timestamp
         or 
-        userId|userType|vin|model|make|plate|year|approxTime|timestamp
+        userId|userType|vin|model|make|plate|year|approxTime|day registered|timestamp
     */
     public void loadPendingRequests() {
         if (!Files.exists(PENDING_TRANSACTIONS_PATH)) {
@@ -457,7 +458,8 @@ public class UserManager {
                     String plate = parts[5].trim();
                     String year = parts[6].trim();
                     String approxTime = parts[7].trim();
-                    Vehicle v = new Vehicle(vin, make, model, plate, year, approxTime);
+                    String dayRegistered = parts[8].trim();
+                    Vehicle v = new Vehicle(vin, make, model, plate, year, Double.parseDouble(approxTime), dayRegistered);
                     Admin.addPendingVehicle(users.get(normalizedUsername), v, false);
                 }
                 else {
