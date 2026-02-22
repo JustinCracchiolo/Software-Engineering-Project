@@ -57,7 +57,7 @@ public class HomePage extends JPanel implements Refreshable {
             for (Vehicle v : userVehicles) {
                 vehicles++;
             }
-            name.setText(" vehicles: " + vehicles);
+            //name.setText(" vehicles: " + vehicles);
         }
         else {
             name.setText("");
