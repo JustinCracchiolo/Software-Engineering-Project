@@ -390,7 +390,7 @@ public class UserManager {
             {
                 Instant timestamp = Instant.now();
                 writer.write(u.getUsername() + "|" + u.getUserType() +"|" + v.getNumber() + "|" + v.getModel() + "|" + v.getMake() + 
-                "|" + v.getYear() + "|" + v.approxTime() + "|" + timestamp.toString());
+                "|" + v.getLicensePlate() + "|" + v.getYear() + "|" + v.approxTime() + "|" + timestamp.toString());
                 writer.newLine();
         }
         
