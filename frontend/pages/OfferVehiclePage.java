@@ -76,31 +76,31 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         vehicleLabel.setForeground(new Color(65, 105, 255));
         vehicleLabel.setFont(new Font("Arial", Font.PLAIN, 36));
 
-        vehicleVin = new PlaceHolderTextField("Vin", 16); // adds more graphics to regular textfield
+        vehicleVin = new PlaceHolderTextField("Vin                               (XXXXXXXXXXXXXXXXX)", 36); // adds more graphics to regular textfield
         vehicleVin.setMaximumSize(vehicleVin.getPreferredSize());
         vehicleVin.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        vehicleMake = new PlaceHolderTextField("Make", 16); // adds more graphics to regular textfield
+        vehicleMake = new PlaceHolderTextField("Make                           (Letters and/or Numbers)", 36); // adds more graphics to regular textfield
         vehicleMake.setMaximumSize(vehicleMake.getPreferredSize());
         vehicleMake.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        vehicleModel = new PlaceHolderTextField("Model", 16); // adds more graphics to regular textfield
+        vehicleModel = new PlaceHolderTextField("Model                           (Letters and/or Numbers)", 36); // adds more graphics to regular textfield
         vehicleModel.setMaximumSize(vehicleModel.getPreferredSize());
         vehicleModel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        vehiclePlate = new PlaceHolderTextField("License Plate", 16);
+        vehiclePlate = new PlaceHolderTextField("License Plate               (Letters and/or Numbers)", 36);
         vehiclePlate.setMaximumSize(vehiclePlate.getPreferredSize());
         vehiclePlate.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        vehicleYear = new PlaceHolderTextField("Year (xxxx)", 16);
+        vehicleYear = new PlaceHolderTextField("Year                             (yyyy)", 36);
         vehicleYear.setMaximumSize(vehiclePlate.getPreferredSize());
         vehicleYear.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        vehicleArrival = new PlaceHolderTextField("Expected arrival (yyyy-mm-dd hh:mm:ss)", 30);
+        vehicleArrival = new PlaceHolderTextField("Expected arrival          (yyyy-mm-dd hh:mm:ss)", 36);
         vehicleArrival.setMaximumSize(vehiclePlate.getPreferredSize());
         vehicleArrival.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        vehicleDeparture = new PlaceHolderTextField("Expected departure (yyyy-mm-dd hh:mm:ss)", 30);
+        vehicleDeparture = new PlaceHolderTextField("Expected departure    (yyyy-mm-dd hh:mm:ss)", 36);
         vehicleDeparture.setMaximumSize(vehiclePlate.getPreferredSize());
         vehicleDeparture.setAlignmentX(Component.CENTER_ALIGNMENT);
 

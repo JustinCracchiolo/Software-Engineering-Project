@@ -74,7 +74,7 @@ public class Login_Registration {
         aboutTitle.setForeground(Color.white);
         aboutTitle.setFont(new Font("Arial", Font.PLAIN, 40));
 
-        String text = "The purpose of the Vehicular Cloud Real-Time System (VCRTS) is to utilize the unused computing power of parked vehicles by pooling their computational resources and renting them out to consumers who require computing services. \n Vehicles parked in a dedicated parking lot serve as possible computing nodes. \n VCRTS manages job execution, resource allocation, real-time monitoring, and reporting to ensure everything is running smoothly. \n The VCRTS attempts to optimize resources by pulling computational power from unused vehicles. \n This helps maximize computing power and minimize load on other systems.";
+        String text = "The purpose of the Vehicular Cloud Real-Time System (VCRTS) is to utilize the unused computing power of parked vehicles by pooling their computational resources and renting them out to consumers who require computing services. \nVehicles parked in a dedicated parking lot serve as possible computing nodes. \nVCRTS manages job execution, resource allocation, real-time monitoring, and reporting to ensure everything is running smoothly. \nThe VCRTS attempts to optimize resources by pulling computational power from unused vehicles. \nThis helps maximize computing power and minimize load on other systems. \nAn Owner registers vehicles for use and a Client can rent a vehicle and/or can submit a job.";
         JTextArea aboutInfo = new JTextArea(text);
         aboutInfo.setLineWrap(true); 
         aboutInfo.setWrapStyleWord(true); 
@@ -421,11 +421,11 @@ public class Login_Registration {
         registerHeader.setForeground(new Color(65, 105, 255));
         registerHeader.setFont(new Font("Arial", Font.PLAIN, 40));
 
-        JTextField regUsernameField = new PlaceHolderTextField("Username", 20);
+        JTextField regUsernameField = new PlaceHolderTextField("Username    (Letters and/or Numbers)", 20);
         regUsernameField.setMaximumSize(regUsernameField.getPreferredSize());
         regUsernameField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextField regEmailField = new PlaceHolderTextField("Email", 20);
+        JTextField regEmailField = new PlaceHolderTextField("Email            (username@domain.com)", 20);
         regEmailField.setMaximumSize(regEmailField.getPreferredSize());
         regEmailField.setAlignmentX(Component.CENTER_ALIGNMENT);
 

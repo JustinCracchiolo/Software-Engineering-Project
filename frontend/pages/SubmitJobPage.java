@@ -78,15 +78,15 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         jobTitle.setForeground(new Color(65, 105, 255));
         jobTitle.setFont(new Font("Arial", Font.PLAIN, 36));
 
-        jobDescription = new PlaceHolderTextField("Job Description", 16); // adds more graphics to regular textfield
+        jobDescription = new PlaceHolderTextField("Job Description                    (Enter Job Description)", 36); // adds more graphics to regular textfield
         jobDescription.setMaximumSize(jobDescription.getPreferredSize());
         jobDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        jobDuration = new PlaceHolderTextField("Approximate Job Duration (in terms of hours)", 25); // adds more graphics to regular textfield
+        jobDuration = new PlaceHolderTextField("Approximate Job Duration   (in terms of hours)", 36); // adds more graphics to regular textfield
         jobDuration.setMaximumSize(jobDuration.getPreferredSize());
         jobDuration.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        jobDeadline = new PlaceHolderTextField("Deadline (yyyy-mm-dd hh:mm:ss)", 20); // adds more graphics to regular textfield
+        jobDeadline = new PlaceHolderTextField("Deadline                               (yyyy-mm-dd hh:mm:ss)", 36); // adds more graphics to regular textfield
         jobDeadline.setMaximumSize(jobDeadline.getPreferredSize());
         jobDeadline.setAlignmentX(Component.CENTER_ALIGNMENT);
 
