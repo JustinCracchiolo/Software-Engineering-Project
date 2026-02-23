@@ -59,6 +59,7 @@ public class AdminPending extends JPanel implements Refreshable{
             
             for (Vehicle v : vehicles) {
                 listPanel.add(createPendingCard(u, v)); 
+                listPanel.add(Box.createVerticalStrut(10)); //This separates the boxes
             }
         }
 
@@ -69,6 +70,7 @@ public class AdminPending extends JPanel implements Refreshable{
             
             for (Job j : jobs) {
                 listPanel.add(createPendingCard(u, j));
+                listPanel.add(Box.createVerticalStrut(10)); //This separates the boxes
             }
         }
 
