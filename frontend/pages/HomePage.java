@@ -79,6 +79,7 @@ public class HomePage extends JPanel implements Refreshable {
             ArrayList<Vehicle> userVehicles = ((Owner) user).getVehicles();
             for (Vehicle v : userVehicles) {
                 listPanel.add(vehicleCard(v));
+                listPanel.add(Box.createVerticalStrut(10)); //This separates the boxes
             }
         }
         else {
@@ -86,6 +87,7 @@ public class HomePage extends JPanel implements Refreshable {
             ArrayList<Job> userJobs = ((Client) user).getClientJobs();
             for (Job j : userJobs) {
                 listPanel.add(jobCard(j));
+                listPanel.add(Box.createVerticalStrut(10)); //This separates the boxes
             }
         }
 
