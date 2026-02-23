@@ -2,8 +2,8 @@
 * Class: SubmitJobPage.java
 * Authors: Group 2 (Justin Cracchiolo, Lauren Rodriguez, David Choi, Tristan Huertas, Ivan Lin, Anthony Vallejo, Sebastian Villavicencio)
 * Date: February 2026
-* This program builds and controls the main Swing GUI for VCRTS, including login, registration, and home navigation using CardLayout. 
-* It connects to UserManager to support user registration and login.
+* This program builds / controls the Submit Job page of the VCRTS system.
+* It allows users to enter job information and submit the job for review. Submitted jobs are then added to the pending job registry for approval by an admin.
 */
 
 package pages;
