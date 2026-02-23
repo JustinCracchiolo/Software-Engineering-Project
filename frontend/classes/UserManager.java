@@ -468,7 +468,14 @@ public class UserManager {
                 String[] parts = line.split("\\|");
                 String name = parts[0];
                 String userType = parts[1];
-                if (line.contains(uniqueForType) && userType.equals(type) && name.equals(username)) {
+                String unique;
+                if(type.equals("Owner")) {
+                    unique = parts[2].trim();
+                }
+                else {
+                    unique = parts[5].trim();
+                }
+                if (unique.contains(uniqueForType) && userType.equals(type) && name.equals(username)) {
                     // Write the removed line to the new file
                     if(accepted) {
                         completedWrite.write(line + "|accepted");
