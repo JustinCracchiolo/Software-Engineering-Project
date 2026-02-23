@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.*;
+import classes.Client;
 
 public class AdminPending extends JPanel implements Refreshable{
 
@@ -27,7 +28,7 @@ public class AdminPending extends JPanel implements Refreshable{
        this.users = users;
 
        setLayout(new BorderLayout());
-       add(new NavBar(cards, user, registry), BorderLayout.NORTH);
+       add(new NavBar(cards, user, registry), BorderLayout.NORTH); //add navbar
 
        JLabel title = new JLabel("Pending Forms", SwingConstants.CENTER); 
        
@@ -45,6 +46,7 @@ public class AdminPending extends JPanel implements Refreshable{
        
        refresh();
     }
+    //---------------------------------------
     
     @Override
     public void refresh() {
@@ -52,8 +54,9 @@ public class AdminPending extends JPanel implements Refreshable{
         // clear old content 
         Map<User, ArrayList<Vehicle>> pendingVehicles= Admin.getPendingVehicles();
         Map<User, ArrayList<Job>> pendingJobs = Admin.getPendingJobs();
+        //gets pending requests 
+
         for (Map.Entry<User, ArrayList<Vehicle>> entry : pendingVehicles.entrySet()) {
-            //String userId = entry.getKey();
             ArrayList<Vehicle> vehicles = entry.getValue();
             User u = entry.getKey();  // get the User object
             
@@ -77,7 +80,9 @@ public class AdminPending extends JPanel implements Refreshable{
         listPanel.revalidate(); 
         listPanel.repaint(); 
     }
+    //-------------------------------------
 
+    //this created a UI for pending requests for vehicles
     private JPanel createPendingCard(User u, Vehicle v) {
         JPanel pendingCard = new JPanel(); 
         pendingCard.setLayout(new GridLayout(0, 1)); 
@@ -122,6 +127,9 @@ public class AdminPending extends JPanel implements Refreshable{
 
         return pendingCard;
     }
+    //------------------------------------
+
+    //this creates a pending request UI for jobs
 
     private JPanel createPendingCard(User u, Job j) {
         JPanel pendingCard = new JPanel(); 
@@ -130,6 +138,7 @@ public class AdminPending extends JPanel implements Refreshable{
         pendingCard.add(new JLabel("Name: " + u.getUsername())); 
         pendingCard.add(new JLabel("User Type: " + u.getUserType())); 
         pendingCard.add(new JLabel("User Id: " + u.getUserId()));
+        pendingCard.add(new JLabel("Client Id: " + ((Client)u).getClientId()));
         pendingCard.add(new JLabel("Job Id: " + j.getJobId()));
         pendingCard.add(new JLabel("Job Description: " + j.getJobDescription())); 
         pendingCard.add(new JLabel("Job Id: " + j.getJobId())); 
@@ -164,5 +173,6 @@ public class AdminPending extends JPanel implements Refreshable{
         return pendingCard;
         
     }
+    //-------------------------
 
 }

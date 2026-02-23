@@ -40,7 +40,7 @@ public class Login_Registration {
         UserManager userManager = new UserManager();
         userManager.loadVehiclesFromFile(); // this tells the program to load the vehicles from the file for the current user
         userManager.loadJobsFromFile(); // this tells the program to load the jobs from the file for the current user
-        userManager.loadPendingRequests();
+        userManager.loadPendingRequests(); //this tells the program to load pending requests for an admin to look at 
 
         JFrame frame = new JFrame("VCRTS App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,7 +74,7 @@ public class Login_Registration {
         aboutTitle.setForeground(Color.white);
         aboutTitle.setFont(new Font("Arial", Font.PLAIN, 40));
 
-        String text = "The purpose of the Vehicular Cloud Real-Time System (VCRTS) is to utilize the unused computing power of parked vehicles by pooling their computational resources and renting them out to consumers who require computing services. \nVehicles parked in a dedicated parking lot serve as possible computing nodes. \nVCRTS manages job execution, resource allocation, real-time monitoring, and reporting to ensure everything is running smoothly. \nThe VCRTS attempts to optimize resources by pulling computational power from unused vehicles. \nThis helps maximize computing power and minimize load on other systems. \nAn Owner registers vehicles for use and a Client can rent a vehicle and/or can submit a job.";
+        String text = "The purpose of the Vehicular Cloud Real-Time System (VCRTS) is to utilize the unused computing power of parked vehicles by pooling their computational resources and renting them out to consumers who require computing services. \n\nVehicles parked in a dedicated parking lot serve as possible computing nodes. \n\nVCRTS manages job execution, resource allocation, real-time monitoring, and reporting to ensure everything is running smoothly. \n\nThe VCRTS attempts to optimize resources by pulling computational power from unused vehicles. \n\nThis helps maximize computing power and minimize load on other systems. \n\nAn Owner registers vehicles for use and a Client can rent a vehicle and/or can submit a job.";
         JTextArea aboutInfo = new JTextArea(text);
         aboutInfo.setLineWrap(true); 
         aboutInfo.setWrapStyleWord(true); 
@@ -82,7 +82,6 @@ public class Login_Registration {
         aboutInfo.setOpaque(false);      
         aboutInfo.setBackground(new Color(0,0,0,0));
         aboutInfo.setBorder(null);
-        //JLabel aboutInfo = new JLabel("The purpose of the Ve");
         aboutInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         aboutInfo.setForeground(Color.white);
         aboutInfo.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -112,17 +111,14 @@ public class Login_Registration {
         toLoginButton.setFont(new Font("Arial", Font.PLAIN, 30));
         toLoginButton.setBackground(new Color(77, 163, 255));
         toLoginButton.setForeground(Color.DARK_GRAY);
-        //toLoginButton.setOpaque(true);
-        //toLoginButton.setBorderPainted(false);
 
         JButton toRegisterButton = new JButton("Create an Account");
         toRegisterButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         toRegisterButton.setFont(new Font("Arial", Font.PLAIN, 30));
         toRegisterButton.setBackground(new Color(77, 163, 255));
         toRegisterButton.setForeground(Color.DARK_GRAY);
-        //toRegisterButton.setOpaque(true);
-       // toRegisterButton.setBorderPainted(false);
 
+        //register button swithces pages
         toRegisterButton.addActionListener(e -> {
             CardLayout c = (CardLayout) cards.getLayout();
             c.show(cards, "register");
@@ -147,6 +143,7 @@ public class Login_Registration {
         aboutPage.add(aboutPanel, BorderLayout.WEST);
         aboutPage.add(startPanel, BorderLayout.CENTER);
         // -------------------------------------------
+        
         // Login page
 
         JPanel loginSidePanel = new JPanel();
@@ -166,8 +163,7 @@ public class Login_Registration {
         loginLabel.setForeground(new Color(65, 105, 255));
         loginLabel.setFont(new Font("Arial", Font.PLAIN, 40));
 
-        JTextField usernameTextField = new PlaceHolderTextField("Username", 20); // adds more graphics to regular
-                                                                                 // textfield
+        JTextField usernameTextField = new PlaceHolderTextField("Username", 20); 
         usernameTextField.setMaximumSize(usernameTextField.getPreferredSize());
         usernameTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -204,8 +200,6 @@ public class Login_Registration {
         loginButton.setFont(new Font("Arial", Font.PLAIN, 30));
         loginButton.setBackground(new Color(77, 163, 255));
         loginButton.setForeground(Color.DARK_GRAY);
-        //loginButton.setOpaque(true);
-       // loginButton.setBorderPainted(false);
 
         // Register button
         JButton registerButton = new JButton("Create an Account");
@@ -221,59 +215,50 @@ public class Login_Registration {
                 currentUser = userManager.getUser(user); // this tells the program the person who is logged in
 
                 // based on kind of user, navbar is different
-                if (currentUser.getUserType().equals("Owner")) {
+                if (currentUser.getUserType().equals("Owner")) {//owner navbar
                     CardLayout cl = (CardLayout) cards.getLayout();
 
                     Map<String, Refreshable> registry = new HashMap<>();
                     HomePage home = new HomePage(cards, currentUser, userManager, registry);
                     SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
-                    OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry, userManager); //I changed this for now
-                    // SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
+                    OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry, userManager);
                     Settings settings = new Settings(cards, currentUser, registry);
 
                     // These cards can now be refreshed when looked up in the hashmap
                     registry.put("home", home);
                     registry.put("schedule", schedule);
                     registry.put("offerVehicle", offer);
-                    // registry.put("submitJob", submit);
                     registry.put("settings", settings);
 
                     cards.add(home, "home");
                     cards.add(schedule, "schedule");
                     cards.add(offer, "offerVehicle");
-                    // cards.add(submit, "submitJob");
                     cards.add(settings, "settings");
                     cl.show(cards, "home");
                 } 
-                else if (currentUser.getUserType().equals("Admin")) {
+                else if (currentUser.getUserType().equals("Admin")) {//admin navbar
                     CardLayout cl = (CardLayout) cards.getLayout();
 
                     Map<String, Refreshable> registry = new HashMap<>();
                     AdminHome home = new AdminHome(cards, currentUser, userManager, registry);
                     AdminPending pending = new AdminPending(cards, currentUser, userManager, registry);
                     SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
-                    //OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
-                    // SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
                     Settings settings = new Settings(cards, currentUser, registry);
 
                     // These cards can now be refreshed when looked up in the hashmap
                     registry.put("adminHome", home);
                     registry.put("pending", pending);
                     registry.put("schedule", schedule);
-                    //registry.put("offerVehicle", offer);
-                    // registry.put("submitJob", submit);
                     registry.put("settings", settings);
 
                     cards.add(home, "adminHome");
                     cards.add(pending, "pending");
                     cards.add(schedule, "schedule");
-                    //cards.add(offer, "offerVehicle");
-                    // cards.add(submit, "submitJob");
                     cards.add(settings, "settings");
                     cl.show(cards, "adminHome");
                 }
                 
-                else { // for now a Client will have all access
+                else { // Client navbar
                     CardLayout cl = (CardLayout) cards.getLayout();
 
                     Map<String, Refreshable> registry = new HashMap<>();
@@ -286,63 +271,15 @@ public class Login_Registration {
                     // These cards can now be refreshed when looked up in the hashmap
                     registry.put("home", home);
                     registry.put("schedule", schedule);
-                    //registry.put("offerVehicle", offer);
                     registry.put("submitJob", submit);
                     registry.put("settings", settings);
 
                     cards.add(home, "home");
                     cards.add(schedule, "schedule");
-                    //cards.add(offer, "offerVehicle");
                     cards.add(submit, "submitJob");
                     cards.add(settings, "settings");
                     cl.show(cards, "home");
                 }
-
-                /*
-                 * CardLayout cl = (CardLayout) cards.getLayout();
-                 * 
-                 * Map<String, Refreshable> registry = new HashMap<>();
-                 * HomePage home = new HomePage(cards, currentUser, userManager, registry);
-                 * SchedulePage schedule = new SchedulePage(cards, currentUser, registry);
-                 * OfferVehiclePage offer = new OfferVehiclePage(cards, currentUser, registry);
-                 * SubmitJobPage submit = new SubmitJobPage(cards, currentUser, registry);
-                 * Settings settings = new Settings(cards, currentUser, registry);
-                 * 
-                 * //These cards can now be refreshed when looked up in the hashmap
-                 * registry.put("home", home);
-                 * registry.put("schedule", schedule);
-                 * registry.put("offerVehicle", offer);
-                 * registry.put("submitJob", submit);
-                 * registry.put("settings", settings);
-                 * 
-                 * 
-                 * cards.add(home, "home");
-                 * cards.add(schedule, "schedule");
-                 * cards.add(offer, "offerVehicle");
-                 * cards.add(submit, "submitJob");
-                 * cards.add(settings, "settings");
-                 * 
-                 * 
-                 * cl.show(cards, "home");
-                 */
-
-                /*
-                 * HomePage homePage = new HomePage(cards, currentUser, userManager);
-                 * cards.add(homePage, "home");
-                 * 
-                 * OfferVehiclePage offerVehiclePage = new OfferVehiclePage(cards, currentUser);
-                 * SchedulePage schedulePage = new SchedulePage(cards, currentUser);
-                 * SubmitJobPage submitJobPage = new SubmitJobPage(cards, currentUser);
-                 * Settings settingsPage = new Settings(cards, currentUser);
-                 * 
-                 * cards.add(offerVehiclePage, "offerVehicle");
-                 * cards.add(schedulePage, "schedule");
-                 * cards.add(submitJobPage, "submitJob");
-                 * cards.add(settingsPage, "settings");
-                 * 
-                 * cl.show(cards, "home");
-                 * 
-                 */
             } else {
                 JOptionPane.showMessageDialog(frame, "Invalid username or password.");
             }
@@ -495,8 +432,6 @@ public class Login_Registration {
         submitRegisterButton.setFont(new Font("Arial", Font.PLAIN, 30));
         submitRegisterButton.setBackground(new Color(77, 163, 255));
         submitRegisterButton.setForeground(Color.DARK_GRAY);
-       // submitRegisterButton.setOpaque(true);
-       // submitRegisterButton.setBorderPainted(false);
 
         JButton backToLoginButton = new JButton("Back to Login");
         backToLoginButton.setAlignmentX(Component.CENTER_ALIGNMENT);

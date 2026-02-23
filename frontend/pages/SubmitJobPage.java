@@ -150,7 +150,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
             //make new vehicle from form information
             Job j = new Job(idText, duration, deadline);
             
-            //((Owner) user).addJob(v);
+            //add user and job to pending so admin can look at it 
             Admin.addPendingJob(user, j, true);
 
             JOptionPane.showMessageDialog(this, "Submitted job application.");

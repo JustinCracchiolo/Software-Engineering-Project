@@ -71,9 +71,6 @@ public class UserManager {
             return false;
         }
 
-        //will need to add admin type as well
-        //will have problem with residency time
-
         if(userType.equals("Owner")) {
             newUser = new Owner(username, password, email);
             addUserToFile(username, password, newUser.getUserId(), email, userType, ((Owner) newUser).getOwnerId());
@@ -94,8 +91,6 @@ public class UserManager {
         
         users.put(normalizedUsername, newUser);
         // Save to file once
-
-        //addUserToFile(username, password, email, userType);
 
         return true;
     }   
@@ -154,31 +149,11 @@ public class UserManager {
                 // Split using "|" as the delimiter
                 String[] parts = trimmed.split("\\|");
 
-                /* 
-                 if (parts.length < 3) {
-                    continue;
-                }
-                
-                */
-              
-                //will have to change this it we have more than one user type per person
-                //will also have to chnage to get expected residence time once implemented
                 String username = parts[0].trim();
                 String password = parts[1].trim();
-                //String userId = parts[2].trim();
                 String email = parts[3].trim();
                 String type = parts[4].trim();
-                //String typeId = parts[5].trim();
 
-                /* 
-                if (parts.length >= 4) {
-                    email = parts[2].trim();
-                    type = parts[3].trim();
-                } else {
-                    type = parts[2].trim();
-                }
-                 */
-                
                 String normalizedUsername = normalizeUsername(username);
 
                 //If the person you just read from the file is not in the map of current users, add them
@@ -194,6 +169,7 @@ public class UserManager {
                     }
                 }
             }
+
         } catch (IOException e) {
             // If the file is unreadable, continue with an empty in-memory list.
         }
@@ -253,7 +229,6 @@ public class UserManager {
                 // Split using "|" as the delimiter
                 String[] parts = trimmed.split("\\|");
               
-                //will have to change if more fields are added to the vehicle class
                 String username = parts[0].trim();
                 String vinNumber = parts[1].trim();
                 String make = parts[2].trim();
@@ -282,6 +257,7 @@ public class UserManager {
     /* 
      vehicle txt format: username|vin|model|make|plate|year|approxTime|day registered
     */
+   //Add vehicle information to vehicle file
     public static void updateVehiclesFile(User u) {
         if (!Files.exists(VEHICLES_FILE_PATH)) {
             return;
@@ -307,7 +283,7 @@ public class UserManager {
     /* 
     jobs.txt format: username|description|hrs|deadline|jobId
     */
-
+   //add a job to the job file
     public static void updateJobFile(User u) {
         if (!Files.exists(JOBS_FILE_PATH)) {
             return;
@@ -377,6 +353,7 @@ public class UserManager {
     /* 
     pending transaction file structure: userId|userType|vin|model|make|plate|year|approxTime|day registered|timestamp
     */
+   //add a new pending transaction to the file. This one is for vehicles
 
     public static void updatePendingFile(User u,Vehicle v) {
         if (!Files.exists(PENDING_TRANSACTIONS_PATH)) {
@@ -404,6 +381,7 @@ public class UserManager {
     /* 
     pending transaction file structure: userId|userType|description|hrs|deadline|jobId|timestamp
     */
+   //update pending transaction to file. This one is for jobs
     public static void updatePendingFile(User u, Job j) {
         if (!Files.exists(PENDING_TRANSACTIONS_PATH)) {
             return;
@@ -433,6 +411,7 @@ public class UserManager {
         or 
         userId|userType|vin|model|make|plate|year|approxTime|day registered|timestamp
     */
+   //On application load, add all pending requests back into the system
     public void loadPendingRequests() {
         if (!Files.exists(PENDING_TRANSACTIONS_PATH)) {
             return;
@@ -447,7 +426,6 @@ public class UserManager {
                 // Split using "|" as the delimiter
                 String[] parts = trimmed.split("\\|");
               
-                //will have to change if more fields are added to the jobs class
                 String username = parts[0].trim();
                 String userType = parts[1].trim();
                 String normalizedUsername = normalizeUsername(username);
@@ -476,7 +454,9 @@ public class UserManager {
         }
     }
 
-    public static void transactionUpdate(String uniqueForType, boolean accepted) throws IOException {
+    //pending transaction => completed 
+    //remove old pending transaction and move it to completed file
+    public static void transactionUpdate(String uniqueForType, boolean accepted, String username, String type) throws IOException {
         Path tempFile = Files.createTempFile("pending_transactions", ".txt");
         try (
             BufferedReader pendingRead  = Files.newBufferedReader(PENDING_TRANSACTIONS_PATH);
@@ -485,7 +465,10 @@ public class UserManager {
         ) {
             String line;
             while ((line = pendingRead.readLine()) != null) {
-                if (line.contains(uniqueForType)) {
+                String[] parts = line.split("\\|");
+                String name = parts[0];
+                String userType = parts[1];
+                if (line.contains(uniqueForType) && userType.equals(type) && name.equals(username)) {
                     // Write the removed line to the new file
                     if(accepted) {
                         completedWrite.write(line + "|accepted");

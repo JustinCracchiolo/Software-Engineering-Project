@@ -45,6 +45,8 @@ public class NavBar extends JPanel {
 
         homeBtn = new JButton("Home");
 
+        //declaration of user specific buttons
+
         if(user.getUserType().equals("Admin")) {
             pendingBtn = new JButton("Pending");
         }
@@ -60,6 +62,10 @@ public class NavBar extends JPanel {
 
         JButton settingsBtn = new JButton("Settings");
         JButton logoutBtn = new JButton("Log Out");
+
+        //--------------------------------------------
+
+        //event listeners for buttons. Some buttons are restricted based on user
 
         if (user.getUserType().equals("Admin")) {
             homeBtn.addActionListener(e -> {
@@ -102,12 +108,6 @@ public class NavBar extends JPanel {
             });
         }
 
-        /*
-         * submitJobBtn.addActionListener(e -> {
-         * refreshables.get("submitJob").refresh();
-         * ((CardLayout) cards.getLayout()).show(cards, "submitJob");
-         * });
-         */
 
         settingsBtn.addActionListener(e -> {
             refreshables.get("settings").refresh();
@@ -116,6 +116,8 @@ public class NavBar extends JPanel {
 
         logoutBtn.addActionListener(e -> ((CardLayout) cards.getLayout()).show(cards, "about"));
 
+        //--------------------------------------
+
         add(Box.createHorizontalStrut(20));
         add(title);
         add(Box.createHorizontalStrut(15));
@@ -123,6 +125,7 @@ public class NavBar extends JPanel {
         add(Box.createHorizontalGlue());
         add(homeBtn);
         add(Box.createHorizontalStrut(10));
+
         // TODO: SCHEDULE BUTTON IS COMMENTED OUT FOR NOW, AS SCHEDULE PAGE IS NOT IMPLEMENTED. UNCOMMENT WHEN SCHEDULE PAGE IS READY
         // add(scheduleBtn);
         add(Box.createHorizontalStrut(10));
@@ -150,133 +153,11 @@ public class NavBar extends JPanel {
         add(logoutBtn);
         add(Box.createHorizontalStrut(30));
     }
+    //-----------------------------
 
+    //adds pointer to a given navbar page
     public void register(String name, Refreshable page) {
         refreshables.put(name, page);
     }
+    //--------------------------
 }
-
-/*
- * public class NavBar extends JPanel {
- * 
- * private final HomePage homePage;
- * private final OfferVehiclePage vehiclePage;
- * private final SchedulePage schedulePage;
- * private final Settings settings;
- * private final SubmitJobPage submitJobPage;
- * 
- * public NavBar(JPanel cards, User user) {
- * 
- * setBackground(new Color(30, 30, 30));
- * setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
- * setPreferredSize(new Dimension(1000, 60));
- * 
- * JLabel title = new JLabel("VCRTS");
- * title.setForeground(Color.WHITE);
- * title.setFont(new Font("Arial", Font.BOLD, 28));
- * 
- * JButton homeBtn = new JButton("Home");
- * JButton scheduleBtn = new JButton("Schedule");
- * JButton offerVehicleBtn = new JButton("Offer Vehicle");
- * JButton submitJobBtn = new JButton("Submit Job");
- * JButton logoutBtn = new JButton("Log Out");
- * JButton settingsBtn = new JButton("Settings");
- * 
- * homeBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "home")
- * );
- * 
- * scheduleBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "schedule")
- * );
- * 
- * offerVehicleBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "offerVehicle")
- * );
- * 
- * submitJobBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "submitJob")
- * );
- * 
- * logoutBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "login")
- * );
- * 
- * settingsBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "settings")
- * );
- * 
- * 
- * add(Box.createHorizontalStrut(20));
- * add(title);
- * add(Box.createHorizontalGlue());
- * add(homeBtn);
- * add(Box.createHorizontalStrut(10));
- * add(scheduleBtn);
- * add(Box.createHorizontalStrut(10));
- * add(offerVehicleBtn);
- * add(Box.createHorizontalStrut(10));
- * add(submitJobBtn);
- * add(Box.createHorizontalStrut(10));
- * add(settingsBtn);
- * add(Box.createHorizontalStrut(10));
- * add(logoutBtn);
- * add(Box.createHorizontalStrut(30));
- * }
- * 
- * public NavBar(JPanel cards, User user, HomePage homePage) {
- * this.homePage = homePage;
- * 
- * setBackground(new Color(30, 30, 30));
- * setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
- * setPreferredSize(new Dimension(1000, 60));
- * 
- * JLabel title = new JLabel("VCRTS");
- * title.setForeground(Color.WHITE);
- * title.setFont(new Font("Arial", Font.BOLD, 28));
- * 
- * JButton homeBtn = new JButton("Home");
- * JButton scheduleBtn = new JButton("Schedule");
- * JButton offerVehicleBtn = new JButton("Offer Vehicle");
- * JButton submitJobBtn = new JButton("Submit Job");
- * JButton logoutBtn = new JButton("Log Out");
- * JButton settingsBtn = new JButton("Settings");
- * 
- * homeBtn.addActionListener(e -> {
- * homePage.refresh(); // <-- THIS is what updates the number
- * ((CardLayout) cards.getLayout()).show(cards, "home");
- * });
- * 
- * scheduleBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "schedule")
- * );
- * 
- * offerVehicleBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "offerVehicle")
- * );
- * 
- * submitJobBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "submitJob")
- * );
- * 
- * logoutBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "login")
- * );
- * 
- * settingsBtn.addActionListener(e ->
- * ((CardLayout) cards.getLayout()).show(cards, "settings")
- * );
- * 
- * add(Box.createHorizontalStrut(20));
- * add(title);
- * add(Box.createHorizontalGlue());
- * add(homeBtn);
- * add(scheduleBtn);
- * add(offerVehicleBtn);
- * add(submitJobBtn);
- * add(settingsBtn);
- * add(logoutBtn);
- * }
- * }
- * 
- */

@@ -31,8 +31,6 @@ public class User {
 
         this.userType = userType;
 
-        // read vehicle file for when user is loaded into the system
-        // readUserVehicles()
     }
 
     //this overloaded constructor is for reading users from the text file. They already have assigned user ids

@@ -14,12 +14,14 @@ import java.util.Map;
 public class Admin extends User {
     private String adminId;
     private static int increment = 0;
-    private static Map<User, ArrayList<Vehicle>> pendingVehicles= new HashMap<>();;
-    private static Map<User, ArrayList<Job>> pendingJobs = new HashMap<>();
+    private static Map<User, ArrayList<Vehicle>> pendingVehicles= new HashMap<>(); //stores vehicles yet to be approved
+    private static Map<User, ArrayList<Job>> pendingJobs = new HashMap<>(); //stores jobs yet to be approved
+    //--------------------------------------------
 
     public Admin(String username, String password) {
         this(username, password, "");
     }
+    //--------------------------
 
     public Admin(String username, String password, String email) {
         super(username, password, email, "Admin");
@@ -27,18 +29,27 @@ public class Admin extends User {
         adminId = Integer.toString(increment);
         
     }
+    //------------------------------
 
     public static Map<User, ArrayList<Vehicle>> getPendingVehicles() {
         return pendingVehicles;
     }
+    //------------------------
 
     public static Map<User, ArrayList<Job>> getPendingJobs() {
         return pendingJobs;
     }
+    //-----------------------
 
     public String getAdminId() {
         return adminId;
     }
+    //--------------------------
+
+    /* 
+    This method adds pending vehicles to the hashmap
+    If it's the first time we are seeing the request, it also adds it to the pending requests file
+    */
 
     public static void addPendingVehicle(User u, Vehicle v, boolean addToPendingFile) {
         if(pendingVehicles.containsKey(u)) {
@@ -49,14 +60,19 @@ public class Admin extends User {
             list.add(v); 
             pendingVehicles.put(u, list);
         }
-        if(addToPendingFile) {
+        if(addToPendingFile) {//chekcs if this is the first time we are seeing this request
             UserManager.updatePendingFile(u, v);
         }
         
-        //allowVehicle(u, v);
 
     }
-
+    //------------------------------
+    
+    /* 
+    If admin allows vehicle than add it to that user
+    Update the vehicle file 
+    And move the request from pending to completed  
+    */
     public static void allowVehicle(User u, Vehicle v) { 
         for(int i = 0; i < pendingVehicles.get(u).size(); i++) {
             if(pendingVehicles.get(u).get(i).getNumber().equals(v.getNumber())) {
@@ -65,9 +81,8 @@ public class Admin extends User {
                 
                 UserManager.updateVehiclesFile(u);
 
-                //add call to move it from pending to reserved as well
                 try { 
-                    UserManager.transactionUpdate(v.getNumber(), true); 
+                    UserManager.transactionUpdate(v.getNumber(), true, u.getUsername(), "Owner"); 
                 } catch (IOException ex) { 
 
                 }
@@ -77,7 +92,12 @@ public class Admin extends User {
         }
         
     }
+    //-----------------------
 
+    /* 
+    If admin rejects a vehicle than remove it from pending list
+    And move the request from pending to completed and set status to rejected 
+    */
     public static void rejectVehicle(User u, Vehicle v) { 
         for(int i = 0; i < pendingVehicles.get(u).size(); i++) {
             if(pendingVehicles.get(u).get(i).getNumber().equals(v.getNumber())) {
@@ -85,7 +105,7 @@ public class Admin extends User {
                 
                 //add call to move it from pending to reserved as well
                 try { 
-                    UserManager.transactionUpdate(v.getNumber(), false); 
+                    UserManager.transactionUpdate(v.getNumber(), false, u.getUsername(), "Owner"); 
                 } catch (IOException ex) { 
 
                 }
@@ -95,7 +115,12 @@ public class Admin extends User {
         }
         
     }
+    //----------------------------------
 
+    /* 
+    This method adds pending jobs to the hashmap
+    If it's the first time we are seeing the request, it also adds it to the pending requests file
+    */
     public static void addPendingJob(User u, Job j, boolean addToPendingFile) {
         if(pendingJobs.containsKey(u)) {
             pendingJobs.get(u).add(j);
@@ -110,10 +135,15 @@ public class Admin extends User {
             UserManager.updatePendingFile(u, j);
         }
         
-        // allowJob(u, j);
 
     }
+    //----------------------------------
 
+    /* 
+    If admin allows a job than add it to that user
+    Update the job file 
+    And move the request from pending to completed  
+    */
     public static void allowJob(User u, Job j) { 
         for(int i = 0; i < pendingJobs.get(u).size(); i++) {
             if (pendingJobs.get(u).get(i).getJobId().equals(j.getJobId())) {
@@ -123,7 +153,7 @@ public class Admin extends User {
                 UserManager.updateJobFile(u);
 
                 try { 
-                    UserManager.transactionUpdate(j.getJobId(), true); 
+                    UserManager.transactionUpdate(j.getJobId(), true, u.getUsername(), "Client"); 
                 } catch (IOException ex) { 
 
                 }
@@ -133,14 +163,19 @@ public class Admin extends User {
         }
         
     }
+    //--------------------------------------
 
+    /* 
+    If admin rejects a job than remove it from pending list
+    And move the request from pending to completed and set status to rejected 
+    */
     public static void rejectJob(User u, Job j) { 
         for(int i = 0; i < pendingJobs.get(u).size(); i++) {
             if (pendingJobs.get(u).get(i).getJobId().equals(j.getJobId())) {
                 pendingJobs.get(u).remove(i);
 
                 try { 
-                    UserManager.transactionUpdate(j.getJobId(), false); 
+                    UserManager.transactionUpdate(j.getJobId(), false, u.getUsername(), "Client"); 
                 } catch (IOException ex) { 
 
                 }
@@ -150,6 +185,7 @@ public class Admin extends User {
         }
         
     }
+    //---------------------
 
 
 }

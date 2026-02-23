@@ -93,13 +93,19 @@ public class Vehicle {
         return licensePlate;
     }
 
+    //----------------------------
+    //returns the year 
     public String getYear() {
         return year;
     }
 
+    //-------------------------
+    //return the residency time
     public double approxTime() {
         return approxResidencyTime;
     }
+    //-----------------
+    //returns the day the vehicle is registered for
 
     public String getDayRegistered() {
         return dayRegistered;

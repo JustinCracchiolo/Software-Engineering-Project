@@ -81,9 +81,13 @@ public class Job {
     public void setJobDeadline(LocalDateTime jobDeadline) {
         this.jobDeadline = jobDeadline;
     }
+    //--------------------------------------
+
+    //this method returns the job description
 
     public String getJobDescription() {
         return description;
     }
+    //--------------------------
 
 }

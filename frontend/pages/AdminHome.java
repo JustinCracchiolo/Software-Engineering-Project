@@ -28,7 +28,7 @@ public class AdminHome extends JPanel implements Refreshable {
         this.users = users;
 
         setLayout(new BorderLayout());
-        add(new NavBar(cards, user, registry), BorderLayout.NORTH);
+        add(new NavBar(cards, user, registry), BorderLayout.NORTH); //create navbar
         
         name_of_view = new JLabel("", SwingConstants.CENTER);
         name_of_view.setFont(new Font("Arial", Font.BOLD, 24));
@@ -52,6 +52,7 @@ public class AdminHome extends JPanel implements Refreshable {
         
         refresh();
     }
+    //----------------------------
 
     @Override 
     public void refresh() { 
@@ -67,7 +68,9 @@ public class AdminHome extends JPanel implements Refreshable {
         listPanel.revalidate(); 
         listPanel.repaint(); 
     }
+    //----------------------------
 
+    //creates a card for each user for the admin to see. The content show is based on the type of user
     private JPanel createUserCard (User u) { 
         JPanel userCard = new JPanel(); 
         userCard.setLayout(new BoxLayout(userCard, BoxLayout.Y_AXIS));
@@ -109,5 +112,5 @@ public class AdminHome extends JPanel implements Refreshable {
 
         return userCard; 
     }
-    
+    //-----------------------------------------
 }

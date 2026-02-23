@@ -22,9 +22,6 @@ public class Owner extends User {
     private String ownerId; 
     private static int increment = 0;
 
-    // possibly change to recieve arrival and departure time from user application
-    //private int approximateResidencyTime;
-
     // ---------------------------------------------------------------
     // constructor for the owner class; utilizes the constructor of the User class
     // to set the username and password.
@@ -60,14 +57,7 @@ public class Owner extends User {
     }
 
     // ---------------------------------------------------------------
-    // would calc difference in time object
-    /* 
-    public int getApproximateResidencyTime() {
-        //return approximateResidencyTime;
-    }
-    */
 
-    // ---------------------------------------------------------------
     // adds a job to the owner's list of jobs
     public void addJob(Job job) {
         ownerJobs.add(job);

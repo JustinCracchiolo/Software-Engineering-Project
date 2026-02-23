@@ -35,12 +35,6 @@ public class HomePage extends JPanel implements Refreshable {
         setLayout(new BorderLayout());
         add(new NavBar(cards, user, registry), BorderLayout.NORTH);
 
-        /* 
-         JLabel label = new JLabel("Home Page", SwingConstants.CENTER);
-        label.setFont(new Font("Arial", Font.BOLD, 24));
-
-         */
-
         name_of_view = new JLabel("", SwingConstants.CENTER);
         name_of_view.setFont(new Font("Arial", Font.BOLD, 24));
         name_of_view.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -49,11 +43,6 @@ public class HomePage extends JPanel implements Refreshable {
         JPanel viewPanel = new JPanel();
         viewPanel.setLayout(new BoxLayout(viewPanel, BoxLayout.Y_AXIS));
 
-        /* 
-        JPanel panel = new JPanel();
-        panel.add(label, BorderLayout.CENTER);
-        panel.add(name, BorderLayout.CENTER);
-        */
         listPanel = new JPanel(); 
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); 
        
@@ -94,7 +83,9 @@ public class HomePage extends JPanel implements Refreshable {
         listPanel.revalidate();
         listPanel.repaint();
     }
+    //---------------------------
 
+    //if user is an owner show all their vehicles
     private JPanel vehicleCard(Vehicle v) {
         JPanel vehicleCard = new JPanel();
         vehicleCard.setLayout(new BoxLayout(vehicleCard, BoxLayout.Y_AXIS));
@@ -120,6 +111,9 @@ public class HomePage extends JPanel implements Refreshable {
 
         return vehicleCard;
     }
+    //-------------------------------
+
+    //if user is a client show all their jobs
 
      private JPanel jobCard(Job j) {
         JPanel jobCard = new JPanel();
@@ -141,6 +135,7 @@ public class HomePage extends JPanel implements Refreshable {
 
         return jobCard;
     }
+    //------------------------
 
 
 }
