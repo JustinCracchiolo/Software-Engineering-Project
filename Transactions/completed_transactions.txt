@@ -7,3 +7,5 @@ bee|Client|CalculateThis|3.5|2026-02-22T17:30|8|2026-02-22T20:38:07.489855200Z|a
 bee|Client|ColorTest|1.0|2026-02-22T17:00|9|2026-02-22T20:46:31.474507500Z|accepted
 
 cat|Client|Math simulation|3.0|2026-02-28T17:45|10|2026-02-23T03:43:57.131842800Z|accepted
+cat|Client|test|2.0|2024-03-09T17:45|11|2026-02-23T04:40:51.167399Z|rejected
+Lauren|Client|Physics Simulation|3.0|2026-03-09T10:45|10|2026-02-23T03:36:08.737876400Z|accepted

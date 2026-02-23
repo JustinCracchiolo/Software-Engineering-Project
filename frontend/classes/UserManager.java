@@ -509,5 +509,29 @@ public class UserManager {
     public Map<String, User> getAllUsers() {
         return users;
     }
+
+    public static void loadCompletedTransactions() {
+        if (!Files.exists(COMPLETED_TRANSACTIONS_PATH)) {
+            return;
+        }
+        try (BufferedReader reader = Files.newBufferedReader(COMPLETED_TRANSACTIONS_PATH, StandardCharsets.UTF_8)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String trimmed = line.trim();
+                if (trimmed.isEmpty()) {
+                    continue;
+                }
+                // Split using "|" as the delimiter
+                String[] parts = trimmed.split("\\|");
+                String type = parts[1];
+                String action = parts[7];
+                if(type.equals("Client") && action.equals("rejected")) {
+                    Job.increaseJobIdCount();
+                }
+            }
+        } catch (IOException e) {
+            // If the file is unreadable, continue with an empty in-memory list.
+        }
+    }
     
 }

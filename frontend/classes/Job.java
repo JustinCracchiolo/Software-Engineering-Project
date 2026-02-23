@@ -90,4 +90,7 @@ public class Job {
     }
     //--------------------------
 
+    public static void increaseJobIdCount() {
+        increment++;
+    }
 }
