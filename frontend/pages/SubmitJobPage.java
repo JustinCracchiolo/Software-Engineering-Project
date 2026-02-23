@@ -98,12 +98,15 @@ public class SubmitJobPage extends JPanel implements Refreshable {
 
         jobForm.add(Box.createVerticalGlue());
         jobForm.add(jobTitle);
-        jobForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        jobForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         jobForm.add(jobDescription);
-        jobForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        jobForm.add(createFormatLabel("Enter Job Description"));
+        jobForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         jobForm.add(jobDuration);
-        jobForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        jobForm.add(createFormatLabel("In terms of hours"));
+        jobForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         jobForm.add(jobDeadline);
+        jobForm.add(createFormatLabel("Format: yyyy-mm-dd hh:mm:ss"));
         jobForm.add(Box.createVerticalStrut(30)); // creates padding between elements
         jobForm.add(submitBtn);
         jobForm.add(Box.createVerticalGlue());
@@ -163,6 +166,14 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         jobDeadline.setText("");
         jobDuration.setText("");
         jobDescription.setText("");
+    }
+
+    private JLabel createFormatLabel(String text) {
+        JLabel label = new JLabel(text);
+        label.setFont(new Font("Arial", Font.ITALIC, 12));
+        label.setForeground(Color.GRAY); // Makes it look like helper text
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        return label;
     }
 
 }

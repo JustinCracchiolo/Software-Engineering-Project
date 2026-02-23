@@ -111,23 +111,32 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         submitBtn.setBackground(new Color(77, 163, 255));
         submitBtn.setForeground(Color.DARK_GRAY);
 
+        
+
         vehicleForm.add(Box.createVerticalGlue());
         vehicleForm.add(vehicleLabel);
-        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(vehicleVin);
-        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(createFormatLabel("Must be a 17-character alphanumeric string"));
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(vehicleMake);
-        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(createFormatLabel("Letters and/or Numbers. E.g. Ford, Honda"));
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(vehicleModel);
-        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(createFormatLabel("Letters and/or Numbers. E.g. Mustang, Civic"));
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(vehiclePlate);
-        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(createFormatLabel("Letters and/or Numbers."));
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(vehicleYear);
-        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(createFormatLabel("Must be 4 digit number"));
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(vehicleArrival);
-        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(createFormatLabel("Format: yyyy-mm-dd hh:mm:ss"));
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(vehicleDeparture);
-        vehicleForm.add(Box.createVerticalStrut(30)); // creates padding between elements
+        vehicleForm.add(createFormatLabel("Format: yyyy-mm-dd hh:mm:ss"));
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
 
 
         vehicleForm.add(submitBtn);
@@ -165,6 +174,14 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
 
     }
 
+
+    private JLabel createFormatLabel(String text) {
+        JLabel label = new JLabel(text);
+        label.setFont(new Font("Arial", Font.ITALIC, 12));
+        label.setForeground(Color.GRAY); // Makes it look like helper text
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        return label;
+    }
     // ---------------------------------------------------------------
     // refreshes offer vehicle page
     @Override
