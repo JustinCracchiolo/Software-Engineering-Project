@@ -475,7 +475,7 @@ public class UserManager {
                 else {
                     unique = parts[5].trim();
                 }
-                if (unique.contains(uniqueForType) && userType.equals(type) && name.equals(username)) {
+                if (unique.equals(uniqueForType) && userType.equals(type) && name.equals(username)) {
                     // Write the removed line to the new file
                     if(accepted) {
                         completedWrite.write(line + "|accepted");
