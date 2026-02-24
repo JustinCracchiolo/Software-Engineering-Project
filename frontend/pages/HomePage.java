@@ -120,6 +120,8 @@ public class HomePage extends JPanel implements Refreshable {
         jobCard.setLayout(new BoxLayout(jobCard, BoxLayout.Y_AXIS));
         jobCard.add(new JLabel("Job Id: " + j.getJobId()));
         jobCard.add(Box.createVerticalStrut(20));
+        jobCard.add(new JLabel("Client Id: " + ((Client)user).getClientId())); 
+        jobCard.add(Box.createVerticalStrut(20));
         jobCard.add(new JLabel("Job Description: " + j.getJobDescription())); 
         jobCard.add(Box.createVerticalStrut(20));
         jobCard.add(new JLabel("Deadline: " + j.getJobDeadline()));

@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.*;
+import classes.Owner;
 
 // ---------------------------------------------------------------
 // class that controls the offer vehicle page
@@ -32,7 +33,6 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
 
     private final JTextArea STATUS_AREA = new JTextArea(6, 50);
 
-    private JLabel vehicleLabel;
     private JTextField vehicleVin;
     private JTextField vehicleMake;
     private JTextField vehicleModel;
@@ -42,6 +42,7 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
     private JTextField vehicleArrival;
     private JTextField vehicleDeparture;
 
+    private JTextField ownerIdField;
 
     // ---------------------------------------------------------------
     // constructor: sets user + user manager + registry
@@ -71,10 +72,21 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         vehicleForm.setBackground(new Color(242, 245, 249));
         vehicleForm.setLayout(new BoxLayout(vehicleForm, BoxLayout.Y_AXIS)); // center everything vertically
 
-        vehicleLabel = new JLabel("Enter vehicle information");
+        JLabel vehicleLabel = new JLabel("Enter vehicle information");
         vehicleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         vehicleLabel.setForeground(new Color(65, 105, 255));
         vehicleLabel.setFont(new Font("Arial", Font.PLAIN, 36));
+
+        JLabel ownerId = new JLabel("Your Owner Id: " + ((Owner)user).getOwnerId());
+        ownerId.setAlignmentX(Component.CENTER_ALIGNMENT);
+        ownerId.setForeground(new Color(65, 105, 255));
+        ownerId.setFont(new Font("Arial", Font.PLAIN, 36));
+
+        
+        ownerIdField= new PlaceHolderTextField("Enter your owner id", 36); // adds more graphics to regular textfield
+        ownerIdField.setMaximumSize(ownerIdField.getPreferredSize());
+        ownerIdField.setAlignmentX(Component.CENTER_ALIGNMENT);
+
 
         vehicleVin = new PlaceHolderTextField("Vin                               (XXXXXXXXXXXXXXXXX)", 36); // adds more graphics to regular textfield
         vehicleVin.setMaximumSize(vehicleVin.getPreferredSize());
@@ -112,8 +124,13 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         submitBtn.setForeground(Color.DARK_GRAY);
 
         
-
+        vehicleForm.add(vehicleLabel);
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(Box.createVerticalGlue());
+        vehicleForm.add(ownerId);
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
+        vehicleForm.add(ownerIdField);
+        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(vehicleLabel);
         vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(vehicleVin);
@@ -154,11 +171,16 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
             String year = vehicleYear.getText().trim();
             String arrivalText = vehicleArrival.getText().trim();
             String departureText = vehicleDeparture.getText().trim();
+            String id = ownerIdField.getText().trim();
 
 
             if(VIN_NUMBER.isEmpty() || make.isEmpty() || model.isEmpty() || licensePlate.isEmpty() || year.isEmpty() 
              || arrivalText.isEmpty() || departureText.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Fields cannot be empty.");
+                return;
+            }
+            if(!id.equals(((Owner)user).getOwnerId())) {
+                JOptionPane.showMessageDialog(this, "Your Owner id is incorrect.");
                 return;
             }
 
@@ -186,7 +208,6 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
     // refreshes offer vehicle page
     @Override
     public void refresh() {
-        vehicleLabel.setText("");
         vehicleVin.setText("");
         vehicleMake.setText("");
         vehicleModel.setText("");
@@ -194,5 +215,6 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         vehicleArrival.setText("");
         vehicleYear.setText("");
         vehicleDeparture.setText("");
+        ownerIdField.setText("");
     }
 }

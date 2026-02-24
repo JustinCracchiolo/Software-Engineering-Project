@@ -8,4 +8,5 @@ banana|banana|1009|banana@gmail.com|Client|3
 cat|cat|1010|cat@gmail.com|Client|4
 Owen|owner|1015|owen@gmail.com|Owner|4
 David|Choi|1016|sangohchoi90@gmail.com|Owner|5
-
+Tristan|punch|1011|tristan@gmail.com|Client|5
+Tristany|punch|1012|tristany@gmail.com|Client|6

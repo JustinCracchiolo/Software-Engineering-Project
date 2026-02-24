@@ -213,7 +213,7 @@ public class UserManager {
      * Put all their information in the ArrayList. Keeps registrations after application closed
      */
     /* 
-     vehicle txt format: username|vin|model|make|plate|year|approxTime|day registered
+     vehicle txt format: username|owner id|vin|model|make|plate|year|approxTime|day registered
     */
     public void loadVehiclesFromFile() {
         if (!Files.exists(VEHICLES_FILE_PATH)) {
@@ -230,13 +230,14 @@ public class UserManager {
                 String[] parts = trimmed.split("\\|");
               
                 String username = parts[0].trim();
-                String vinNumber = parts[1].trim();
-                String make = parts[2].trim();
-                String model = parts[3].trim();
-                String licensePlate = parts[4].trim();
-                String year = parts[5].trim();
-                String approxTime = parts[6].trim();
-                String dayRegistered = parts[7].trim();
+                //String ownerId = parts[1].trim();
+                String vinNumber = parts[2].trim();
+                String make = parts[3].trim();
+                String model = parts[4].trim();
+                String licensePlate = parts[5].trim();
+                String year = parts[6].trim();
+                String approxTime = parts[7].trim();
+                String dayRegistered = parts[8].trim();
                 
                 String normalizedUsername = normalizeUsername(username);
 
@@ -255,7 +256,7 @@ public class UserManager {
     }
 
     /* 
-     vehicle txt format: username|vin|model|make|plate|year|approxTime|day registered
+     vehicle txt format: username|owner id|vin|model|make|plate|year|approxTime|day registered
     */
    //Add vehicle information to vehicle file
     public static void updateVehiclesFile(User u) {
@@ -270,7 +271,7 @@ public class UserManager {
             )) 
             {
                 Vehicle newVehicle = ((Owner) u).getVehicles().get(((Owner) u).getVehicles().size()-1);
-                writer.write(u.getUsername() + "|" + newVehicle.getNumber() + "|" + newVehicle.getModel() + "|" + newVehicle.getMake() + 
+                writer.write(u.getUsername() + "|" +  ((Owner) u).getOwnerId() + "|" + newVehicle.getNumber() + "|" + newVehicle.getModel() + "|" + newVehicle.getMake() + 
                  "|" + newVehicle.getLicensePlate() + "|" + newVehicle.getYear() + "|" + newVehicle.approxTime() + "|" + newVehicle.getDayRegistered());
                 writer.newLine();
         }
@@ -281,7 +282,7 @@ public class UserManager {
     }
 
     /* 
-    jobs.txt format: username|description|hrs|deadline|jobId
+    jobs.txt format: username|client id|description|hrs|deadline|jobId
     */
    //add a job to the job file
     public static void updateJobFile(User u) {
@@ -296,7 +297,7 @@ public class UserManager {
             )) 
             {
                 Job newJob = ((Client) u).getClientJobs().get(((Client) u).getClientJobs().size()-1);
-                writer.write(u.getUsername() + "|" + newJob.getJobDescription() + "|" + newJob.getApproximateJobDuration() + "|"
+                writer.write(u.getUsername() + "|" + ((Client) u).getClientId() + "|" + newJob.getJobDescription() + "|" + newJob.getApproximateJobDuration() + "|"
                  + newJob.getJobDeadline() + "|" + newJob.getJobId());
                 writer.newLine();
         }
@@ -312,7 +313,7 @@ public class UserManager {
      * Put all their information in the ArrayList. Keeps registrations after application closed
      */
      /* 
-    jobs.txt format: username|description|hrs|deadline|jobId
+    jobs.txt format: username|client id|description|hrs|deadline|jobId
     */
     public void loadJobsFromFile() {
         if (!Files.exists(JOBS_FILE_PATH)) {
@@ -330,9 +331,9 @@ public class UserManager {
               
                 //will have to change if more fields are added to the jobs class
                 String username = parts[0].trim();
-                String jobDescription = parts[1].trim();
-                String approximateJobDuration = parts[2].trim();
-                String jobDeadline = parts[3].trim();
+                String jobDescription = parts[2].trim();
+                String approximateJobDuration = parts[3].trim();
+                String jobDeadline = parts[4].trim();
                 
                 String normalizedUsername = normalizeUsername(username);
 
@@ -351,7 +352,7 @@ public class UserManager {
     }
 
     /* 
-    pending transaction file structure: userId|userType|vin|model|make|plate|year|approxTime|day registered|timestamp
+    pending transaction file structure: userId|userType|owner id|vin|model|make|plate|year|approxTime|day registered|timestamp
     */
    //add a new pending transaction to the file. This one is for vehicles
 
@@ -367,7 +368,7 @@ public class UserManager {
             )) 
             {
                 Instant timestamp = Instant.now();
-                writer.write(u.getUsername() + "|" + u.getUserType() +"|" + v.getNumber() + "|" + v.getModel() + "|" + v.getMake() + 
+                writer.write(u.getUsername() + "|" + u.getUserType() +"|" + ((Owner)u).getOwnerId() + "|" + v.getNumber() + "|" + v.getModel() + "|" + v.getMake() + 
                 "|" + v.getLicensePlate() + "|" + v.getYear() + "|" + v.approxTime() + "|" + v.getDayRegistered() + "|" + timestamp.toString());
                 writer.newLine();
         }
@@ -379,7 +380,7 @@ public class UserManager {
 
     
     /* 
-    pending transaction file structure: userId|userType|description|hrs|deadline|jobId|timestamp
+    pending transaction file structure: userId|userType|Client id|description|hrs|deadline|jobId|timestamp
     */
    //update pending transaction to file. This one is for jobs
     public static void updatePendingFile(User u, Job j) {
@@ -394,7 +395,7 @@ public class UserManager {
             )) 
             {
                 Instant timestamp = Instant.now();
-                writer.write(u.getUsername() + "|" + u.getUserType() +"|" + j.getJobDescription() + "|" + 
+                writer.write(u.getUsername() + "|" + u.getUserType() +"|" + ((Client)u).getClientId() + "|" + j.getJobDescription() + "|" + 
                 j.getApproximateJobDuration() + "|" + j.getJobDeadline() + "|" + j.getJobId() + "|" + timestamp.toString());
                 writer.newLine();
         }
@@ -407,9 +408,9 @@ public class UserManager {
     
     /* 
     pending transaction file structure: 
-        userId|userType|description|hrs|deadline|jobId|timestamp
+        userName|userType|client id|description|hrs|deadline|jobId|timestamp
         or 
-        userId|userType|vin|model|make|plate|year|approxTime|day registered|timestamp
+        userName|userType|owner id|vin|model|make|plate|year|approxTime|day registered|timestamp
     */
    //On application load, add all pending requests back into the system
     public void loadPendingRequests() {
@@ -430,21 +431,21 @@ public class UserManager {
                 String userType = parts[1].trim();
                 String normalizedUsername = normalizeUsername(username);
                 if(userType.equals("Owner")) {
-                    String vin = parts[2].trim();
-                    String model = parts[3].trim();
-                    String make = parts[4].trim();
-                    String plate = parts[5].trim();
-                    String year = parts[6].trim();
-                    String approxTime = parts[7].trim();
-                    String dayRegistered = parts[8].trim();
+                    String vin = parts[3].trim();
+                    String model = parts[4].trim();
+                    String make = parts[5].trim();
+                    String plate = parts[6].trim();
+                    String year = parts[7].trim();
+                    String approxTime = parts[8].trim();
+                    String dayRegistered = parts[9].trim();
                     Vehicle v = new Vehicle(vin, make, model, plate, year, Double.parseDouble(approxTime), dayRegistered);
                     Admin.addPendingVehicle(users.get(normalizedUsername), v, false);
                 }
                 else {
-                    String desc = parts[2].trim();
-                    String hrs = parts[3].trim();
-                    String deadline = parts[4].trim();
-                    String jobdId = parts[5].trim();
+                    String desc = parts[3].trim();
+                    String hrs = parts[4].trim();
+                    String deadline = parts[5].trim();
+                    String jobdId = parts[6].trim();
                     Job j = new Job(desc, hrs, LocalDateTime.parse(deadline), jobdId);
                     Admin.addPendingJob(users.get(normalizedUsername), j, false);
                 }
@@ -470,10 +471,10 @@ public class UserManager {
                 String userType = parts[1];
                 String unique;
                 if(type.equals("Owner")) {
-                    unique = parts[2].trim();
+                    unique = parts[3].trim();
                 }
                 else {
-                    unique = parts[5].trim();
+                    unique = parts[6].trim();
                 }
                 if (unique.equals(uniqueForType) && userType.equals(type) && name.equals(username)) {
                     // Write the removed line to the new file

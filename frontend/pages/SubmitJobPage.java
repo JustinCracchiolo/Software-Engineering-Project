@@ -10,6 +10,7 @@ package pages;
 
 import classes.Admin;
 import classes.Job;
+import classes.Owner;
 import classes.PlaceHolderTextField;
 import classes.User;
 import classes.UserManager;
@@ -19,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.*;
+import classes.Client;
 
 
 // ---------------------------------------------------------------
@@ -35,7 +37,6 @@ public class SubmitJobPage extends JPanel implements Refreshable {
 
     private final User user;
 
-    private JLabel clientIdLabel;
     private JTextField durationField;
     private JTextField deadlineField;
     private JTextField jobDescField;
@@ -43,6 +44,8 @@ public class SubmitJobPage extends JPanel implements Refreshable {
     private JTextField jobDescription;
     private JTextField jobDuration;
     private JTextField jobDeadline;
+
+    private JTextField clientdField;
 
     // ---------------------------------------------------------------
        // ---------------------------------------------------------------
@@ -78,6 +81,15 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         jobTitle.setForeground(new Color(65, 105, 255));
         jobTitle.setFont(new Font("Arial", Font.PLAIN, 36));
 
+        JLabel clientId = new JLabel("Your Client Id: " + ((Client)user).getClientId());
+        clientId.setAlignmentX(Component.CENTER_ALIGNMENT);
+        clientId.setForeground(new Color(65, 105, 255));
+        clientId.setFont(new Font("Arial", Font.PLAIN, 36));
+
+        clientdField = new PlaceHolderTextField("Enter your client id:", 36); // adds more graphics to regular textfield
+        clientdField.setMaximumSize(clientdField.getPreferredSize());
+        clientdField.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         jobDescription = new PlaceHolderTextField("Job Description                    (Enter Job Description)", 36); // adds more graphics to regular textfield
         jobDescription.setMaximumSize(jobDescription.getPreferredSize());
         jobDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -96,7 +108,12 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         submitBtn.setBackground(new Color(77, 163, 255));
         submitBtn.setForeground(Color.DARK_GRAY);
 
+        
+        jobForm.add(clientId);
+        jobForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         jobForm.add(Box.createVerticalGlue());
+        jobForm.add(clientdField);
+        jobForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         jobForm.add(jobTitle);
         jobForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         jobForm.add(jobDescription);
@@ -119,9 +136,15 @@ public class SubmitJobPage extends JPanel implements Refreshable {
             String idText = jobDescription.getText().trim();
             String durationText = jobDuration.getText().trim();
             String deadlineText = jobDeadline.getText().trim();
+            String id = clientdField.getText().trim();
 
             if(idText.isEmpty() || durationText.isEmpty() || deadlineText.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Fields cannot be empty.");
+                return;
+            }
+
+            if(!id.equals(((Client)user).getClientId())) {
+                JOptionPane.showMessageDialog(this, "Client id is incorrect.");
                 return;
             }
 
@@ -166,6 +189,7 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         jobDeadline.setText("");
         jobDuration.setText("");
         jobDescription.setText("");
+        clientdField.setText("");
     }
 
     private JLabel createFormatLabel(String text) {
