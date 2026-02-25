@@ -77,10 +77,10 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         vehicleLabel.setForeground(new Color(65, 105, 255));
         vehicleLabel.setFont(new Font("Arial", Font.PLAIN, 36));
 
-        JLabel ownerId = new JLabel("Your Owner Id: " + ((Owner)user).getOwnerId());
-        ownerId.setAlignmentX(Component.CENTER_ALIGNMENT);
-        ownerId.setForeground(new Color(65, 105, 255));
-        ownerId.setFont(new Font("Arial", Font.PLAIN, 36));
+        //JLabel ownerId = new JLabel("Your Owner Id: " + ((Owner)user).getOwnerId());
+        //ownerId.setAlignmentX(Component.CENTER_ALIGNMENT);
+       // ownerId.setForeground(new Color(65, 105, 255));
+       // ownerId.setFont(new Font("Arial", Font.PLAIN, 36));
 
         
         ownerIdField= new PlaceHolderTextField("Enter your owner id", 36); // adds more graphics to regular textfield
@@ -124,15 +124,16 @@ public class OfferVehiclePage extends JPanel implements Refreshable {
         submitBtn.setForeground(Color.DARK_GRAY);
 
         
-        vehicleForm.add(vehicleLabel);
-        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
+        
+        //vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(Box.createVerticalGlue());
-        vehicleForm.add(ownerId);
+        vehicleForm.add(vehicleLabel);
+        //vehicleForm.add(ownerId);
         vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(ownerIdField);
+        vehicleForm.add(createFormatLabel("Your Owner Id: " + ((Owner)user).getOwnerId()));
         vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
-        vehicleForm.add(vehicleLabel);
-        vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
+        //vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         vehicleForm.add(vehicleVin);
         vehicleForm.add(createFormatLabel("Must be a 17-character alphanumeric string"));
         vehicleForm.add(Box.createVerticalStrut(20)); // creates padding between elements

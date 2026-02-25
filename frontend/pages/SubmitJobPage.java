@@ -81,10 +81,10 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         jobTitle.setForeground(new Color(65, 105, 255));
         jobTitle.setFont(new Font("Arial", Font.PLAIN, 36));
 
-        JLabel clientId = new JLabel("Your Client Id: " + ((Client)user).getClientId());
-        clientId.setAlignmentX(Component.CENTER_ALIGNMENT);
-        clientId.setForeground(new Color(65, 105, 255));
-        clientId.setFont(new Font("Arial", Font.PLAIN, 36));
+        //JLabel clientId = new JLabel("Your Client Id: " + ((Client)user).getClientId());
+       // clientId.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //clientId.setForeground(new Color(65, 105, 255));
+       // clientId.setFont(new Font("Arial", Font.PLAIN, 36));
 
         clientdField = new PlaceHolderTextField("Enter your client id:", 36); // adds more graphics to regular textfield
         clientdField.setMaximumSize(clientdField.getPreferredSize());
@@ -109,12 +109,12 @@ public class SubmitJobPage extends JPanel implements Refreshable {
         submitBtn.setForeground(Color.DARK_GRAY);
 
         
-        jobForm.add(clientId);
-        jobForm.add(Box.createVerticalStrut(20)); // creates padding between elements
+        //jobForm.add(clientId);
         jobForm.add(Box.createVerticalGlue());
-        jobForm.add(clientdField);
-        jobForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         jobForm.add(jobTitle);
+        jobForm.add(Box.createVerticalStrut(20)); // creates padding between elements
+        jobForm.add(clientdField);
+        jobForm.add(createFormatLabel("Your Client Id: " + ((Client)user).getClientId()));
         jobForm.add(Box.createVerticalStrut(20)); // creates padding between elements
         jobForm.add(jobDescription);
         jobForm.add(createFormatLabel("Enter Job Description"));
